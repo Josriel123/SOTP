@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "F13",
+			"Path": "..\\Source\\F13.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "F13Editor",
+			"Path": "..\\Source\\F13Editor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
