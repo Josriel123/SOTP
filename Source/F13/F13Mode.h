@@ -17,5 +17,18 @@ class F13_API AF13Mode : public AGameModeBase
 
 public:
 	AF13Mode();
+
+	// When a new player has fully connected, this function is called.
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+	// (Optionally) when the match officially “starts,” you could override 
+	// StartPlay() or BeginPlay() to check if everyone has chosen and then spawn.
+
+protected:
+	// Called when the match is ready to actually spawn pawns (maybe after UI).
+	void SpawnChosenPawnForController(APlayerController* PC);
+
+	// A small helper that finds the PlayerState and returns their chosen pawn class:
+	TSubclassOf<APawn> GetPawnClassForController(APlayerController* PC) const;
 };
 

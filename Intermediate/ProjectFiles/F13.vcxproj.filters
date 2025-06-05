@@ -11,6 +11,8 @@
     <None Include="..\..\Source\F13Editor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -75,6 +77,9 @@
     <Filter Include="Source\F13\Private">
       <UniqueIdentifier>{D7C66078-A2B3-302A-924A-7EEACEF3DF20}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\F13\Private\DataTableFuntionLibrary.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13CharacterBase.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
@@ -87,6 +92,15 @@
     <Filter Include="Source\F13\Public">
       <UniqueIdentifier>{B0CCF371-B3DA-3E4D-BC43-706E89CD844B}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\F13\Public\CharacterOption.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\CharacterStats.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\DataTableFuntionLibrary.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13CharacterBase.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
@@ -96,10 +110,5 @@
     <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CharcaterStats.h">
-      <Filter>Source\F13\Public</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

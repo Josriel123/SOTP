@@ -16,9 +16,6 @@
 AF13CharacterBase::AF13CharacterBase()
 {
 
-	//GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-	//GetCharacterMovement()->MaxAcceleration = WalkAccel;
-
 	// 1) Create a CameraBoom
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
@@ -34,7 +31,7 @@ AF13CharacterBase::AF13CharacterBase()
 	// 4) Load your InputMappingContext asset at construction time,
     //    so it’s baked into the CDO/Blueprint defaults:
 	static ConstructorHelpers::FObjectFinder<UInputMappingContext> IMC_AssetObject(
-		TEXT("/Game/Characters/Jasons/Part_3/Input/IMC_JasonPart3.IMC_JasonPart3"));
+		TEXT("/Game/Characters/Input/IMC_JasonPart3.IMC_JasonPart3"));
 	if (IMC_AssetObject.Succeeded())
 	{
 		IMC_JasonPart3 = IMC_AssetObject.Object;
@@ -42,28 +39,28 @@ AF13CharacterBase::AF13CharacterBase()
 
 	// 4) Similarly, load your InputAction assets:
 	static ConstructorHelpers::FObjectFinder<UInputAction> MoveActionObj(
-		TEXT("/Game/Characters/Jasons/Part_3/Input/IA_Move.IA_Move"));
+		TEXT("/Game/Characters/Input/IA_Move.IA_Move"));
 	if (MoveActionObj.Succeeded())
 	{
 		IA_Move = MoveActionObj.Object;
 	}
 
 	static ConstructorHelpers::FObjectFinder<UInputAction> JumpActionObj(
-		TEXT("/Game/Characters/Jasons/Part_3/Input/IA_Jump.IA_Jump"));
+		TEXT("/Game/Characters/Input/IA_Jump.IA_Jump"));
 	if (JumpActionObj.Succeeded())
 	{
 		IA_Jump = JumpActionObj.Object;
 	}
 
 	static ConstructorHelpers::FObjectFinder<UInputAction> LookActionObj(
-		TEXT("/Game/Characters/Jasons/Part_3/Input/IA_Look.IA_Look"));
+		TEXT("/Game/Characters/Input/IA_Look.IA_Look"));
 	if (LookActionObj.Succeeded())
 	{
 		IA_Look = LookActionObj.Object;
 	}
 
 	static ConstructorHelpers::FObjectFinder<UInputAction> SprintActionObj(
-		TEXT("/Game/Characters/Jasons/Part_3/Input/IA_Sprint.IA_Sprint"));
+		TEXT("/Game/Characters/Input/IA_Sprint.IA_Sprint"));
 	if (SprintActionObj.Succeeded())
 	{
 		IA_Sprint = SprintActionObj.Object;
