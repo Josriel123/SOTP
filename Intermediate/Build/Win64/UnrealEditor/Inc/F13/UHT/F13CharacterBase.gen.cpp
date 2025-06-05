@@ -48,20 +48,32 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterStatsTable_MetaData[] = {
 		{ "Category", "Stats" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "//----- Character stats/abilities ----------------------------------------------------------\n" },
+		{ "Comment", "/** DataTable containing per\xe2\x80\x90""character stats (WalkSpeed, etc.) */" },
 #endif
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "----- Character stats/abilities ----------------------------------------------------------" },
+		{ "ToolTip", "DataTable containing per\xe2\x80\x90""character stats (WalkSpeed, etc.)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StatsRowName_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Row name in CharacterStatsTable to look up for this character */" },
+#endif
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Row name in CharacterStatsTable to look up for this character" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WalkSpeed_MetaData[] = {
 		{ "Category", "Stats" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Locomotion / Ability properties that get filled in from CharacterStatsTable row */" },
+#endif
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Locomotion / Ability properties that get filled in from CharacterStatsTable row" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SprintSpeed_MetaData[] = {
 		{ "Category", "Stats" },
@@ -82,16 +94,22 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IMC_JasonPart3_MetaData[] = {
 		{ "Category", "Input" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80 Enhanced Input Action  \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\n" },
+		{ "Comment", "/** The IMC (Input Mapping Context) asset (set automatically via ConstructorHelpers) */" },
 #endif
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80 Enhanced Input Action  \xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80\xe2\x94\x80" },
+		{ "ToolTip", "The IMC (Input Mapping Context) asset (set automatically via ConstructorHelpers)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IA_Move_MetaData[] = {
 		{ "Category", "Input" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Input Actions (also loaded with ConstructorHelpers) */" },
+#endif
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Input Actions (also loaded with ConstructorHelpers)" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IA_Look_MetaData[] = {
 		{ "Category", "Input" },
@@ -108,12 +126,12 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CameraBoom_MetaData[] = {
 		{ "Category", "Camera" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "//------------Camera settings ------------------------------------\n" },
+		{ "Comment", "//------------Camera settings -------------------------------------------------\n" },
 #endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "------------Camera settings ------------------------------------" },
+		{ "ToolTip", "------------Camera settings -------------------------------------------------" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FollowCamera_MetaData[] = {
@@ -235,10 +253,10 @@ AF13CharacterBase::~AF13CharacterBase() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13CharacterBase, AF13CharacterBase::StaticClass, TEXT("AF13CharacterBase"), &Z_Registration_Info_UClass_AF13CharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13CharacterBase), 2298001664U) },
+		{ Z_Construct_UClass_AF13CharacterBase, AF13CharacterBase::StaticClass, TEXT("AF13CharacterBase"), &Z_Registration_Info_UClass_AF13CharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13CharacterBase), 3840752369U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_1397412202(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_2347859646(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

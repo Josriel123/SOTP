@@ -11,14 +11,68 @@ void EmptyLinkFunctionForGeneratedCodeF13Mode() {}
 
 // Begin Cross Module References
 ENGINE_API UClass* Z_Construct_UClass_AGameModeBase();
+ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13Mode();
 F13_API UClass* Z_Construct_UClass_AF13Mode_NoRegister();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
+// Begin Class AF13Mode Function HandleCharacterSelected
+struct Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics
+{
+	struct F13Mode_eventHandleCharacterSelected_Parms
+	{
+		APlayerController* SelectingPC;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// This is the function that actually spawns the pawn for a given PlayerController\n" },
+#endif
+		{ "ModuleRelativePath", "F13Mode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "This is the function that actually spawns the pawn for a given PlayerController" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_SelectingPC;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::NewProp_SelectingPC = { "SelectingPC", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13Mode_eventHandleCharacterSelected_Parms, SelectingPC), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::NewProp_SelectingPC,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13Mode, nullptr, "HandleCharacterSelected", nullptr, nullptr, Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::PropPointers), sizeof(Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::F13Mode_eventHandleCharacterSelected_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::F13Mode_eventHandleCharacterSelected_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AF13Mode_HandleCharacterSelected()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AF13Mode::execHandleCharacterSelected)
+{
+	P_GET_OBJECT(APlayerController,Z_Param_SelectingPC);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->HandleCharacterSelected(Z_Param_SelectingPC);
+	P_NATIVE_END;
+}
+// End Class AF13Mode Function HandleCharacterSelected
+
 // Begin Class AF13Mode
 void AF13Mode::StaticRegisterNativesAF13Mode()
 {
+	UClass* Class = AF13Mode::StaticClass();
+	static const FNameNativePtrPair Funcs[] = {
+		{ "HandleCharacterSelected", &AF13Mode::execHandleCharacterSelected },
+	};
+	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
 IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(AF13Mode);
 UClass* Z_Construct_UClass_AF13Mode_NoRegister()
@@ -36,6 +90,10 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
+	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AF13Mode_HandleCharacterSelected, "HandleCharacterSelected" }, // 2022002596
+	};
+	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AF13Mode>::IsAbstract,
 	};
@@ -51,11 +109,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AF13Mode_Statics::Class
 	"Game",
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
-	nullptr,
+	FuncInfo,
 	nullptr,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
-	0,
+	UE_ARRAY_COUNT(FuncInfo),
 	0,
 	0,
 	0x009002ACu,
@@ -81,10 +139,10 @@ AF13Mode::~AF13Mode() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 4275938890U) },
+		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 1371792251U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_1665082732(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_3972859745(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

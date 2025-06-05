@@ -77,9 +77,6 @@
     <Filter Include="Source\F13\Private">
       <UniqueIdentifier>{D7C66078-A2B3-302A-924A-7EEACEF3DF20}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\F13\Private\DataTableFuntionLibrary.cpp">
-      <Filter>Source\F13\Private</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13CharacterBase.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
@@ -87,6 +84,9 @@
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13SurvivorCharacter.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\MyDataTableFunctionLibrary.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <Filter Include="Source\F13\Public">
@@ -98,9 +98,6 @@
     <ClCompile Include="..\..\Source\F13\Public\CharacterStats.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\DataTableFuntionLibrary.h">
-      <Filter>Source\F13\Public</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13CharacterBase.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
@@ -108,6 +105,9 @@
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\MyDataTableFunctionLibrary.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,20 +10,25 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class APawn;
+class APlayerController;
 #ifdef F13_F13PlayerState_generated_h
 #error "F13PlayerState.generated.h already included, missing '#pragma once' in F13PlayerState.h"
 #endif
 #define F13_F13PlayerState_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_17_DELEGATE \
+F13_API void FOnCharacterSelectedSignature_DelegateWrapper(const FMulticastScriptDelegate& OnCharacterSelectedSignature, APlayerController* SelectingPC);
+
+
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual bool ServerSetCharacterSelection_Validate(const FString& , FName const& ); \
 	virtual void ServerSetCharacterSelection_Implementation(const FString& NewRole, FName const& NewCharacterKey); \
 	DECLARE_FUNCTION(execGetChosenPawnClass); \
 	DECLARE_FUNCTION(execServerSetCharacterSelection);
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_CALLBACK_WRAPPERS
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_INCLASS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_CALLBACK_WRAPPERS
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13PlayerState(); \
 	friend struct Z_Construct_UClass_AF13PlayerState_Statics; \
@@ -39,7 +44,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_ENHANCED_CONSTRUCTORS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AF13PlayerState(AF13PlayerState&&); \
@@ -51,14 +56,14 @@ public: \
 	NO_API virtual ~AF13PlayerState();
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_13_PROLOG
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_GENERATED_BODY \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_23_PROLOG
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_CALLBACK_WRAPPERS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_INCLASS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_16_ENHANCED_CONSTRUCTORS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_CALLBACK_WRAPPERS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_INCLASS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

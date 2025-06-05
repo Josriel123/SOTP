@@ -4,11 +4,21 @@
 #include "GameFramework/PlayerState.h"
 #include "F13PlayerState.generated.h"
 
-// Forward declarations
+// Forward‐declare
 class UDataTable;
+class APawn;
+class APlayerController;
+
+// Delegate signature: when the server has accepted a character choice,
+// broadcast to anyone (e.g. GameMode) so they can spawn the Pawn.
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+	FOnCharacterSelectedSignature,
+	APlayerController*, SelectingPC
+);
 
 /**
- * Our custom PlayerState, stores role/character choices.
+ *  Custom PlayerState: stores Role + DataTable row key,
+ *  and publishes an event when the server “locks in” the character choice.
  */
 UCLASS()
 class F13_API AF13PlayerState : public APlayerState
@@ -18,28 +28,52 @@ class F13_API AF13PlayerState : public APlayerState
 public:
 	AF13PlayerState();
 
-	/** The role this player chose: “Killer” or “Survivor” */
+	/**
+	 *  The “role” string the player chose (e.g. “Killer” or “Survivor”).
+	 */
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
 	FString ChosenRole;
 
-	/** The DataTable RowName (key) for the character they picked. */
+	/**
+	 *  The DataTable row name/key for the character this player picked.
+	 */
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
 	FName ChosenCharacterKey;
 
-	/** Set both fields on the server (called via RPC). */
+	/**
+	 *  Called on the client when the player picks something in the UI.
+	 *  This RPC is executed on the server, which caches the new values and
+	 *  broadcasts OnCharacterSelected so that GameMode (or whoever) can react.
+	 */
 	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "CharacterSelection")
 	void ServerSetCharacterSelection(const FString& NewRole, const FName& NewCharacterKey);
 
-	/** Returns the actual Pawn class (looks up the DataTable row by ChosenCharacterKey). */
+	/**
+	 *  Given the already‐loaded DataTable and the replicated RowKey,
+	 *  return the Pawn subclass that corresponds to ChosenCharacterKey.
+	 *  Only valid on the server; clients will simply get nullptr.
+	 */
 	UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
 	TSubclassOf<APawn> GetChosenPawnClass() const;
 
+	/**
+	 *  Fired on the server once ServerSetCharacterSelection is accepted.  Passes
+	 *  the APlayerController* that owns this PlayerState as the single argument.
+	 *  GameMode can bind to this event and then call SpawnChosenPawnForController(SelectingPC).
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "CharacterSelection")
+	FOnCharacterSelectedSignature OnCharacterSelected;
+
 protected:
-	// Always call this so the replication system knows to replicate our new vars:
+	// Make sure ChosenRole and ChosenCharacterKey actually replicate.
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 private:
-	// Cached pointer to our DataTable. We will lazy‐load it the first time GetChosenPawnClass() is called.
+	/**
+	 *  Cached pointer to our Character‐options DataTable.
+	 *  We load it once in the constructor (server only).
+	 *  After that, any call to FindRow<…>() is very cheap at runtime.
+	 */
 	UPROPERTY()
-	mutable UDataTable* CharacterOptionsTable;
+	UDataTable* CharacterOptionsTable;
 };
