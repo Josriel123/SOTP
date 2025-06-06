@@ -26,4 +26,7 @@ struct FCharacterOption : public FTableRowBase
     // The actual Pawn subclass to spawn for this character
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="CharacterSelection")
     TSubclassOf<APawn> PawnClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DataTable")
+    UTexture2D* Texture;
 };

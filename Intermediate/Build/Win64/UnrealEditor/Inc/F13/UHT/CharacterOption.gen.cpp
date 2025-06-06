@@ -12,6 +12,7 @@ void EmptyLinkFunctionForGeneratedCodeCharacterOption() {}
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
 F13_API UScriptStruct* Z_Construct_UScriptStruct_FCharacterOption();
 UPackage* Z_Construct_UPackage__Script_F13();
@@ -75,10 +76,15 @@ struct Z_Construct_UScriptStruct_FCharacterOption_Statics
 		{ "ToolTip", "The actual Pawn subclass to spawn for this character" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Texture_MetaData[] = {
+		{ "Category", "DataTable" },
+		{ "ModuleRelativePath", "Public/CharacterOption.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_RoleName;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_CharacterDisplayName;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_PawnClass;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Texture;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
 	{
@@ -89,10 +95,12 @@ struct Z_Construct_UScriptStruct_FCharacterOption_Statics
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_RoleName = { "RoleName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCharacterOption, RoleName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RoleName_MetaData), NewProp_RoleName_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_CharacterDisplayName = { "CharacterDisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCharacterOption, CharacterDisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterDisplayName_MetaData), NewProp_CharacterDisplayName_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_PawnClass = { "PawnClass", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCharacterOption, PawnClass), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PawnClass_MetaData), NewProp_PawnClass_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_Texture = { "Texture", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCharacterOption, Texture), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Texture_MetaData), NewProp_Texture_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FCharacterOption_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_RoleName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_CharacterDisplayName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_PawnClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCharacterOption_Statics::NewProp_Texture,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FCharacterOption_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FCharacterOption_Statics::StructParams = {
@@ -122,10 +130,10 @@ UScriptStruct* Z_Construct_UScriptStruct_FCharacterOption()
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_CharacterOption_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FCharacterOption::StaticStruct, Z_Construct_UScriptStruct_FCharacterOption_Statics::NewStructOps, TEXT("CharacterOption"), &Z_Registration_Info_UScriptStruct_CharacterOption, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCharacterOption), 1173445466U) },
+		{ FCharacterOption::StaticStruct, Z_Construct_UScriptStruct_FCharacterOption_Statics::NewStructOps, TEXT("CharacterOption"), &Z_Registration_Info_UScriptStruct_CharacterOption, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCharacterOption), 1010984285U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_CharacterOption_h_435956755(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_CharacterOption_h_3300965132(TEXT("/Script/F13"),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_CharacterOption_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_CharacterOption_h_Statics::ScriptStructInfo),
 	nullptr, 0);

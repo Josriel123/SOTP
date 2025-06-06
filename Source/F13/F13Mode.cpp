@@ -121,7 +121,7 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
     // and here you check: if (HasChosenCharacter) SpawnChosenPawnForController(NewPlayer).)
 }
 
-TSubclassOf<APawn> AF13Mode::GetPawnClassForController(APlayerController* PC) const
+TSubclassOf<APawn> AF13Mode::GetPawnClassForController(AF13PlayerController* PC) const
 {
     if (!PC) return nullptr;
 
@@ -131,7 +131,7 @@ TSubclassOf<APawn> AF13Mode::GetPawnClassForController(APlayerController* PC) co
     return PS->GetChosenPawnClass();
 }
 
-void AF13Mode::SpawnChosenPawnForController(APlayerController* PC)
+void AF13Mode::SpawnChosenPawnForController(AF13PlayerController* PC)
 {
     if (!PC) return;
 

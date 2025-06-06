@@ -3,16 +3,15 @@
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/DataTable.h"
-#include "CharacterOption.h"         // The struct type used by our DataTable
+#include "CharacterOption.h"         // Your row struct type
 #include "GameFramework/PlayerController.h"
 
 AF13PlayerState::AF13PlayerState()
 {
-	// By default, we start with no DataTable loaded.
+	// Start with no DataTable loaded.
 	CharacterOptionsTable = nullptr;
 
-	// Server‐only: load the DataTable asset exactly once (during construction).
-	// Clients will ignore this (the if‐block below only runs when we are the server/authority).
+	// Only the server (ROLE_Authority) should load the DataTable once in the constructor.
 	if (HasAuthority())
 	{
 		static ConstructorHelpers::FObjectFinder<UDataTable> DT_Finder(
@@ -26,11 +25,10 @@ AF13PlayerState::AF13PlayerState()
 		{
 			UE_LOG(LogTemp, Error,
 				TEXT("AF13PlayerState ctor: Failed to find DataTable '/Game/Characters/Data/DT_CharacterOptions'"));
-			CharacterOptionsTable = nullptr;
 		}
 	}
 
-	// Initialize replicated properties
+	// Initialize replicated fields to defaults.
 	ChosenRole = TEXT("");
 	ChosenCharacterKey = NAME_None;
 }
@@ -48,7 +46,7 @@ void AF13PlayerState::ServerSetCharacterSelection_Implementation(
 	const FName& NewCharacterKey
 )
 {
-	// Cache the values on the server
+	// Cache the new values on the server
 	ChosenRole = NewRole;
 	ChosenCharacterKey = NewCharacterKey;
 
@@ -60,9 +58,8 @@ void AF13PlayerState::ServerSetCharacterSelection_Implementation(
 		*ChosenCharacterKey.ToString()
 	);
 
-	// Broadcast to any listeners (e.g. GameMode) so they can immediately spawn the chosen Pawn.
-	APlayerController* OwningPC = Cast<APlayerController>(GetOwner());
-	if (OwningPC)
+	// Notify any listeners (GameMode will bind to this) to spawn the chosen Pawn right away.
+	if (APlayerController* OwningPC = Cast<APlayerController>(GetOwner()))
 	{
 		OnCharacterSelected.Broadcast(OwningPC);
 	}
@@ -73,42 +70,37 @@ bool AF13PlayerState::ServerSetCharacterSelection_Validate(
 	const FName& NewCharacterKey
 )
 {
-#if !UE_BUILD_SHIPPING
-	// In non‐shipping builds you could validate that NewRole matches either "Killer" or "Survivor",
-	// and that NewCharacterKey is a valid row in the DataTable (if already loaded).
-	// For now, just allow everything through.
+	// In non–shipping builds you could verify NewRole is “Killer” or “Survivor”
+	// and NewCharacterKey actually exists in the DataTable. For now, allow all.
 	return true;
-#else
-	return true;
-#endif
 }
 
 TSubclassOf<APawn> AF13PlayerState::GetChosenPawnClass() const
 {
-	// Only the server cares about returning a valid UClass.  If we are a client, just bail out.
+	// Only the server cares about returning a valid UClass.
+	// If we’re a client, just return null.
 	if (GetLocalRole() != ROLE_Authority)
 	{
 		return nullptr;
 	}
 
-	// Make sure the DataTable was successfully loaded in the constructor.
+	// If the DataTable failed to load in the ctor, warn & bail.
 	if (CharacterOptionsTable == nullptr)
 	{
 		UE_LOG(LogTemp, Error,
-			TEXT("GetChosenPawnClass: CharacterOptionsTable is nullptr!  Was loading in ctor successful?"));
+			TEXT("GetChosenPawnClass: CharacterOptionsTable is nullptr!"));
 		return nullptr;
 	}
 
-	// Lookup the row by the replicated key
+	// Look up the row by the replicated key.
 	static const FString Context(TEXT("GetChosenPawnClass"));
-	FCharacterOption* Row = CharacterOptionsTable->FindRow<FCharacterOption>(
+	const FCharacterOption* Row = CharacterOptionsTable->FindRow<FCharacterOption>(
 		ChosenCharacterKey, Context
 	);
 
 	if (Row == nullptr)
 	{
-		UE_LOG(
-			LogTemp, Warning,
+		UE_LOG(LogTemp, Warning,
 			TEXT("GetChosenPawnClass: No row found for key '%s' in DT_CharacterOptions"),
 			*ChosenCharacterKey.ToString()
 		);

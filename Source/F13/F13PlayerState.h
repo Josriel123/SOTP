@@ -9,7 +9,7 @@ class UDataTable;
 class APawn;
 class APlayerController;
 
-// Delegate signature: when the server has accepted a character choice,
+// Delegate signature: when the server accepts a character choice,
 // broadcast to anyone (e.g. GameMode) so they can spawn the Pawn.
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
 	FOnCharacterSelectedSignature,
@@ -65,7 +65,7 @@ public:
 	FOnCharacterSelectedSignature OnCharacterSelected;
 
 protected:
-	// Make sure ChosenRole and ChosenCharacterKey actually replicate.
+	// Make sure ChosenRole and ChosenCharacterKey replicate.
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 private:

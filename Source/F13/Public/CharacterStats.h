@@ -36,6 +36,7 @@ struct FCharacterStats : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement|Braking")
     float BrakingDecelWalking = 2048.f;
 
+
     // ─── Custom Ability Flags & Parameters ──────────────────────────────────
 
     /** Does this character have a “dash” ability? */

@@ -1,4 +1,6 @@
-﻿#include "F13CharacterBase.h"
+﻿// F13CharacterBase.cpp
+
+#include "F13CharacterBase.h"
 #include "CharacterStats.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -8,31 +10,39 @@
 #include "InputAction.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/PlayerInput.h"
 #include "Components/InputComponent.h"
 #include "Engine/LocalPlayer.h"
-#include "UObject/ConstructorHelpers.h"
+
+//////////////////////////////////////////////////////////////////////////
+// AF13CharacterBase
 
 AF13CharacterBase::AF13CharacterBase()
 {
-    // Create a CameraBoom (spring arm)
+    // Tell engine to tick this Actor
+    PrimaryActorTick.bCanEverTick = true;
+
+
+    // 1) Create the spring arm (CameraBoom):
     CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
     CameraBoom->SetupAttachment(RootComponent);
     CameraBoom->bUsePawnControlRotation = true;
 
-    // Create the follow camera
+    // 2) Create the follow camera
     FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
     FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
     FollowCamera->bUsePawnControlRotation = false;
 
-    // Load the IMC asset at construction time:
-    static ConstructorHelpers::FObjectFinder<UInputMappingContext> IMCAsset(
+    // 3) Load your InputMappingContext asset at construction time,
+    //    so it’s baked into the CDO/Blueprint defaults:
+    static ConstructorHelpers::FObjectFinder<UInputMappingContext> IMC_AssetObject(
         TEXT("/Game/Characters/Input/IMC_JasonPart3.IMC_JasonPart3"));
-    if (IMCAsset.Succeeded())
+    if (IMC_AssetObject.Succeeded())
     {
-        IMC_JasonPart3 = IMCAsset.Object;
+        IMC_JasonPart3 = IMC_AssetObject.Object;
     }
 
-    // Load InputAction assets
+    // 4) Similarly, load your InputAction assets:
     static ConstructorHelpers::FObjectFinder<UInputAction> MoveActionObj(
         TEXT("/Game/Characters/Input/IA_Move.IA_Move"));
     if (MoveActionObj.Succeeded())
@@ -66,99 +76,92 @@ void AF13CharacterBase::BeginPlay()
 {
     Super::BeginPlay();
 
-    // ─── 1) Read from CharacterStatsTable ─────────────────────────────────────
+
+}
+
+void AF13CharacterBase::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+
+    bUseControllerRotationYaw = false;
+
     if (CharacterStatsTable && StatsRowName != NAME_None)
     {
         static const FString ContextString(TEXT("CharacterStatsLookup"));
-        FCharacterStats* StatsRow = CharacterStatsTable->FindRow<FCharacterStats>(
-            StatsRowName, ContextString, /*bWarnIfNotFound=*/ true);
+        FCharacterStats* StatsRow = CharacterStatsTable->FindRow<FCharacterStats>(StatsRowName, ContextString, true);
 
         if (StatsRow)
         {
-            // Copy locomotion stats
+            // Set the character stats from the row
             WalkSpeed = StatsRow->WalkSpeed;
-            SprintSpeed = StatsRow->SprintSpeed;
             WalkAccel = StatsRow->WalkAccel;
+            SprintSpeed = StatsRow->SprintSpeed;
             SprintAccel = StatsRow->SprintAccel;
-            BrakingDecelerationWalking = StatsRow->BrakingDecelWalking;
+            BrakingDecelWalking = StatsRow->BrakingDecelWalking;
 
-            // Copy ability flags
-            bCanDash = StatsRow->bCanDash;
-            DashDistance = StatsRow->DashDistance;
-            DashCooldown = StatsRow->DashCooldown;
 
-            bCanDoubleJump = StatsRow->bCanDoubleJump;
-            DoubleJumpZVelocity = StatsRow->DoubleJumpZVelocity;
-
-            // Apply to CharacterMovementComponent
-            if (UCharacterMovementComponent* MoveComp = GetCharacterMovement())
+            // Apply the initial walk speed
+            MoveComp = GetCharacterMovement();
+            if (MoveComp)
             {
                 MoveComp->MaxWalkSpeed = WalkSpeed;
                 MoveComp->MaxAcceleration = WalkAccel;
-                MoveComp->BrakingDecelerationWalking = BrakingDecelerationWalking;
+                MoveComp->BrakingDecelerationWalking = BrakingDecelWalking;
+                MoveComp->GroundFriction = 12.0f;
+                MoveComp->bOrientRotationToMovement = true;
+
             }
         }
         else
         {
-            UE_LOG(LogTemp, Error,
-                TEXT("%s: Could not find row '%s' in DataTable '%s'"),
-                *GetName(),
-                *StatsRowName.ToString(),
-                *GetNameSafe(CharacterStatsTable));
+            UE_LOG(LogTemp, Error, TEXT("AF13CharacterBase::BeginPlay(): Could not find row '%s' in CharacterStatsTable."), *StatsRowName.ToString());
         }
     }
     else
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("%s: CharacterStatsTable or StatsRowName not set."),
-            *GetName());
+        UE_LOG(LogTemp, Warning, TEXT("AF13CharacterBase::BeginPlay(): CharacterStatsTable or StatsRowName is not set."));
     }
 
-    // Finally, attempt to add our Enhanced Input Mapping Context
+    // Now that the pawn definitely has a valid PlayerController (and thus a LocalPlayer),
+    // we can register our Enhanced Input Mapping Context:
     AddInputMappingContext();
 }
 
 void AF13CharacterBase::AddInputMappingContext()
 {
+    // Get the PlayerController for this pawn
     APlayerController* PC = Cast<APlayerController>(GetController());
     if (PC == nullptr)
     {
-        // We don’t have a valid PlayerController yet—skip adding mapping context.
-        UE_LOG(LogTemp, Warning,
-            TEXT("%s: Cannot add InputMappingContext because GetController() is null."),
-            *GetName());
+        UE_LOG(LogTemp, Error, TEXT("AF13CharacterBase::AddInputMappingContext(): Pawn has no PlayerController yet."));
         return;
     }
 
+    // The Enhanced Input subsystem only lives on the LocalPlayer
     ULocalPlayer* LP = PC->GetLocalPlayer();
     if (LP == nullptr)
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("%s: Cannot add InputMappingContext because PlayerController has no LocalPlayer."),
-            *GetName());
+        UE_LOG(LogTemp, Error, TEXT("AF13CharacterBase::AddInputMappingContext(): PlayerController has no LocalPlayer."));
         return;
     }
 
-    // Now safely grab the Enhanced Input subsystem
+    // Grab the EnhancedInputLocalPlayerSubsystem
     if (UEnhancedInputLocalPlayerSubsystem* EnhancedInputSubsystem =
         LP->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
     {
         if (IMC_JasonPart3)
         {
             EnhancedInputSubsystem->AddMappingContext(IMC_JasonPart3, 0);
+            UE_LOG(LogTemp, Log, TEXT("Added IMC_JasonPart3 to EnhancedInputLocalPlayerSubsystem."));
         }
         else
         {
-            UE_LOG(LogTemp, Warning,
-                TEXT("%s: IMC_JasonPart3 is null in Blueprint or constructor."),
-                *GetName());
+            UE_LOG(LogTemp, Error, TEXT("AF13CharacterBase::AddInputMappingContext(): IMC_JasonPart3 is NULL in Blueprint!"));
         }
     }
     else
     {
-        UE_LOG(LogTemp, Warning,
-            TEXT("%s: Failed to get UEnhancedInputLocalPlayerSubsystem on LocalPlayer."),
-            *GetName());
+        UE_LOG(LogTemp, Error, TEXT("AF13CharacterBase::AddInputMappingContext(): Could not get EnhancedInputLocalPlayerSubsystem"));
     }
 }
 
@@ -173,50 +176,43 @@ void AF13CharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
         // ─── Bind Move ─────────────────────────
         if (IA_Move)
         {
-            EnhancedInput->BindAction(
-                IA_Move, ETriggerEvent::Triggered, this, &AF13CharacterBase::Move);
+            EnhancedInput->BindAction(IA_Move, ETriggerEvent::Triggered, this, &AF13CharacterBase::Move);
         }
 
         // ─── Bind Look ─────────────────────────
         if (IA_Look)
         {
-            EnhancedInput->BindAction(
-                IA_Look, ETriggerEvent::Triggered, this, &AF13CharacterBase::Look);
+            EnhancedInput->BindAction(IA_Look, ETriggerEvent::Triggered, this, &AF13CharacterBase::Look);
         }
 
         // ─── Bind Jump ─────────────────────────
         if (IA_Jump)
         {
-            EnhancedInput->BindAction(
-                IA_Jump, ETriggerEvent::Started, this, &AF13CharacterBase::JumpPressed);
-            EnhancedInput->BindAction(
-                IA_Jump, ETriggerEvent::Completed, this, &AF13CharacterBase::JumpReleased);
+            EnhancedInput->BindAction(IA_Jump, ETriggerEvent::Started, this, &AF13CharacterBase::JumpPressed);
+            EnhancedInput->BindAction(IA_Jump, ETriggerEvent::Completed, this, &AF13CharacterBase::JumpReleased);
         }
 
         // ─── Bind Sprint ────────────────────────
         if (IA_Sprint)
         {
-            EnhancedInput->BindAction(
-                IA_Sprint, ETriggerEvent::Started, this, &AF13CharacterBase::SprintPressed);
-            EnhancedInput->BindAction(
-                IA_Sprint, ETriggerEvent::Completed, this, &AF13CharacterBase::SprintReleased);
+            EnhancedInput->BindAction(IA_Sprint, ETriggerEvent::Started, this, &AF13CharacterBase::SprintPressed);
+            EnhancedInput->BindAction(IA_Sprint, ETriggerEvent::Completed, this, &AF13CharacterBase::SprintReleased);
         }
     }
 }
 
 void AF13CharacterBase::Move(const FInputActionValue& Value)
 {
+    // Value.Get<FVector2D>() is (X = Right/Left, Y = Forward/Backward)
     const FVector2D MovementVector = Value.Get<FVector2D>();
-    if (!Controller)
-    {
-        return;
-    }
+    if (!Controller) return;
 
+    // Figure out which way is “forward” from the controller’s yaw
     const FRotator ControlRot = Controller->GetControlRotation();
-    const FRotator YawRot(0.f, ControlRot.Yaw, 0.f);
+    const FRotator YawRotation(0.f, ControlRot.Yaw, 0.f);
 
-    const FVector ForwardDir = FRotationMatrix(YawRot).GetUnitAxis(EAxis::X);
-    const FVector RightDir = FRotationMatrix(YawRot).GetUnitAxis(EAxis::Y);
+    const FVector ForwardDir = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+    const FVector RightDir = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
     AddMovementInput(ForwardDir, MovementVector.Y);
     AddMovementInput(RightDir, MovementVector.X);
@@ -224,9 +220,15 @@ void AF13CharacterBase::Move(const FInputActionValue& Value)
 
 void AF13CharacterBase::Look(const FInputActionValue& Value)
 {
-    const FVector2D LookAxis = Value.Get<FVector2D>();
-    AddControllerYawInput(LookAxis.X);
-    AddControllerPitchInput(LookAxis.Y);
+    // Value.Get<FVector2D>() is (X = Yaw input, Y = Pitch input)
+    const FVector2D LookAxisVector = Value.Get<FVector2D>();
+
+    UE_LOG(LogTemp, Warning, TEXT("Look fired: X=%f  Y=%f"),
+        LookAxisVector.X, LookAxisVector.Y);
+
+
+    AddControllerYawInput(LookAxisVector.X);
+    AddControllerPitchInput(LookAxisVector.Y);
 }
 
 void AF13CharacterBase::JumpPressed(const FInputActionValue& Value)
@@ -241,21 +243,67 @@ void AF13CharacterBase::JumpReleased(const FInputActionValue& Value)
 
 void AF13CharacterBase::SprintPressed(const FInputActionValue& Value)
 {
-    if (UCharacterMovementComponent* MoveComp = GetCharacterMovement())
+    bIsSprinting = true;
+
+    if (!MoveComp)
+        return;
+
+    MoveComp->MaxWalkSpeed = SprintSpeed;
+
+    const float SpeedSqr = GetVelocity().SizeSquared();
+    if (SpeedSqr >= WalkSpeed * WalkSpeed)
     {
-        MoveComp->MaxWalkSpeed = SprintSpeed;
         MoveComp->MaxAcceleration = SprintAccel;
-        MoveComp->BrakingDecelerationWalking = 0.f; // Smooth transition
+        MoveComp->BrakingDecelerationWalking = 0.f;
+        bWasAtWalkSpeed = false;
+    }
+    else
+    {
+        // still below walk‐speed; keep walking acc until you cross threshold
+        MoveComp->MaxAcceleration = WalkAccel;
+        MoveComp->BrakingDecelerationWalking = 2048.f;
+        bWasAtWalkSpeed = true;
     }
 }
 
 void AF13CharacterBase::SprintReleased(const FInputActionValue& Value)
 {
-    if (UCharacterMovementComponent* MoveComp = GetCharacterMovement())
+    bIsSprinting = true;
+
+    if (!MoveComp)
+        return;
+
+    // Revert immediately to walking settings
+    MoveComp->MaxWalkSpeed = WalkSpeed;
+    MoveComp->MaxAcceleration = WalkAccel;
+    MoveComp->BrakingDecelerationWalking = 2048.f;
+    bWasAtWalkSpeed = true;
+}
+
+void AF13CharacterBase::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+
+    if (!MoveComp || !bIsSprinting)
+        return;
+
+    // Only check threshold crossing while sprinting:
+    const float SpeedSqr = GetVelocity().SizeSquared();
+    const float WalkSpeedSqr = WalkSpeed * WalkSpeed;
+
+    // If we just crossed from below WalkSpeed to ≥WalkSpeed, switch to sprint‐accel:
+    if (bWasAtWalkSpeed && SpeedSqr >= WalkSpeedSqr)
     {
-        MoveComp->MaxWalkSpeed = WalkSpeed;
+        MoveComp->MaxAcceleration = SprintAccel;
+        MoveComp->BrakingDecelerationWalking = 0.f;
+        bWasAtWalkSpeed = false;
+    }
+    // If you somehow dipped back below WalkSpeed (e.g. hit a wall), revert to walk‐accel:
+    else if (!bWasAtWalkSpeed && SpeedSqr < WalkSpeedSqr)
+    {
         MoveComp->MaxAcceleration = WalkAccel;
-        MoveComp->BrakingDecelerationWalking = 2048.f; // Restore default
+        MoveComp->BrakingDecelerationWalking = 2048.f;
+        bWasAtWalkSpeed = true;
     }
 }
 

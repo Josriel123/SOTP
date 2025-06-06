@@ -8,7 +8,16 @@
 				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/UI/WBP_CharacterSelection.uasset",
 				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/UI/WBP_CharcaterOptionRow.uasset",
 				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/UI/BP_CharacterSelectionHUD.uasset",
-				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/BP_F13Mode.uasset"
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/BP_F13Mode.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Data/DT_CharacterStats.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Killer/Blueprints/BP_JasonPart3.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Killer/Jason_Part_3_Assets/Animations/JasonPart3/JasonPart3_BlendSpace1D.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Data/DT_CharacterOptions.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Killer/Jason_Part_3_Assets/Textures/JasonPart3.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Killer/Jason_Part_3_Assets/Textures/JasonPart4.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Survivors/Tommy_Jarvis/Textures/TommyJarvis.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Survivors/Tommy_Jarvis/Textures/TommyJarvis1.uasset",
+				"C:/Users/joelb/OneDrive/Documents/Unreal Projects/F13/Content/Characters/Survivors/Tommy_Jarvis/Textures/TommyJarvis2.uasset"
 			]
 		}
 	]

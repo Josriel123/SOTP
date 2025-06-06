@@ -80,10 +80,10 @@ AF13SurvivorCharacter::~AF13SurvivorCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13SurvivorCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13SurvivorCharacter, AF13SurvivorCharacter::StaticClass, TEXT("AF13SurvivorCharacter"), &Z_Registration_Info_UClass_AF13SurvivorCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13SurvivorCharacter), 1327860397U) },
+		{ Z_Construct_UClass_AF13SurvivorCharacter, AF13SurvivorCharacter::StaticClass, TEXT("AF13SurvivorCharacter"), &Z_Registration_Info_UClass_AF13SurvivorCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13SurvivorCharacter), 575906470U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13SurvivorCharacter_h_2707869206(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13SurvivorCharacter_h_371945977(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13SurvivorCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13SurvivorCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
