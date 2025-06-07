@@ -14,10 +14,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define F13_F13PlayerController_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execClientClickedSelectOption);
-
-
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13PlayerController(); \
@@ -43,7 +39,6 @@ public: \
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_INCLASS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_16_ENHANCED_CONSTRUCTORS \
 private: \

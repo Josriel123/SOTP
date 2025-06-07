@@ -30,10 +30,5 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	// Called when the match is ready to actually spawn pawns (maybe after UI).
-	void SpawnChosenPawnForController(AF13PlayerController* PC);
-
-	// A small helper that finds the PlayerState and returns their chosen pawn class:
-	TSubclassOf<APawn> GetPawnClassForController(AF13PlayerController* PC) const;
 };
 

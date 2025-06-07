@@ -18,18 +18,9 @@ class F13_API AF13PlayerController : public APlayerController
 public:
 	AF13PlayerController();
 
-	/**
-	 * Called by the UI (Blueprint) when the player clicks on a character option.
-	 * Forwards to the PlayerState server RPC.
-	 */
-	UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
-	void ClientClickedSelectOption(const FString& ChosenRole, const FName& ChosenKey);
-
 protected:
 	/** Override to cache our typed PlayerState. */
 	virtual void BeginPlay() override;
-
-	virtual void OnPossess(APawn* aPawn) override;
 
 
 private:

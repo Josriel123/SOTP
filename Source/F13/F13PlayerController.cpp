@@ -23,29 +23,4 @@ void AF13PlayerController::BeginPlay()
 
 }
 
-void AF13PlayerController::OnPossess(APawn* aPawn)
-{
-	Super::OnPossess(aPawn);
 
-	// 1) Hide the OS cursor so you never have to hold any button.
-	bShowMouseCursor = false;
-
-	// 2) Force GameOnly input mode. That tells UE: “Lock mouse to viewport & send all
-	//    Mouse X/Y deltas directly to Enhanced Input.” 
-	FInputModeGameOnly InputMode;
-	SetInputMode(InputMode);
-
-	// Now, at this point, raw mouse movement will fire IA_Look every frame,
-	// without any Left- or Right-Click.
-}
-
-void AF13PlayerController::ClientClickedSelectOption(const FString& ChosenRole, const FName& ChosenKey)
-{
-	// Only forward to server if we have a valid cached PlayerState
-	if (F13PlayerStateCached && HasAuthority() == false)
-	{
-		// Invoke the server RPC. If we somehow already have authority, skip it because the GameMode
-		// will pick up our replicated values immediately.
-		F13PlayerStateCached->ServerSetCharacterSelection(ChosenRole, ChosenKey);
-	}
-}

@@ -53,6 +53,8 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
         return;
     }
 
+
+
     // Spawn logic (same as SpawnChosenPawnForController):
     AF13PlayerState* PS = Cast<AF13PlayerState>(SelectingPC->PlayerState);
     if (!PS)
@@ -60,6 +62,14 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
         UE_LOG(LogTemp, Warning, TEXT("HandleCharacterSelected: no PlayerState"));
         return;
     }
+
+    UE_LOG(LogTemp, Log, TEXT(
+        "HandleCharacterSelected: Spawning pawn for %s (Role=%s, Key=%s)"
+    ),
+        *PS->GetPlayerName(),
+        *PS->ChosenRole,
+        *PS->ChosenCharacterKey.ToString()
+    );
 
     // Get the pawn class they chose:
     TSubclassOf<APawn> PawnToSpawn = PS->GetChosenPawnClass();
@@ -95,8 +105,6 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
             *PawnToSpawn->GetName(), *PS->GetPlayerName());
     }
 
-    // Optionally: hide/disable the CharacterSelection UI – 
-    //   you can broadcast a Widget‐event or have the PlayerController tell the UMG to remove itself.
 }
 
 
@@ -121,63 +129,3 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
     // and here you check: if (HasChosenCharacter) SpawnChosenPawnForController(NewPlayer).)
 }
 
-TSubclassOf<APawn> AF13Mode::GetPawnClassForController(AF13PlayerController* PC) const
-{
-    if (!PC) return nullptr;
-
-    AF13PlayerState* PS = Cast<AF13PlayerState>(PC->PlayerState);
-    if (!PS) return nullptr;
-
-    return PS->GetChosenPawnClass();
-}
-
-void AF13Mode::SpawnChosenPawnForController(AF13PlayerController* PC)
-{
-    if (!PC) return;
-
-    // If this player already has a pawn, skip:
-    if (PC->GetPawn()) return;
-
-    UWorld* World = GetWorld();
-    if (!World) return;
-
-    TSubclassOf<APawn> PawnClass = GetPawnClassForController(PC);
-    if (!PawnClass)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("SpawnChosenPawnForController: PawnClass is null."));
-        return;
-    }
-
-    // Determine a spawn location & rotation. For simplicity, we use the GameMode's
-    // default spawn logic (FindPlayerStart & SpawnDefaultPawnFor):
-    FTransform SpawnTransform;
-    AActor* StartSpot = FindPlayerStart(PC);
-    if (StartSpot)
-    {
-        SpawnTransform = StartSpot->GetActorTransform();
-    }
-    else
-    {
-        // If no PlayerStart is found, just spawn at origin:
-        SpawnTransform = FTransform(FRotator::ZeroRotator, FVector::ZeroVector);
-    }
-
-    // Actually spawn the chosen Pawn.
-    FActorSpawnParameters SpawnParams;
-    SpawnParams.Owner = PC;
-    APawn* NewPawn = World->SpawnActor<APawn>(
-        PawnClass,
-        SpawnTransform.GetLocation(),
-        SpawnTransform.Rotator(),
-        SpawnParams
-    );
-    if (NewPawn)
-    {
-        PC->Possess(NewPawn);
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("Failed to Spawn Actor for PawnClass %s"),
-            *PawnClass->GetName());
-    }
-}
