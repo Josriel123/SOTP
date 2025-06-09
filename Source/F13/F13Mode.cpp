@@ -1,17 +1,17 @@
-﻿#include "F13Mode.h"              // your GameMode header
+﻿#include "F13Mode.h"
 #include "GameFramework/HUD.h" 
 #include "F13PlayerController.h" 
-#include "GameFramework/PlayerController.h"// because you set PlayerControllerClass
-#include "F13PlayerState.h"       // because you set PlayerStateClass
-#include "F13GameState.h"         // because you set GameStateClass
+#include "GameFramework/PlayerController.h"
+#include "F13PlayerState.h"    
+#include "F13GameState.h"        
 #include "Kismet/GameplayStatics.h"
-#include "Engine/World.h"         // for SpawnActor, GetWorld()
-#include "UObject/ConstructorHelpers.h"  // for FClassFinder<>
+#include "Engine/World.h"        
+#include "UObject/ConstructorHelpers.h" 
 
 
 AF13Mode::AF13Mode()
 {
-    DefaultPawnClass = nullptr;
+    //DefaultPawnClass = nullptr;
     PlayerControllerClass = AF13PlayerController::StaticClass();
     PlayerStateClass = AF13PlayerState::StaticClass();
     GameStateClass = AF13GameState::StaticClass();
@@ -128,4 +128,3 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
     // (Alternatively, you could store a “HasChosenCharacter” bool in PlayerState,
     // and here you check: if (HasChosenCharacter) SpawnChosenPawnForController(NewPlayer).)
 }
-

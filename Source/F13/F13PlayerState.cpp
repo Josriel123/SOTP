@@ -39,6 +39,7 @@ void AF13PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 
 	DOREPLIFETIME(AF13PlayerState, ChosenRole);
 	DOREPLIFETIME(AF13PlayerState, ChosenCharacterKey);
+	DOREPLIFETIME(AF13PlayerState, SelectedPawnClass);
 }
 
 void AF13PlayerState::ServerSetCharacterSelection_Implementation(
@@ -50,6 +51,16 @@ void AF13PlayerState::ServerSetCharacterSelection_Implementation(
 	ChosenRole = NewRole;
 	ChosenCharacterKey = NewCharacterKey;
 
+	SelectedPawnClass = GetChosenPawnClass();
+
+	UE_LOG(LogTemp, Log,
+		TEXT("PlayerState[%s] got SelectedPawnClass = %s"),
+		*GetPlayerName(),
+		SelectedPawnClass
+		? *SelectedPawnClass->GetName()
+		: TEXT("nullptr")
+	);
+
 	UE_LOG(LogTemp, Log, TEXT(
 		"AF13PlayerState::ServerSetCharacterSelection: PlayerState[%s] → Role=%s, Key=%s"
 	),
@@ -58,11 +69,11 @@ void AF13PlayerState::ServerSetCharacterSelection_Implementation(
 		*ChosenCharacterKey.ToString()
 	);
 
-	// Notify any listeners (GameMode will bind to this) to spawn the chosen Pawn right away.
 	if (APlayerController* OwningPC = Cast<APlayerController>(GetOwner()))
 	{
 		OnCharacterSelected.Broadcast(OwningPC);
 	}
+	
 }
 
 bool AF13PlayerState::ServerSetCharacterSelection_Validate(

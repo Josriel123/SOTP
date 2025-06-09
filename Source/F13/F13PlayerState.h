@@ -28,6 +28,9 @@ class F13_API AF13PlayerState : public APlayerState
 public:
 	AF13PlayerState();
 
+	UPROPERTY(Replicated)
+	TSubclassOf<APawn> SelectedPawnClass;
+
 	/**
 	 *  The “role” string the player chose (e.g. “Killer” or “Survivor”).
 	 */

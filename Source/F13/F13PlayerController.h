@@ -18,6 +18,9 @@ class F13_API AF13PlayerController : public APlayerController
 public:
 	AF13PlayerController();
 
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSelectPawnClass(TSubclassOf<APawn> PawnClass);
+
 protected:
 	/** Override to cache our typed PlayerState. */
 	virtual void BeginPlay() override;

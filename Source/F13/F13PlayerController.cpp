@@ -22,5 +22,23 @@ void AF13PlayerController::BeginPlay()
 	}
 
 }
+// In F13PlayerController.cpp
+
+bool AF13PlayerController::ServerSelectPawnClass_Validate(TSubclassOf<APawn> PawnClass)
+{
+	// Here you can sanity-check the class (e.g., is it in your approved DataTable?)
+	return true;  // return false if you want to reject the request
+}
+
+void AF13PlayerController::ServerSelectPawnClass_Implementation(TSubclassOf<APawn> PawnClass)
+{
+	// This code runs on the server!
+	if (AF13PlayerState* PS = GetPlayerState<AF13PlayerState>())
+	{
+		// Store the choice in the replicated PlayerState
+		PS->SelectedPawnClass = PawnClass;
+	}
+}
+
 
 

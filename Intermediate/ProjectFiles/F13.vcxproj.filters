@@ -44,12 +44,6 @@
     <ClCompile Include="..\..\Source\F13\F13.h">
       <Filter>Source\F13</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Character.cpp">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Character.h">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\F13\F13GameState.cpp">
       <Filter>Source\F13</Filter>
     </ClCompile>
@@ -80,13 +74,13 @@
     <ClCompile Include="..\..\Source\F13\Private\F13CharacterBase.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13GameInstance.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13SurvivorCharacter.cpp">
-      <Filter>Source\F13\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\MyDataTableFunctionLibrary.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <Filter Include="Source\F13\Public">
@@ -101,13 +95,13 @@
     <ClCompile Include="..\..\Source\F13\Public\F13CharacterBase.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13GameInstance.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">
-      <Filter>Source\F13\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\MyDataTableFunctionLibrary.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
   </ItemGroup>

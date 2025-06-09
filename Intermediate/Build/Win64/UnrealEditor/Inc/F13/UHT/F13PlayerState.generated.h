@@ -38,7 +38,8 @@ public: \
 	enum class ENetFields_Private : uint16 \
 	{ \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
-		ChosenRole=NETFIELD_REP_START, \
+		SelectedPawnClass=NETFIELD_REP_START, \
+		ChosenRole, \
 		ChosenCharacterKey, \
 		NETFIELD_REP_END=ChosenCharacterKey	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
