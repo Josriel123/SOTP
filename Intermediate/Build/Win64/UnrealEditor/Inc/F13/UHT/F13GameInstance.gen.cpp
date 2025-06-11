@@ -15,6 +15,7 @@ F13_API UClass* Z_Construct_UClass_UF13GameInstance();
 F13_API UClass* Z_Construct_UClass_UF13GameInstance_NoRegister();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionCreated__DelegateSignature();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionJoined__DelegateSignature();
+F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
@@ -128,6 +129,56 @@ void FOnSessionCreated_DelegateWrapper(const FMulticastScriptDelegate& OnSession
 }
 // End Delegate FOnSessionCreated
 
+// Begin Delegate FOnSessionListReady
+struct Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics
+{
+	struct _Script_F13_eventOnSessionListReady_Parms
+	{
+		TArray<FString> FoundNames;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FoundNames_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_FoundNames_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_FoundNames;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::NewProp_FoundNames_Inner = { "FoundNames", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::NewProp_FoundNames = { "FoundNames", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_F13_eventOnSessionListReady_Parms, FoundNames), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FoundNames_MetaData), NewProp_FoundNames_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::NewProp_FoundNames_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::NewProp_FoundNames,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_F13, nullptr, "OnSessionListReady__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::_Script_F13_eventOnSessionListReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::_Script_F13_eventOnSessionListReady_Parms) < MAX_uint16);
+UFunction* Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+void FOnSessionListReady_DelegateWrapper(const FMulticastScriptDelegate& OnSessionListReady, TArray<FString> const& FoundNames)
+{
+	struct _Script_F13_eventOnSessionListReady_Parms
+	{
+		TArray<FString> FoundNames;
+	};
+	_Script_F13_eventOnSessionListReady_Parms Parms;
+	Parms.FoundNames=FoundNames;
+	OnSessionListReady.ProcessMulticastDelegate<UObject>(&Parms);
+}
+// End Delegate FOnSessionListReady
+
 // Begin Class UF13GameInstance Function FindSessions
 struct Z_Construct_UFunction_UF13GameInstance_FindSessions_Statics
 {
@@ -238,9 +289,9 @@ struct Z_Construct_UFunction_UF13GameInstance_HostSession_Statics
 {
 	struct F13GameInstance_eventHostSession_Parms
 	{
-		FName SessionName;
 		bool bIsLAN;
 		int32 MaxPlayers;
+		FString DisplayName;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -253,25 +304,28 @@ struct Z_Construct_UFunction_UF13GameInstance_HostSession_Statics
 		{ "ToolTip", "Start hosting a session" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DisplayName_MetaData[] = {
+		{ "NativeConst", "" },
+	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FNamePropertyParams NewProp_SessionName;
 	static void NewProp_bIsLAN_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsLAN;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_MaxPlayers;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_DisplayName;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_SessionName = { "SessionName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13GameInstance_eventHostSession_Parms, SessionName), METADATA_PARAMS(0, nullptr) };
 void Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_bIsLAN_SetBit(void* Obj)
 {
 	((F13GameInstance_eventHostSession_Parms*)Obj)->bIsLAN = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_bIsLAN = { "bIsLAN", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(F13GameInstance_eventHostSession_Parms), &Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_bIsLAN_SetBit, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_MaxPlayers = { "MaxPlayers", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13GameInstance_eventHostSession_Parms, MaxPlayers), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13GameInstance_eventHostSession_Parms, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayName_MetaData), NewProp_DisplayName_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_SessionName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_bIsLAN,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_MaxPlayers,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::NewProp_DisplayName,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UF13GameInstance, nullptr, "HostSession", nullptr, nullptr, Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::F13GameInstance_eventHostSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UF13GameInstance_HostSession_Statics::Function_MetaDataParams) };
@@ -287,12 +341,12 @@ UFunction* Z_Construct_UFunction_UF13GameInstance_HostSession()
 }
 DEFINE_FUNCTION(UF13GameInstance::execHostSession)
 {
-	P_GET_PROPERTY(FNameProperty,Z_Param_SessionName);
 	P_GET_UBOOL(Z_Param_bIsLAN);
 	P_GET_PROPERTY(FIntProperty,Z_Param_MaxPlayers);
+	P_GET_PROPERTY(FStrProperty,Z_Param_DisplayName);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->HostSession(Z_Param_SessionName,Z_Param_bIsLAN,Z_Param_MaxPlayers);
+	P_THIS->HostSession(Z_Param_bIsLAN,Z_Param_MaxPlayers,Z_Param_DisplayName);
 	P_NATIVE_END;
 }
 // End Class UF13GameInstance Function HostSession
@@ -421,12 +475,17 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 		{ "ToolTip", "Triggered when a session is joined" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnSessionListReady_MetaData[] = {
+		{ "Category", "Session" },
+		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bSessionCreated_MetaData[] = {
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionCreated;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionJoined;
+	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionListReady;
 	static void NewProp_bSessionCreated_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bSessionCreated;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -434,7 +493,7 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UF13GameInstance_FindSessions, "FindSessions" }, // 4151081956
 		{ &Z_Construct_UFunction_UF13GameInstance_GetFoundSessionNames, "GetFoundSessionNames" }, // 3846831208
-		{ &Z_Construct_UFunction_UF13GameInstance_HostSession, "HostSession" }, // 762945610
+		{ &Z_Construct_UFunction_UF13GameInstance_HostSession, "HostSession" }, // 2413397732
 		{ &Z_Construct_UFunction_UF13GameInstance_JoinFoundSession, "JoinFoundSession" }, // 277463511
 		{ &Z_Construct_UFunction_UF13GameInstance_StartGameSession, "StartGameSession" }, // 589505344
 	};
@@ -446,6 +505,7 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 };
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionCreated = { "OnSessionCreated", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionCreated), Z_Construct_UDelegateFunction_F13_OnSessionCreated__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionCreated_MetaData), NewProp_OnSessionCreated_MetaData) }; // 3240551563
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionJoined = { "OnSessionJoined", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionJoined), Z_Construct_UDelegateFunction_F13_OnSessionJoined__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionJoined_MetaData), NewProp_OnSessionJoined_MetaData) }; // 1539544734
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionListReady = { "OnSessionListReady", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionListReady), Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionListReady_MetaData), NewProp_OnSessionListReady_MetaData) }; // 4068235461
 void Z_Construct_UClass_UF13GameInstance_Statics::NewProp_bSessionCreated_SetBit(void* Obj)
 {
 	((UF13GameInstance*)Obj)->bSessionCreated = 1;
@@ -454,6 +514,7 @@ const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UF13GameInstance
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UF13GameInstance_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionCreated,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionJoined,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionListReady,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_bSessionCreated,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UF13GameInstance_Statics::PropPointers) < 2048);
@@ -497,10 +558,10 @@ UF13GameInstance::~UF13GameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 4224501149U) },
+		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 2161586437U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_2772574820(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_2595254714(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

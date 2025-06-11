@@ -2,6 +2,7 @@
 #include "F13GameInstance.h"
 #include "Engine/World.h"
 
+
 UF13GameInstance::UF13GameInstance()
 {
     if (IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get())
@@ -24,14 +25,19 @@ void UF13GameInstance::Init()
     }
 }
 
-void UF13GameInstance::HostSession(FName SessionName, bool bIsLAN, int32 MaxPlayers)
+void UF13GameInstance::HostSession(bool bIsLAN, int32 MaxPlayers, const FString& DisplayName)
 {
-    if (!SessionInterface.IsValid()) return;
-
-    if (SessionInterface->GetNamedSession(SessionName) != nullptr)
+    if (!SessionInterface.IsValid())
     {
-        SessionInterface->DestroySession(SessionName);
+        UE_LOG(LogTemp, Warning, TEXT("HostSession called but SessionInterface == nullptr"));
+        return;
     }
+
+    if (SessionInterface->GetNamedSession(NAME_GameSession) != nullptr)
+    {
+        SessionInterface->DestroySession(NAME_GameSession);
+    }
+    const FName KEY_ServerName(TEXT("SERVER_NAME"));
 
     TSharedPtr<FOnlineSessionSettings> Settings = MakeShareable(new FOnlineSessionSettings());
     Settings->bIsLANMatch = bIsLAN;
@@ -39,15 +45,21 @@ void UF13GameInstance::HostSession(FName SessionName, bool bIsLAN, int32 MaxPlay
     Settings->bShouldAdvertise = true;
     Settings->bAllowJoinInProgress = true;
     Settings->bUsesPresence = true;
+    Settings->Set<FString>(KEY_ServerName,
+        DisplayName,          // or a widget-field value
+        EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
 
     OnCreateSessionCompleteDelegateHandle =
         SessionInterface->AddOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegate);
 
-    SessionInterface->CreateSession(0, SessionName, *Settings);
+    SessionInterface->CreateSession(0, NAME_GameSession, *Settings);
 }
 
 void UF13GameInstance::OnCreateSessionComplete(FName SessionName, bool bWasSuccessful)
 {
+
+    UE_LOG(LogTemp, Warning, TEXT("OnCreateSessionComplete: %s  success=%d"),
+        *SessionName.ToString(), bWasSuccessful);
     if (SessionInterface.IsValid())
     {
         SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegateHandle);
@@ -88,10 +100,34 @@ void UF13GameInstance::FindSessions(bool bIsLAN)
 
 void UF13GameInstance::OnFindSessionsComplete(bool bWasSuccessful)
 {
+    UE_LOG(LogTemp, Warning, TEXT("OnFindSessionsComplete: success=%d  results=%d"),
+        bWasSuccessful, SessionSearch.IsValid() ? SessionSearch->SearchResults.Num() : -1);
+
     if (SessionInterface.IsValid())
     {
         SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(OnFindSessionsCompleteDelegateHandle);
     }
+
+
+    TArray<FString> Names;
+    if (bWasSuccessful && SessionSearch.IsValid())
+    {
+        const FName KEY_ServerName(TEXT("SERVER_NAME"));
+        for (const auto& Result : SessionSearch->SearchResults)
+        {
+            FString Display;
+            if (Result.Session.SessionSettings.Get(KEY_ServerName, Display))
+            {
+                Names.Add(Display);              // “MySession”
+            }
+            else
+            {
+                Names.Add(Result.GetSessionIdStr()); // fallback GUID
+            }
+        }
+    }
+
+    OnSessionListReady.Broadcast(Names);
 }
 
 void UF13GameInstance::JoinFoundSession(int32 SessionIndex)

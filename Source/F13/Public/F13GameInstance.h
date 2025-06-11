@@ -21,6 +21,15 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
     bWasSuccessful      // name of the parameter in callbacks
 );
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+    FOnSessionListReady,
+    const TArray<FString>&,
+    FoundNames
+);
+
+
+
+
 UCLASS()
 class F13_API UF13GameInstance : public UGameInstance
 {
@@ -32,7 +41,7 @@ public:
 
     /** Start hosting a session */
     UFUNCTION(BlueprintCallable, Category = "Session")
-    void HostSession(FName SessionName, bool bIsLAN, int32 MaxPlayers);
+    void HostSession(bool bIsLAN, int32 MaxPlayers, const FString& DisplayName);
 
     /** Search for available sessions */
     UFUNCTION(BlueprintCallable, Category = "Session")
@@ -56,6 +65,9 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "Session")
     void StartGameSession();
+
+    UPROPERTY(BlueprintAssignable, Category = "Session")
+    FOnSessionListReady OnSessionListReady;
 
 private:
     // Interface to the online subsystem’s session API

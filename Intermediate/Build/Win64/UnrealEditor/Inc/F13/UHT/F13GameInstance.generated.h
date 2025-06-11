@@ -22,7 +22,11 @@ F13_API void FOnSessionJoined_DelegateWrapper(const FMulticastScriptDelegate& On
 F13_API void FOnSessionCreated_DelegateWrapper(const FMulticastScriptDelegate& OnSessionCreated, bool bWasSuccessful);
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_28_DELEGATE \
+F13_API void FOnSessionListReady_DelegateWrapper(const FMulticastScriptDelegate& OnSessionListReady, TArray<FString> const& FoundNames);
+
+
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execStartGameSession); \
 	DECLARE_FUNCTION(execGetFoundSessionNames); \
 	DECLARE_FUNCTION(execJoinFoundSession); \
@@ -30,7 +34,7 @@ F13_API void FOnSessionCreated_DelegateWrapper(const FMulticastScriptDelegate& O
 	DECLARE_FUNCTION(execHostSession);
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_INCLASS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUF13GameInstance(); \
 	friend struct Z_Construct_UClass_UF13GameInstance_Statics; \
@@ -39,7 +43,7 @@ public: \
 	DECLARE_SERIALIZER(UF13GameInstance)
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_ENHANCED_CONSTRUCTORS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UF13GameInstance(UF13GameInstance&&); \
@@ -51,13 +55,13 @@ public: \
 	NO_API virtual ~UF13GameInstance();
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_24_PROLOG
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_GENERATED_BODY \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_33_PROLOG
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_INCLASS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_27_ENHANCED_CONSTRUCTORS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_INCLASS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_36_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
