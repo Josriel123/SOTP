@@ -27,6 +27,13 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
     FoundNames
 );
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+    FOnSessionLeft,
+    bool,
+    bSuccess
+);
+
+
 
 
 
@@ -51,6 +58,10 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Session")
     void JoinFoundSession(int32 SessionIndex);
 
+    UFUNCTION(BlueprintCallable, Category = "Session")
+    void LeaveGameSession();
+
+
     /** Get session names from last search */
     UFUNCTION(BlueprintCallable, Category = "Session")
     TArray<FString> GetFoundSessionNames() const;
@@ -69,6 +80,9 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Session")
     FOnSessionListReady OnSessionListReady;
 
+    UPROPERTY(BlueprintAssignable, Category = "Session")
+    FOnSessionLeft OnSessionLeft;
+
 private:
     // Interface to the online subsystem’s session API
     IOnlineSessionPtr SessionInterface;
@@ -86,10 +100,15 @@ private:
     FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
     FDelegateHandle OnJoinSessionCompleteDelegateHandle;
 
+    FDelegateHandle OnEndSessionCompleteHandle;
+    FDelegateHandle OnDestroySessionCompleteHandle;
+
     // Callback functions bound to the online subsystem
     void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
     void OnFindSessionsComplete(bool bWasSuccessful);
     void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
+    void OnEndSessionComplete(FName, bool);
+    void OnDestroySessionComplete(FName, bool);
 
     UPROPERTY()
     bool bSessionCreated;

@@ -83,6 +83,82 @@ void UF13GameInstance::StartGameSession()
     }
 }
 
+void UF13GameInstance::LeaveGameSession()
+{
+    if (!SessionInterface.IsValid())
+    {
+        UE_LOG(LogTemp, Warning, TEXT("LeaveGameSession: SessionInterface == nullptr"));
+        OnSessionLeft.Broadcast(false);
+        return;
+    }
+
+    /* Is there an active session? */
+    if (!SessionInterface->GetNamedSession(NAME_GameSession))
+    {
+        UE_LOG(LogTemp, Warning, TEXT("LeaveGameSession: no active session"));
+        OnSessionLeft.Broadcast(false);
+        return;
+    }
+
+    /* 1. End the session (host or client) */
+    OnEndSessionCompleteHandle =
+        SessionInterface->AddOnEndSessionCompleteDelegate_Handle(
+            FOnEndSessionCompleteDelegate::CreateUObject(
+                this, &UF13GameInstance::OnEndSessionComplete));
+
+    if (!SessionInterface->EndSession(NAME_GameSession))
+    {
+        /* If EndSession failed to start, fall back to Destroy */
+        SessionInterface->ClearOnEndSessionCompleteDelegate_Handle(OnEndSessionCompleteHandle);
+        OnEndSessionComplete(NAME_GameSession, /*bSuccess=*/false);
+    }
+}
+
+void UF13GameInstance::OnEndSessionComplete(FName SessionName, bool bSuccess)
+{
+    UE_LOG(LogTemp, Warning, TEXT("OnEndSessionComplete: %s  success=%d"),
+        *SessionName.ToString(), bSuccess);
+
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnEndSessionCompleteDelegate_Handle(OnEndSessionCompleteHandle);
+
+        /* 2. Destroy the session object locally */
+        OnDestroySessionCompleteHandle =
+            SessionInterface->AddOnDestroySessionCompleteDelegate_Handle(
+                FOnDestroySessionCompleteDelegate::CreateUObject(
+                    this, &UF13GameInstance::OnDestroySessionComplete));
+
+        if (!SessionInterface->DestroySession(SessionName))
+        {
+            /* If DestroySession failed to start, fire callback anyway */
+            SessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(OnDestroySessionCompleteHandle);
+            OnDestroySessionComplete(SessionName, /*bSuccess=*/false);
+        }
+    }
+}
+
+void UF13GameInstance::OnDestroySessionComplete(FName SessionName, bool bSuccess)
+{
+    UE_LOG(LogTemp, Warning, TEXT("OnDestroySessionComplete: %s  success=%d"),
+        *SessionName.ToString(), bSuccess);
+
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(OnDestroySessionCompleteHandle);
+    }
+
+    /* 3. Return to main-menu map (only the local process travels) */
+    if (APlayerController* PC = GetFirstLocalPlayerController())
+    {
+        PC->ClientTravel(TEXT("/Game/MainMenu/MainMenuMap"), TRAVEL_Absolute);
+    }
+
+    OnSessionLeft.Broadcast(bSuccess);
+}
+
+
+
 void UF13GameInstance::FindSessions(bool bIsLAN)
 {
     if (!SessionInterface.IsValid()) return;
