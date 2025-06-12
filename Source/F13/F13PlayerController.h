@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
+#include "HMS_PlayerController.h"
 #include "GameFramework/PlayerController.h"
 #include "F13PlayerController.generated.h"
 
@@ -11,7 +12,7 @@ class AF13PlayerState;
  * and forwarding them to the server‐side PlayerState RPC.
  */
 UCLASS()
-class F13_API AF13PlayerController : public APlayerController
+class F13_API AF13PlayerController : public AHMS_PlayerController
 {
 	GENERATED_BODY()
 

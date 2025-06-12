@@ -17,7 +17,8 @@ public class F13 : ModuleRules
             "EnhancedInput",
             "OnlineSubsystem",
             "OnlineSubsystemUtils",
-            "OnlineSubsystemNull" 
+            "OnlineSubsystemNull",
+            "HostMigrationSystem"
         });
     }
 }

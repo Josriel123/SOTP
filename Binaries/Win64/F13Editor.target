@@ -3946,6 +3946,18 @@
 			"Type": "RequiredResource"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/HostMigrd530f3ca896aV4/Binaries/Win64/UnrealEditor-HostMigrationSystem.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/HostMigrd530f3ca896aV4/Binaries/Win64/UnrealEditor-HostMigrationSystem.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/HostMigrd530f3ca896aV4/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Media/AndroidMedia/Binaries/Win64/UnrealEditor-AndroidMediaEditor.dll",
 			"Type": "DynamicLibrary"
 		},
@@ -30248,6 +30260,10 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Marketplace/HostMigrd530f3ca896aV4/HostMigrationSystemV2.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Media/AndroidMedia/AndroidMedia.uplugin",
 			"Type": "UFS"
 		},
@@ -30641,6 +30657,7 @@
 		"GooglePAD",
 		"HairStrands",
 		"HoldoutComposite",
+		"HostMigrationSystemV2",
 		"IKRig",
 		"IOSDeviceProfileSelector",
 		"ImgMedia",

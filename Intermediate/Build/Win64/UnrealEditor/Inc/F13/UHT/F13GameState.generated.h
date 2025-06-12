@@ -19,7 +19,7 @@ private: \
 	static void StaticRegisterNativesAF13GameState(); \
 	friend struct Z_Construct_UClass_AF13GameState_Statics; \
 public: \
-	DECLARE_CLASS(AF13GameState, AGameStateBase, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/F13"), NO_API) \
+	DECLARE_CLASS(AF13GameState, AGameState, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/F13"), NO_API) \
 	DECLARE_SERIALIZER(AF13GameState)
 
 

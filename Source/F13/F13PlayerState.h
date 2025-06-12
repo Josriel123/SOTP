@@ -46,7 +46,7 @@ public:
 	/**
 	 *  Called on the client when the player picks something in the UI.
 	 *  This RPC is executed on the server, which caches the new values and
-	 *  broadcasts OnCharacterSelected so that GameMode (or whoever) can react.
+	 *  broadcasts OnCharacterSelected so that GameM6ode (or whoever) can react.
 	 */
 	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "CharacterSelection")
 	void ServerSetCharacterSelection(const FString& NewRole, const FName& NewCharacterKey);

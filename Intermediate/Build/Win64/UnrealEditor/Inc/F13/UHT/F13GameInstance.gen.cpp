@@ -10,12 +10,12 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13GameInstance() {}
 
 // Begin Cross Module References
-ENGINE_API UClass* Z_Construct_UClass_UGameInstance();
 F13_API UClass* Z_Construct_UClass_UF13GameInstance();
 F13_API UClass* Z_Construct_UClass_UF13GameInstance_NoRegister();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionCreated__DelegateSignature();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionJoined__DelegateSignature();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature();
+HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_UHMS_GameInstance();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
@@ -519,7 +519,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UF13GameI
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UF13GameInstance_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UF13GameInstance_Statics::DependentSingletons[])() = {
-	(UObject* (*)())Z_Construct_UClass_UGameInstance,
+	(UObject* (*)())Z_Construct_UClass_UHMS_GameInstance,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UF13GameInstance_Statics::DependentSingletons) < 16);
@@ -558,10 +558,10 @@ UF13GameInstance::~UF13GameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 2161586437U) },
+		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 1584843809U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_2595254714(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_1251274954(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "CoreMinimal.h"
+#include "HMS_GameMode.h"
 #include "GameFramework/GameModeBase.h"
 #include "F13Mode.generated.h"
 
@@ -9,7 +10,7 @@ class AF13PlayerState;
 class AF13GameState;
 
 UCLASS()
-class F13_API AF13Mode : public AGameModeBase
+class F13_API AF13Mode : public AHMS_GameMode
 {
 	GENERATED_BODY()
 

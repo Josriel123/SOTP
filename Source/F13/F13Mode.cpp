@@ -120,11 +120,4 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
         PS->OnCharacterSelected.AddDynamic(this, &AF13Mode::HandleCharacterSelected);
     }
 
-    // We could choose to spawn the selected Pawn immediately upon login,
-    // but often we want to wait until the player has actually made their choice
-    // via the UI widget. For now, let's assume the client will call some RPC
-    // to the server (after choosing) that triggers SpawnChosenPawnForController().
-
-    // (Alternatively, you could store a “HasChosenCharacter” bool in PlayerState,
-    // and here you check: if (HasChosenCharacter) SpawnChosenPawnForController(NewPlayer).)
 }

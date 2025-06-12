@@ -13,10 +13,10 @@ void EmptyLinkFunctionForGeneratedCodeF13PlayerController() {}
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
-ENGINE_API UClass* Z_Construct_UClass_APlayerController();
 F13_API UClass* Z_Construct_UClass_AF13PlayerController();
 F13_API UClass* Z_Construct_UClass_AF13PlayerController_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13PlayerState_NoRegister();
+HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_PlayerController();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
@@ -131,7 +131,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13Playe
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13PlayerController_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AF13PlayerController_Statics::DependentSingletons[])() = {
-	(UObject* (*)())Z_Construct_UClass_APlayerController,
+	(UObject* (*)())Z_Construct_UClass_AHMS_PlayerController,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13PlayerController_Statics::DependentSingletons) < 16);
@@ -170,10 +170,10 @@ AF13PlayerController::~AF13PlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 1584118298U) },
+		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2148689971U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_3291568789(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_1783918243(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

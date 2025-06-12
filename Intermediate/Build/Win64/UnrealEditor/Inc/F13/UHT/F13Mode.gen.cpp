@@ -10,10 +10,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13Mode() {}
 
 // Begin Cross Module References
-ENGINE_API UClass* Z_Construct_UClass_AGameModeBase();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13Mode();
 F13_API UClass* Z_Construct_UClass_AF13Mode_NoRegister();
+HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_GameMode();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
@@ -100,7 +100,7 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 UObject* (*const Z_Construct_UClass_AF13Mode_Statics::DependentSingletons[])() = {
-	(UObject* (*)())Z_Construct_UClass_AGameModeBase,
+	(UObject* (*)())Z_Construct_UClass_AHMS_GameMode,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::DependentSingletons) < 16);
@@ -139,10 +139,10 @@ AF13Mode::~AF13Mode() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 1371792251U) },
+		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 209480150U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_3972859745(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_2165539389(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

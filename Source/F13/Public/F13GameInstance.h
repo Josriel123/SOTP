@@ -2,6 +2,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HMS_GameInstance.h" 
 #include "Engine/GameInstance.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSessionSettings.h"
@@ -27,18 +28,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
     FoundNames
 );
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-    FOnSessionLeft,
-    bool,
-    bSuccess
-);
-
-
-
-
-
 UCLASS()
-class F13_API UF13GameInstance : public UGameInstance
+class F13_API UF13GameInstance : public UHMS_GameInstance
 {
     GENERATED_BODY()
 
@@ -57,9 +48,6 @@ public:
     /** Join one of the found sessions by index */
     UFUNCTION(BlueprintCallable, Category = "Session")
     void JoinFoundSession(int32 SessionIndex);
-
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    void LeaveGameSession();
 
 
     /** Get session names from last search */
@@ -80,9 +68,6 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Session")
     FOnSessionListReady OnSessionListReady;
 
-    UPROPERTY(BlueprintAssignable, Category = "Session")
-    FOnSessionLeft OnSessionLeft;
-
 private:
     // Interface to the online subsystem’s session API
     IOnlineSessionPtr SessionInterface;
@@ -100,15 +85,10 @@ private:
     FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
     FDelegateHandle OnJoinSessionCompleteDelegateHandle;
 
-    FDelegateHandle OnEndSessionCompleteHandle;
-    FDelegateHandle OnDestroySessionCompleteHandle;
-
     // Callback functions bound to the online subsystem
     void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
     void OnFindSessionsComplete(bool bWasSuccessful);
     void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
-    void OnEndSessionComplete(FName, bool);
-    void OnDestroySessionComplete(FName, bool);
 
     UPROPERTY()
     bool bSessionCreated;
