@@ -24,6 +24,9 @@ public:
 	// When a new player has fully connected, this function is called.
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Variables")
+	TSubclassOf<APawn> PawnToSpawn;
+
 	// (Optionally) when the match officially “starts,” you could override 
 	// StartPlay() or BeginPlay() to check if everyone has chosen and then spawn.
 

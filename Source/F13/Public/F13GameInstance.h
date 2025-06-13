@@ -3,10 +3,10 @@
 
 #include "CoreMinimal.h"
 #include "HMS_GameInstance.h" 
-#include "Engine/GameInstance.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSessionSettings.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "Interfaces/OnlineIdentityInterface.h"
 #include "F13GameInstance.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
@@ -37,53 +37,39 @@ public:
     UF13GameInstance();
     virtual void Init() override;
 
-    /** Start hosting a session */
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    void HostSession(bool bIsLAN, int32 MaxPlayers, const FString& DisplayName);
+    /* ---------- public Blueprint-callable helpers (already present) ---------- */
+    UFUNCTION(BlueprintCallable, Category = "Session") void HostSession(bool bIsLAN, int32 MaxPlayers, const FString& DisplayName);
+    UFUNCTION(BlueprintCallable, Category = "Session") void FindSessions(bool bIsLAN);
+    UFUNCTION(BlueprintCallable, Category = "Session") void JoinFoundSession(int32 SessionIndex);
+    UFUNCTION(BlueprintCallable, Category = "Session") TArray<FString> GetFoundSessionNames() const;
+    UFUNCTION(BlueprintCallable, Category = "Session") void StartGameSession();
 
-    /** Search for available sessions */
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    void FindSessions(bool bIsLAN);
-
-    /** Join one of the found sessions by index */
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    void JoinFoundSession(int32 SessionIndex);
-
-
-    /** Get session names from last search */
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    TArray<FString> GetFoundSessionNames() const;
-
-    /** Triggered when a session is created */
-    UPROPERTY(BlueprintAssignable, Category = "Session")
-    FOnSessionCreated OnSessionCreated;
-
-    /** Triggered when a session is joined */
-    UPROPERTY(BlueprintAssignable, Category = "Session")
-    FOnSessionJoined OnSessionJoined;
-
-    UFUNCTION(BlueprintCallable, Category = "Session")
-    void StartGameSession();
-
-    UPROPERTY(BlueprintAssignable, Category = "Session")
-    FOnSessionListReady OnSessionListReady;
+    /* ---------- Blueprint delegates (already present) ---------- */
+    UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionCreated   OnSessionCreated;
+    UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionJoined    OnSessionJoined;
+    UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionListReady OnSessionListReady;
 
 private:
-    // Interface to the online subsystem’s session API
-    IOnlineSessionPtr SessionInterface;
 
-    // Stores the results of the last FindSessions call
+    /* ---------- new: login callback + helper ---------- */
+    void OnLoginComplete(int32 LocalUserNum,
+                         bool bWasSuccessful,
+                         const FUniqueNetId& UserId,
+                         const FString& Error);
+
+
+    IOnlineSessionPtr                SessionInterface;
     TSharedPtr<FOnlineSessionSearch> SessionSearch;
 
     // Internal delegates and their handles
     FOnCreateSessionCompleteDelegate OnCreateSessionCompleteDelegate;
-    FDelegateHandle OnCreateSessionCompleteDelegateHandle;
+    FDelegateHandle                  OnCreateSessionCompleteDelegateHandle;
 
-    FOnFindSessionsCompleteDelegate OnFindSessionsCompleteDelegate;
-    FDelegateHandle OnFindSessionsCompleteDelegateHandle;
+    FOnFindSessionsCompleteDelegate  OnFindSessionsCompleteDelegate;
+    FDelegateHandle                  OnFindSessionsCompleteDelegateHandle;
 
-    FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
-    FDelegateHandle OnJoinSessionCompleteDelegateHandle;
+    FOnJoinSessionCompleteDelegate   OnJoinSessionCompleteDelegate;
+    FDelegateHandle                  OnJoinSessionCompleteDelegateHandle;
 
     // Callback functions bound to the online subsystem
     void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);

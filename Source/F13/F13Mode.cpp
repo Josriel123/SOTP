@@ -15,19 +15,8 @@ AF13Mode::AF13Mode()
     PlayerControllerClass = AF13PlayerController::StaticClass();
     PlayerStateClass = AF13PlayerState::StaticClass();
     GameStateClass = AF13GameState::StaticClass();
+    PawnToSpawn = nullptr;
 
-    static ConstructorHelpers::FClassFinder<AHUD> HUD_BP_Class(
-        TEXT("/Game/UI/BP_CharacterSelectionHUD.BP_CharacterSelectionHUD_C")
-    );
-    if (HUD_BP_Class.Succeeded())
-    {
-        HUDClass = HUD_BP_Class.Class;
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning,
-            TEXT("Could NOT find HUD Blueprint at /Game/UI/BP_CharacterSelectionHUD"));
-    }
 }
 
 
@@ -72,7 +61,7 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
     );
 
     // Get the pawn class they chose:
-    TSubclassOf<APawn> PawnToSpawn = PS->GetChosenPawnClass();
+    PawnToSpawn = PS->GetChosenPawnClass();
     if (!PawnToSpawn)
     {
         UE_LOG(LogTemp, Warning, TEXT("HandleCharacterSelected: no PawnClass found for %s"),

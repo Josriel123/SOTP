@@ -14,6 +14,19 @@ UF13GameInstance::UF13GameInstance()
 void UF13GameInstance::Init()
 {
     Super::Init();
+
+    IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();          // now returns EOSPlus
+    if (!Subsystem) { UE_LOG(LogTemp, Error, TEXT("No OSS loaded")); return; }
+
+    SessionInterface = Subsystem->GetSessionInterface();
+    IOnlineIdentityPtr Identity = Subsystem->GetIdentityInterface();
+
+    Identity->OnLoginCompleteDelegates->AddUObject(this, &UF13GameInstance::OnLoginComplete);
+
+    // 0 == first local user, "accountportal" pops the EGS overlay.
+    FOnlineAccountCredentials Creds(TEXT("accountportal"), TEXT(""), TEXT(""));
+    Identity->Login(0, Creds);
+
     if (SessionInterface.IsValid())
     {
         OnCreateSessionCompleteDelegate = FOnCreateSessionCompleteDelegate::CreateUObject(
@@ -22,6 +35,25 @@ void UF13GameInstance::Init()
             this, &UF13GameInstance::OnFindSessionsComplete);
         OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(
             this, &UF13GameInstance::OnJoinSessionComplete);
+    }
+}
+
+void UF13GameInstance::OnLoginComplete(int32 LocalUserNum,
+                                       bool bWasSuccessful,
+                                       const FUniqueNetId& UserId,
+                                       const FString& Error)
+{
+    if (bWasSuccessful)
+    {
+        UE_LOG(LogTemp, Log,
+            TEXT("[EOS] Login OK  | UserNum: %d  | Id: %s"),
+            LocalUserNum, *UserId.ToString());
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error,
+            TEXT("[EOS] Login FAILED (%s)  | UserNum: %d"),
+            *Error, LocalUserNum);
     }
 }
 

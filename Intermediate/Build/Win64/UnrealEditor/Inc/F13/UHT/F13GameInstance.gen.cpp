@@ -189,13 +189,7 @@ struct Z_Construct_UFunction_UF13GameInstance_FindSessions_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Session" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Search for available sessions */" },
-#endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Search for available sessions" },
-#endif
 	};
 #endif // WITH_METADATA
 	static void NewProp_bIsLAN_SetBit(void* Obj);
@@ -243,13 +237,7 @@ struct Z_Construct_UFunction_UF13GameInstance_GetFoundSessionNames_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Session" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Get session names from last search */" },
-#endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Get session names from last search" },
-#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
@@ -297,11 +285,11 @@ struct Z_Construct_UFunction_UF13GameInstance_HostSession_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Session" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Start hosting a session */" },
+		{ "Comment", "/* ---------- public Blueprint-callable helpers (already present) ---------- */" },
 #endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Start hosting a session" },
+		{ "ToolTip", "---------- public Blueprint-callable helpers (already present) ----------" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DisplayName_MetaData[] = {
@@ -361,13 +349,7 @@ struct Z_Construct_UFunction_UF13GameInstance_JoinFoundSession_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Session" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Join one of the found sessions by index */" },
-#endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Join one of the found sessions by index" },
-#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_SessionIndex;
@@ -458,22 +440,16 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnSessionCreated_MetaData[] = {
 		{ "Category", "Session" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Triggered when a session is created */" },
+		{ "Comment", "/* ---------- Blueprint delegates (already present) ---------- */" },
 #endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Triggered when a session is created" },
+		{ "ToolTip", "---------- Blueprint delegates (already present) ----------" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnSessionJoined_MetaData[] = {
 		{ "Category", "Session" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Triggered when a session is joined */" },
-#endif
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Triggered when a session is joined" },
-#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnSessionListReady_MetaData[] = {
 		{ "Category", "Session" },
@@ -491,10 +467,10 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UF13GameInstance_FindSessions, "FindSessions" }, // 4151081956
-		{ &Z_Construct_UFunction_UF13GameInstance_GetFoundSessionNames, "GetFoundSessionNames" }, // 3846831208
-		{ &Z_Construct_UFunction_UF13GameInstance_HostSession, "HostSession" }, // 2413397732
-		{ &Z_Construct_UFunction_UF13GameInstance_JoinFoundSession, "JoinFoundSession" }, // 277463511
+		{ &Z_Construct_UFunction_UF13GameInstance_FindSessions, "FindSessions" }, // 1516793506
+		{ &Z_Construct_UFunction_UF13GameInstance_GetFoundSessionNames, "GetFoundSessionNames" }, // 3043457142
+		{ &Z_Construct_UFunction_UF13GameInstance_HostSession, "HostSession" }, // 2709846092
+		{ &Z_Construct_UFunction_UF13GameInstance_JoinFoundSession, "JoinFoundSession" }, // 3392513280
 		{ &Z_Construct_UFunction_UF13GameInstance_StartGameSession, "StartGameSession" }, // 589505344
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -558,10 +534,10 @@ UF13GameInstance::~UF13GameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 1584843809U) },
+		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 3578789205U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_1251274954(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_4252595167(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

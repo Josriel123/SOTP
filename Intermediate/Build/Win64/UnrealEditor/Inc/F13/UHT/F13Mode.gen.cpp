@@ -10,6 +10,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13Mode() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13Mode();
 F13_API UClass* Z_Construct_UClass_AF13Mode_NoRegister();
@@ -88,7 +90,13 @@ struct Z_Construct_UClass_AF13Mode_Statics
 		{ "ModuleRelativePath", "F13Mode.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PawnToSpawn_MetaData[] = {
+		{ "Category", "Variables" },
+		{ "ModuleRelativePath", "F13Mode.h" },
+	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FClassPropertyParams NewProp_PawnToSpawn;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AF13Mode_HandleCharacterSelected, "HandleCharacterSelected" }, // 2022002596
@@ -99,6 +107,11 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_PawnToSpawn = { "PawnToSpawn", nullptr, (EPropertyFlags)0x0014000000000004, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13Mode, PawnToSpawn), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PawnToSpawn_MetaData), NewProp_PawnToSpawn_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13Mode_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PawnToSpawn,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AF13Mode_Statics::DependentSingletons[])() = {
 	(UObject* (*)())Z_Construct_UClass_AHMS_GameMode,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
@@ -110,11 +123,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AF13Mode_Statics::Class
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
 	FuncInfo,
-	nullptr,
+	Z_Construct_UClass_AF13Mode_Statics::PropPointers,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
 	UE_ARRAY_COUNT(FuncInfo),
-	0,
+	UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::PropPointers),
 	0,
 	0x009002ACu,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::Class_MetaDataParams), Z_Construct_UClass_AF13Mode_Statics::Class_MetaDataParams)
@@ -139,10 +152,10 @@ AF13Mode::~AF13Mode() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 209480150U) },
+		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 447412989U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_2165539389(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_3000951549(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
