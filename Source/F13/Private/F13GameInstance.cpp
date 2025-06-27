@@ -2,7 +2,9 @@
 #include "F13GameInstance.h"
 #include "Engine/World.h"
 
-
+/* ------------------------------------------------------------ */
+/*  ctor / Init                                                 */
+/* ------------------------------------------------------------ */
 UF13GameInstance::UF13GameInstance()
 {
     if (IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get())
@@ -15,17 +17,14 @@ void UF13GameInstance::Init()
 {
     Super::Init();
 
-    IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();          // now returns EOSPlus
+    IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
     if (!Subsystem) { UE_LOG(LogTemp, Error, TEXT("No OSS loaded")); return; }
 
     SessionInterface = Subsystem->GetSessionInterface();
     IOnlineIdentityPtr Identity = Subsystem->GetIdentityInterface();
 
     Identity->OnLoginCompleteDelegates->AddUObject(this, &UF13GameInstance::OnLoginComplete);
-
-    // 0 == first local user, "accountportal" pops the EGS overlay.
-    FOnlineAccountCredentials Creds(TEXT("accountportal"), TEXT(""), TEXT(""));
-    Identity->Login(0, Creds);
+    Identity->Login(0, FOnlineAccountCredentials(TEXT("accountportal"), TEXT(""), TEXT("")));
 
     if (SessionInterface.IsValid())
     {
@@ -38,90 +37,22 @@ void UF13GameInstance::Init()
     }
 }
 
-void UF13GameInstance::OnLoginComplete(int32 LocalUserNum,
-                                       bool bWasSuccessful,
-                                       const FUniqueNetId& UserId,
-                                       const FString& Error)
+/* ------------------------------------------------------------ */
+/*  PUBLIC  — widget entry-point                                */
+/* ------------------------------------------------------------ */
+void UF13GameInstance::HostAndStartSession()
 {
-    if (bWasSuccessful)
-    {
-        UE_LOG(LogTemp, Log,
-            TEXT("[EOS] Login OK  | UserNum: %d  | Id: %s"),
-            LocalUserNum, *UserId.ToString());
-    }
-    else
-    {
-        UE_LOG(LogTemp, Error,
-            TEXT("[EOS] Login FAILED (%s)  | UserNum: %d"),
-            *Error, LocalUserNum);
-    }
+    HostSession();
 }
 
-void UF13GameInstance::HostSession(bool bIsLAN, int32 MaxPlayers, const FString& DisplayName)
-{
-    if (!SessionInterface.IsValid())
-    {
-        UE_LOG(LogTemp, Warning, TEXT("HostSession called but SessionInterface == nullptr"));
-        return;
-    }
-
-    if (SessionInterface->GetNamedSession(NAME_GameSession) != nullptr)
-    {
-        SessionInterface->DestroySession(NAME_GameSession);
-    }
-    const FName KEY_ServerName(TEXT("SERVER_NAME"));
-
-    TSharedPtr<FOnlineSessionSettings> Settings = MakeShareable(new FOnlineSessionSettings());
-    Settings->bIsLANMatch = bIsLAN;
-    Settings->NumPublicConnections = MaxPlayers;
-    Settings->bShouldAdvertise = true;
-    Settings->bAllowJoinInProgress = true;
-    Settings->bUsesPresence = true;
-    Settings->Set<FString>(KEY_ServerName,
-        DisplayName,          // or a widget-field value
-        EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
-
-    OnCreateSessionCompleteDelegateHandle =
-        SessionInterface->AddOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegate);
-
-    SessionInterface->CreateSession(0, NAME_GameSession, *Settings);
-}
-
-void UF13GameInstance::OnCreateSessionComplete(FName SessionName, bool bWasSuccessful)
-{
-
-    UE_LOG(LogTemp, Warning, TEXT("OnCreateSessionComplete: %s  success=%d"),
-        *SessionName.ToString(), bWasSuccessful);
-    if (SessionInterface.IsValid())
-    {
-        SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegateHandle);
-    }
-
-    bSessionCreated = bWasSuccessful;
-
-    OnSessionCreated.Broadcast(bWasSuccessful);
-}
-
-void UF13GameInstance::StartGameSession()
-{
-    if (bSessionCreated && GetWorld())
-    {
-        GetWorld()->ServerTravel(TEXT("/Game/ThirdPerson/Maps/ThirdPersonMap?listen?game=/Game/BP_F13Mode.BP_F13Mode_C"));
-
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("StartGameSession called before session was created!"));
-    }
-}
-
-
-void UF13GameInstance::FindSessions(bool bIsLAN)
+/* ------------------------------------------------------------ */
+/*  Search & Join                                               */
+/* ------------------------------------------------------------ */
+void UF13GameInstance::FindSessions()
 {
     if (!SessionInterface.IsValid()) return;
 
     SessionSearch = MakeShareable(new FOnlineSessionSearch());
-    SessionSearch->bIsLanQuery = bIsLAN;
     SessionSearch->MaxSearchResults = 20;
     SessionSearch->PingBucketSize = 50;
 
@@ -131,56 +62,159 @@ void UF13GameInstance::FindSessions(bool bIsLAN)
     SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
 
-void UF13GameInstance::OnFindSessionsComplete(bool bWasSuccessful)
-{
-    UE_LOG(LogTemp, Warning, TEXT("OnFindSessionsComplete: success=%d  results=%d"),
-        bWasSuccessful, SessionSearch.IsValid() ? SessionSearch->SearchResults.Num() : -1);
-
-    if (SessionInterface.IsValid())
-    {
-        SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(OnFindSessionsCompleteDelegateHandle);
-    }
-
-
-    TArray<FString> Names;
-    if (bWasSuccessful && SessionSearch.IsValid())
-    {
-        const FName KEY_ServerName(TEXT("SERVER_NAME"));
-        for (const auto& Result : SessionSearch->SearchResults)
-        {
-            FString Display;
-            if (Result.Session.SessionSettings.Get(KEY_ServerName, Display))
-            {
-                Names.Add(Display);              // “MySession”
-            }
-            else
-            {
-                Names.Add(Result.GetSessionIdStr()); // fallback GUID
-            }
-        }
-    }
-
-    OnSessionListReady.Broadcast(Names);
-}
-
 void UF13GameInstance::JoinFoundSession(int32 SessionIndex)
 {
     if (!SessionInterface.IsValid() || !SessionSearch.IsValid()) return;
+    if (!SessionSearch->SearchResults.IsValidIndex(SessionIndex)) return;
 
-    if (SessionSearch->SearchResults.IsValidIndex(SessionIndex))
+    /* ---- if we still have a local GameSession, destroy first ---- */
+    if (SessionInterface->GetNamedSession(NAME_GameSession))
     {
-        OnJoinSessionCompleteDelegateHandle =
-            SessionInterface->AddOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegate);
-
-        SessionInterface->JoinSession(0, NAME_GameSession, SessionSearch->SearchResults[SessionIndex]);
+        CleanAndJoin(SessionIndex);
+        return;
     }
+
+    /* ---- proceed to join ---- */
+    OnJoinSessionCompleteDelegateHandle =
+        SessionInterface->AddOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegate);
+
+    SessionInterface->JoinSession(
+        0, NAME_GameSession, SessionSearch->SearchResults[SessionIndex]);
 }
 
-void UF13GameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
+TArray<FString> UF13GameInstance::GetFoundSessionNames() const
+{
+    TArray<FString> Names;
+    if (SessionSearch.IsValid())
+    {
+        for (const auto& Result : SessionSearch->SearchResults)
+        {
+            Names.Add(Result.GetSessionIdStr());
+        }
+    }
+    return Names;
+}
+
+/* ------------------------------------------------------------ */
+/*  INTERNAL — Host                                             */
+/* ------------------------------------------------------------ */
+void UF13GameInstance::HostSession()
+{
+    if (!SessionInterface.IsValid())
+    {
+        UE_LOG(LogTemp, Warning, TEXT("HostSession: SessionInterface == nullptr"));
+        return;
+    }
+
+    if (SessionInterface->GetNamedSession(NAME_GameSession))
+    {
+        SessionInterface->DestroySession(NAME_GameSession);
+    }
+
+    TSharedPtr<FOnlineSessionSettings> Settings = MakeShareable(new FOnlineSessionSettings());
+    Settings->bIsLANMatch = false;
+    Settings->NumPublicConnections = 10;
+    Settings->bShouldAdvertise = true;
+    Settings->bAllowJoinInProgress = true;
+    Settings->bUsesPresence = true;
+
+    OnCreateSessionCompleteDelegateHandle =
+        SessionInterface->AddOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegate);
+
+    SessionInterface->CreateSession(0, NAME_GameSession, *Settings);
+}
+
+/* ------------------------------------------------------------ */
+/*  NEW — destroy-then-join helpers                             */
+/* ------------------------------------------------------------ */
+void UF13GameInstance::CleanAndJoin(int32 SearchIndex)
+{
+    if (!SessionInterface.IsValid()) return;
+
+    PendingJoinIndex = SearchIndex;
+
+    OnDestroySessionCompleteDelegate =
+        FOnDestroySessionCompleteDelegate::CreateUObject(
+            this, &UF13GameInstance::OnDestroySessionComplete);
+
+    OnDestroySessionCompleteDelegateHandle =
+        SessionInterface->AddOnDestroySessionCompleteDelegate_Handle(
+            OnDestroySessionCompleteDelegate);
+
+    SessionInterface->DestroySession(NAME_GameSession);
+}
+
+void UF13GameInstance::OnDestroySessionComplete(FName /*SessionName*/, bool /*bSuccess*/)
 {
     if (SessionInterface.IsValid())
     {
-        SessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegateHandle);
+        SessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(
+            OnDestroySessionCompleteDelegateHandle);
+    }
+
+    if (PendingJoinIndex != INDEX_NONE)
+    {
+        const int32 RetryIndex = PendingJoinIndex;
+        PendingJoinIndex = INDEX_NONE;
+        JoinFoundSession(RetryIndex);   // will skip destroy path now
+    }
+}
+
+/* ------------------------------------------------------------ */
+/*  Online-subsystem callbacks                                   */
+/* ------------------------------------------------------------ */
+void UF13GameInstance::OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful,
+    const FUniqueNetId& UserId, const FString& Error)
+{
+    UE_LOG(LogTemp, Log,
+        TEXT("[EOS] Login %s | UserNum:%d | Id:%s | Error:%s"),
+        bWasSuccessful ? TEXT("OK") : TEXT("FAILED"),
+        LocalUserNum, *UserId.ToString(), *Error);
+}
+
+void UF13GameInstance::OnCreateSessionComplete(FName /*SessionName*/, bool bWasSuccessful)
+{
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(
+            OnCreateSessionCompleteDelegateHandle);
+    }
+
+    OnSessionCreated.Broadcast(bWasSuccessful);
+}
+
+void UF13GameInstance::OnFindSessionsComplete(bool bWasSuccessful)
+{
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(
+            OnFindSessionsCompleteDelegateHandle);
+    }
+
+    if (bWasSuccessful && SessionSearch.IsValid() && SessionSearch->SearchResults.Num() > 0)
+    {
+        const int32 RandomIndex =
+            FMath::RandRange(0, SessionSearch->SearchResults.Num() - 1);
+
+        UE_LOG(LogTemp, Log,
+            TEXT("Attempting to join random session [%d / %d]"),
+            RandomIndex, SessionSearch->SearchResults.Num());
+
+        JoinFoundSession(RandomIndex);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("No sessions found to join"));
+    }
+}
+
+void UF13GameInstance::OnJoinSessionComplete(FName SessionName,
+    EOnJoinSessionCompleteResult::Type Result)
+{
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(
+            OnJoinSessionCompleteDelegateHandle);
     }
 
     const bool bWasSuccessful = (Result == EOnJoinSessionCompleteResult::Success);
@@ -197,17 +231,4 @@ void UF13GameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCo
     }
 
     OnSessionJoined.Broadcast(bWasSuccessful);
-}
-
-TArray<FString> UF13GameInstance::GetFoundSessionNames() const
-{
-    TArray<FString> Names;
-    if (SessionSearch.IsValid())
-    {
-        for (const auto& Result : SessionSearch->SearchResults)
-        {
-            Names.Add(Result.GetSessionIdStr());
-        }
-    }
-    return Names;
 }

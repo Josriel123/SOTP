@@ -9,17 +9,17 @@ class UDataTable;
 class APawn;
 class APlayerController;
 
-// Delegate signature: when the server accepts a character choice,
-// broadcast to anyone (e.g. GameMode) so they can spawn the Pawn.
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
 	FOnCharacterSelectedSignature,
 	APlayerController*, SelectingPC
 );
 
-/**
- *  Custom PlayerState: stores Role + DataTable row key,
- *  and publishes an event when the server “locks in” the character choice.
- */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+	FOnReadyChanged, 
+	AF13PlayerState*, PlayerState, bool, bNowReady
+);
+
+
 UCLASS()
 class F13_API AF13PlayerState : public APlayerState
 {
@@ -27,6 +27,18 @@ class F13_API AF13PlayerState : public APlayerState
 
 public:
 	AF13PlayerState();
+
+	/* --------------------  READY  -------------------- */
+	/** Current ready state (replicated). */
+	UFUNCTION(BlueprintPure, Category = "Lobby") bool IsReady() const { return bIsReady; }
+
+	/** Call from UI to toggle ready. */
+	UFUNCTION(BlueprintCallable, Category = "Lobby")
+	void SetReady(bool bNewReady);
+
+	/** Fired on both server & clients whenever ready changes. */
+	UPROPERTY(BlueprintAssignable, Category = "Lobby")
+	FOnReadyChanged OnReadyChanged;
 
 	UPROPERTY(Replicated)
 	TSubclassOf<APawn> SelectedPawnClass;
@@ -71,12 +83,12 @@ protected:
 	// Make sure ChosenRole and ChosenCharacterKey replicate.
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+	UFUNCTION() void OnRep_IsReady();
+
 private:
-	/**
-	 *  Cached pointer to our Character‐options DataTable.
-	 *  We load it once in the constructor (server only).
-	 *  After that, any call to FindRow<…>() is very cheap at runtime.
-	 */
+
 	UPROPERTY()
 	UDataTable* CharacterOptionsTable;
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsReady) bool bIsReady = false;
 };

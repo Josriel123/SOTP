@@ -9,6 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AF13PlayerState;
 class APawn;
 class APlayerController;
 #ifdef F13_F13PlayerState_generated_h
@@ -16,15 +17,22 @@ class APlayerController;
 #endif
 #define F13_F13PlayerState_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_17_DELEGATE \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_15_DELEGATE \
 F13_API void FOnCharacterSelectedSignature_DelegateWrapper(const FMulticastScriptDelegate& OnCharacterSelectedSignature, APlayerController* SelectingPC);
+
+
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_20_DELEGATE \
+F13_API void FOnReadyChanged_DelegateWrapper(const FMulticastScriptDelegate& OnReadyChanged, AF13PlayerState* PlayerState, bool bNowReady);
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual bool ServerSetCharacterSelection_Validate(const FString& , FName const& ); \
 	virtual void ServerSetCharacterSelection_Implementation(const FString& NewRole, FName const& NewCharacterKey); \
+	DECLARE_FUNCTION(execOnRep_IsReady); \
 	DECLARE_FUNCTION(execGetChosenPawnClass); \
-	DECLARE_FUNCTION(execServerSetCharacterSelection);
+	DECLARE_FUNCTION(execServerSetCharacterSelection); \
+	DECLARE_FUNCTION(execSetReady); \
+	DECLARE_FUNCTION(execIsReady);
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_26_CALLBACK_WRAPPERS
@@ -41,7 +49,8 @@ public: \
 		SelectedPawnClass=NETFIELD_REP_START, \
 		ChosenRole, \
 		ChosenCharacterKey, \
-		NETFIELD_REP_END=ChosenCharacterKey	}; \
+		bIsReady, \
+		NETFIELD_REP_END=bIsReady	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 

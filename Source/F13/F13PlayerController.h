@@ -22,6 +22,9 @@ public:
 	UFUNCTION(Server, Reliable, WithValidation)
 	void ServerSelectPawnClass(TSubclassOf<APawn> PawnClass);
 
+	UFUNCTION(BlueprintCallable, Server, Reliable, WithValidation)
+	void ServerSetReady(bool bNewReady);
+
 protected:
 	/** Override to cache our typed PlayerState. */
 	virtual void BeginPlay() override;

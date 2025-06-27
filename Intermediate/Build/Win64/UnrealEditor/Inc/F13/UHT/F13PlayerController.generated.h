@@ -16,8 +16,11 @@ class APawn;
 #define F13_F13PlayerController_generated_h
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual bool ServerSetReady_Validate(bool ); \
+	virtual void ServerSetReady_Implementation(bool bNewReady); \
 	virtual bool ServerSelectPawnClass_Validate(TSubclassOf<APawn> ); \
 	virtual void ServerSelectPawnClass_Implementation(TSubclassOf<APawn> PawnClass); \
+	DECLARE_FUNCTION(execServerSetReady); \
 	DECLARE_FUNCTION(execServerSelectPawnClass);
 
 

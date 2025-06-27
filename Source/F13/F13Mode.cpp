@@ -11,7 +11,7 @@
 
 AF13Mode::AF13Mode()
 {
-    //DefaultPawnClass = nullptr;
+    DefaultPawnClass = nullptr;
     PlayerControllerClass = AF13PlayerController::StaticClass();
     PlayerStateClass = AF13PlayerState::StaticClass();
     GameStateClass = AF13GameState::StaticClass();
@@ -23,10 +23,6 @@ AF13Mode::AF13Mode()
 void AF13Mode::BeginPlay()
 {
     Super::BeginPlay();
-
-    // Optional: if you want to catch PlayerStates as they spawn in World
-    // (instead of waiting for each individual PlayerState to broadcast,
-    //  you can do a ‘foreach’ existing or bind on new ones in PostLogin).
 }
 
 void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)

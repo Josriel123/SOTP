@@ -40,5 +40,21 @@ void AF13PlayerController::ServerSelectPawnClass_Implementation(TSubclassOf<APaw
 	}
 }
 
+void AF13PlayerController::ServerSetReady_Implementation(bool bNewReady)
+{
+	if (AF13PlayerState* PS = GetPlayerState<AF13PlayerState>())
+	{
+		if (PS->IsReady() != bNewReady)
+		{
+			PS->SetReady(bNewReady);   // write a simple setter that sets bIsReady and calls OnRep_IsReady on server
+		}
+	}
+}
+
+bool AF13PlayerController::ServerSetReady_Validate(bool /*bNewReady*/)
+{
+	return true;    // add extra checks if needed
+}
+
 
 

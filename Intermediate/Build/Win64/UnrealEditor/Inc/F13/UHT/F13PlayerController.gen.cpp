@@ -75,12 +75,73 @@ DEFINE_FUNCTION(AF13PlayerController::execServerSelectPawnClass)
 }
 // End Class AF13PlayerController Function ServerSelectPawnClass
 
+// Begin Class AF13PlayerController Function ServerSetReady
+struct F13PlayerController_eventServerSetReady_Parms
+{
+	bool bNewReady;
+};
+static const FName NAME_AF13PlayerController_ServerSetReady = FName(TEXT("ServerSetReady"));
+void AF13PlayerController::ServerSetReady(bool bNewReady)
+{
+	F13PlayerController_eventServerSetReady_Parms Parms;
+	Parms.bNewReady=bNewReady ? true : false;
+	UFunction* Func = FindFunctionChecked(NAME_AF13PlayerController_ServerSetReady);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "F13PlayerController.h" },
+	};
+#endif // WITH_METADATA
+	static void NewProp_bNewReady_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bNewReady;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::NewProp_bNewReady_SetBit(void* Obj)
+{
+	((F13PlayerController_eventServerSetReady_Parms*)Obj)->bNewReady = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::NewProp_bNewReady = { "bNewReady", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(F13PlayerController_eventServerSetReady_Parms), &Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::NewProp_bNewReady_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::NewProp_bNewReady,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13PlayerController, nullptr, "ServerSetReady", nullptr, nullptr, Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::PropPointers), sizeof(F13PlayerController_eventServerSetReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::Function_MetaDataParams) };
+static_assert(sizeof(F13PlayerController_eventServerSetReady_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AF13PlayerController_ServerSetReady()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AF13PlayerController::execServerSetReady)
+{
+	P_GET_UBOOL(Z_Param_bNewReady);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	if (!P_THIS->ServerSetReady_Validate(Z_Param_bNewReady))
+	{
+		RPC_ValidateFailed(TEXT("ServerSetReady_Validate"));
+		return;
+	}
+	P_THIS->ServerSetReady_Implementation(Z_Param_bNewReady);
+	P_NATIVE_END;
+}
+// End Class AF13PlayerController Function ServerSetReady
+
 // Begin Class AF13PlayerController
 void AF13PlayerController::StaticRegisterNativesAF13PlayerController()
 {
 	UClass* Class = AF13PlayerController::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "ServerSelectPawnClass", &AF13PlayerController::execServerSelectPawnClass },
+		{ "ServerSetReady", &AF13PlayerController::execServerSetReady },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -118,6 +179,7 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass, "ServerSelectPawnClass" }, // 1729292092
+		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetReady, "ServerSetReady" }, // 4241345266
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -170,10 +232,10 @@ AF13PlayerController::~AF13PlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2148689971U) },
+		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2222610882U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_1783918243(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_3180702567(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

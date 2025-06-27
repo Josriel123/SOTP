@@ -14,7 +14,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define F13_F13GameState_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_9_DELEGATE \
+F13_API void FOnPlayersChanged_DelegateWrapper(const FMulticastScriptDelegate& OnPlayersChanged);
+
+
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_14_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13GameState(); \
 	friend struct Z_Construct_UClass_AF13GameState_Statics; \
@@ -23,7 +27,7 @@ public: \
 	DECLARE_SERIALIZER(AF13GameState)
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_14_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AF13GameState(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -37,12 +41,12 @@ public: \
 	NO_API virtual ~AF13GameState();
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_12_PROLOG
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_15_GENERATED_BODY \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_11_PROLOG
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_14_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_14_INCLASS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_14_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

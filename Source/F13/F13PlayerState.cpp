@@ -31,12 +31,14 @@ AF13PlayerState::AF13PlayerState()
 	// Initialize replicated fields to defaults.
 	ChosenRole = TEXT("");
 	ChosenCharacterKey = NAME_None;
+	bIsReady = false;
 }
 
 void AF13PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	DOREPLIFETIME(AF13PlayerState, bIsReady);
 	DOREPLIFETIME(AF13PlayerState, ChosenRole);
 	DOREPLIFETIME(AF13PlayerState, ChosenCharacterKey);
 	DOREPLIFETIME(AF13PlayerState, SelectedPawnClass);
@@ -119,4 +121,21 @@ TSubclassOf<APawn> AF13PlayerState::GetChosenPawnClass() const
 	}
 
 	return Row->PawnClass;
+}
+
+void AF13PlayerState::SetReady(bool bNewReady)
+{
+	if (bIsReady == bNewReady) return;     // no change
+
+	bIsReady = bNewReady;
+	OnRep_IsReady();                       // update server immediately
+}
+
+
+void AF13PlayerState::OnRep_IsReady()
+{
+	OnReadyChanged.Broadcast(this, bIsReady);
+
+	UE_LOG(LogTemp, Log, TEXT("PlayerState[%s] Ready = %s"),
+		*GetPlayerName(), bIsReady ? TEXT("TRUE") : TEXT("FALSE"));
 }
