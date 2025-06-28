@@ -61,23 +61,13 @@ struct Z_Construct_UClass_AF13GameState_Statics
 		{ "ModuleRelativePath", "F13GameState.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnPlayersChanged_MetaData[] = {
-		{ "ModuleRelativePath", "F13GameState.h" },
-	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnPlayersChanged;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AF13GameState>::IsAbstract,
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13GameState_Statics::NewProp_OnPlayersChanged = { "OnPlayersChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13GameState, OnPlayersChanged), Z_Construct_UDelegateFunction_F13_OnPlayersChanged__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnPlayersChanged_MetaData), NewProp_OnPlayersChanged_MetaData) }; // 1911114124
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13GameState_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13GameState_Statics::NewProp_OnPlayersChanged,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13GameState_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AF13GameState_Statics::DependentSingletons[])() = {
 	(UObject* (*)())Z_Construct_UClass_AGameState,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
@@ -89,11 +79,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AF13GameState_Statics::
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
 	nullptr,
-	Z_Construct_UClass_AF13GameState_Statics::PropPointers,
+	nullptr,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
 	0,
-	UE_ARRAY_COUNT(Z_Construct_UClass_AF13GameState_Statics::PropPointers),
+	0,
 	0,
 	0x009002A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AF13GameState_Statics::Class_MetaDataParams), Z_Construct_UClass_AF13GameState_Statics::Class_MetaDataParams)
@@ -119,10 +109,10 @@ AF13GameState::~AF13GameState() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13GameState, AF13GameState::StaticClass, TEXT("AF13GameState"), &Z_Registration_Info_UClass_AF13GameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13GameState), 3730320691U) },
+		{ Z_Construct_UClass_AF13GameState, AF13GameState::StaticClass, TEXT("AF13GameState"), &Z_Registration_Info_UClass_AF13GameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13GameState), 2111261506U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_2751975580(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_668448521(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

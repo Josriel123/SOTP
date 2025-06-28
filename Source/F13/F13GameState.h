@@ -12,9 +12,4 @@ UCLASS()
 class F13_API AF13GameState : public AGameState
 {
     GENERATED_BODY()
-public:
-    UPROPERTY(BlueprintAssignable) FOnPlayersChanged OnPlayersChanged;
-
-    virtual void AddPlayerState(APlayerState* PS)   override;
-    virtual void RemovePlayerState(APlayerState* PS) override;
 };
