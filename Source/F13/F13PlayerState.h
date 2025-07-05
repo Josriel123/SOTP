@@ -43,44 +43,26 @@ public:
 	UPROPERTY(Replicated)
 	TSubclassOf<APawn> SelectedPawnClass;
 
-	/**
-	 *  The “role” string the player chose (e.g. “Killer” or “Survivor”).
-	 */
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
 	FString ChosenRole;
 
-	/**
-	 *  The DataTable row name/key for the character this player picked.
-	 */
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
 	FName ChosenCharacterKey;
 
-	/**
-	 *  Called on the client when the player picks something in the UI.
-	 *  This RPC is executed on the server, which caches the new values and
-	 *  broadcasts OnCharacterSelected so that GameM6ode (or whoever) can react.
-	 */
 	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "CharacterSelection")
 	void ServerSetCharacterSelection(const FString& NewRole, const FName& NewCharacterKey);
 
-	/**
-	 *  Given the already‐loaded DataTable and the replicated RowKey,
-	 *  return the Pawn subclass that corresponds to ChosenCharacterKey.
-	 *  Only valid on the server; clients will simply get nullptr.
-	 */
 	UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
 	TSubclassOf<APawn> GetChosenPawnClass() const;
 
-	/**
-	 *  Fired on the server once ServerSetCharacterSelection is accepted.  Passes
-	 *  the APlayerController* that owns this PlayerState as the single argument.
-	 *  GameMode can bind to this event and then call SpawnChosenPawnForController(SelectingPC).
-	 */
 	UPROPERTY(BlueprintAssignable, Category = "CharacterSelection")
 	FOnCharacterSelectedSignature OnCharacterSelected;
 
+	UPROPERTY(Replicated, BlueprintReadOnly) bool bIsBot = false;
+
 protected:
 	// Make sure ChosenRole and ChosenCharacterKey replicate.
+	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UFUNCTION() void OnRep_IsReady();
@@ -91,4 +73,6 @@ private:
 	UDataTable* CharacterOptionsTable;
 
 	UPROPERTY(ReplicatedUsing = OnRep_IsReady) bool bIsReady = false;
+
+	
 };

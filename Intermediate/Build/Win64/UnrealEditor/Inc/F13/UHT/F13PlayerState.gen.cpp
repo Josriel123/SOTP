@@ -132,13 +132,7 @@ struct Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "CharacterSelection" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n\x09 *  Given the already\xe2\x80\x90loaded DataTable and the replicated RowKey,\n\x09 *  return the Pawn subclass that corresponds to ChosenCharacterKey.\n\x09 *  Only valid on the server; clients will simply get nullptr.\n\x09 */" },
-#endif
 		{ "ModuleRelativePath", "F13PlayerState.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Given the already\xe2\x80\x90loaded DataTable and the replicated RowKey,\nreturn the Pawn subclass that corresponds to ChosenCharacterKey.\nOnly valid on the server; clients will simply get nullptr." },
-#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnValue;
@@ -272,13 +266,7 @@ struct Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "CharacterSelection" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n\x09 *  Called on the client when the player picks something in the UI.\n\x09 *  This RPC is executed on the server, which caches the new values and\n\x09 *  broadcasts OnCharacterSelected so that GameM6ode (or whoever) can react.\n\x09 */" },
-#endif
 		{ "ModuleRelativePath", "F13PlayerState.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Called on the client when the player picks something in the UI.\nThis RPC is executed on the server, which caches the new values and\nbroadcasts OnCharacterSelected so that GameM6ode (or whoever) can react." },
-#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NewRole_MetaData[] = {
 		{ "NativeConst", "" },
@@ -422,33 +410,19 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ChosenRole_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n\x09 *  The \xe2\x80\x9crole\xe2\x80\x9d string the player chose (e.g. \xe2\x80\x9cKiller\xe2\x80\x9d or \xe2\x80\x9cSurvivor\xe2\x80\x9d).\n\x09 */" },
-#endif
 		{ "ModuleRelativePath", "F13PlayerState.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "The \xe2\x80\x9crole\xe2\x80\x9d string the player chose (e.g. \xe2\x80\x9cKiller\xe2\x80\x9d or \xe2\x80\x9cSurvivor\xe2\x80\x9d)." },
-#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ChosenCharacterKey_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n\x09 *  The DataTable row name/key for the character this player picked.\n\x09 */" },
-#endif
 		{ "ModuleRelativePath", "F13PlayerState.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "The DataTable row name/key for the character this player picked." },
-#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnCharacterSelected_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/**\n\x09 *  Fired on the server once ServerSetCharacterSelection is accepted.  Passes\n\x09 *  the APlayerController* that owns this PlayerState as the single argument.\n\x09 *  GameMode can bind to this event and then call SpawnChosenPawnForController(SelectingPC).\n\x09 */" },
-#endif
 		{ "ModuleRelativePath", "F13PlayerState.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Fired on the server once ServerSetCharacterSelection is accepted.  Passes\nthe APlayerController* that owns this PlayerState as the single argument.\nGameMode can bind to this event and then call SpawnChosenPawnForController(SelectingPC)." },
-#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsBot_MetaData[] = {
+		{ "Category", "F13PlayerState" },
+		{ "ModuleRelativePath", "F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterOptionsTable_MetaData[] = {
 		{ "ModuleRelativePath", "F13PlayerState.h" },
@@ -462,16 +436,18 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 	static const UECodeGen_Private::FStrPropertyParams NewProp_ChosenRole;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_ChosenCharacterKey;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnCharacterSelected;
+	static void NewProp_bIsBot_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsBot;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CharacterOptionsTable;
 	static void NewProp_bIsReady_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsReady;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass, "GetChosenPawnClass" }, // 1909513106
+		{ &Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass, "GetChosenPawnClass" }, // 2313521646
 		{ &Z_Construct_UFunction_AF13PlayerState_IsReady, "IsReady" }, // 2292886887
 		{ &Z_Construct_UFunction_AF13PlayerState_OnRep_IsReady, "OnRep_IsReady" }, // 3908571767
-		{ &Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection, "ServerSetCharacterSelection" }, // 3826532896
+		{ &Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection, "ServerSetCharacterSelection" }, // 1696547860
 		{ &Z_Construct_UFunction_AF13PlayerState_SetReady, "SetReady" }, // 107041671
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -485,6 +461,11 @@ const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AF13PlayerState
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenRole = { "ChosenRole", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, ChosenRole), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ChosenRole_MetaData), NewProp_ChosenRole_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenCharacterKey = { "ChosenCharacterKey", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, ChosenCharacterKey), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ChosenCharacterKey_MetaData), NewProp_ChosenCharacterKey_MetaData) };
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnCharacterSelected = { "OnCharacterSelected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, OnCharacterSelected), Z_Construct_UDelegateFunction_F13_OnCharacterSelectedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnCharacterSelected_MetaData), NewProp_OnCharacterSelected_MetaData) }; // 1281545652
+void Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsBot_SetBit(void* Obj)
+{
+	((AF13PlayerState*)Obj)->bIsBot = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsBot = { "bIsBot", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AF13PlayerState), &Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsBot_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsBot_MetaData), NewProp_bIsBot_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_CharacterOptionsTable = { "CharacterOptionsTable", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, CharacterOptionsTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterOptionsTable_MetaData), NewProp_CharacterOptionsTable_MetaData) };
 void Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsReady_SetBit(void* Obj)
 {
@@ -497,6 +478,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13Playe
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenRole,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenCharacterKey,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnCharacterSelected,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsBot,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_CharacterOptionsTable,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsReady,
 };
@@ -538,11 +520,13 @@ void AF13PlayerState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>&
 	static const FName Name_SelectedPawnClass(TEXT("SelectedPawnClass"));
 	static const FName Name_ChosenRole(TEXT("ChosenRole"));
 	static const FName Name_ChosenCharacterKey(TEXT("ChosenCharacterKey"));
+	static const FName Name_bIsBot(TEXT("bIsBot"));
 	static const FName Name_bIsReady(TEXT("bIsReady"));
 	const bool bIsValid = true
 		&& Name_SelectedPawnClass == ClassReps[(int32)ENetFields_Private::SelectedPawnClass].Property->GetFName()
 		&& Name_ChosenRole == ClassReps[(int32)ENetFields_Private::ChosenRole].Property->GetFName()
 		&& Name_ChosenCharacterKey == ClassReps[(int32)ENetFields_Private::ChosenCharacterKey].Property->GetFName()
+		&& Name_bIsBot == ClassReps[(int32)ENetFields_Private::bIsBot].Property->GetFName()
 		&& Name_bIsReady == ClassReps[(int32)ENetFields_Private::bIsReady].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in AF13PlayerState"));
 }
@@ -554,10 +538,10 @@ AF13PlayerState::~AF13PlayerState() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerState, AF13PlayerState::StaticClass, TEXT("AF13PlayerState"), &Z_Registration_Info_UClass_AF13PlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerState), 2421314462U) },
+		{ Z_Construct_UClass_AF13PlayerState, AF13PlayerState::StaticClass, TEXT("AF13PlayerState"), &Z_Registration_Info_UClass_AF13PlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerState), 1748983037U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_3652065849(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_2348981756(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

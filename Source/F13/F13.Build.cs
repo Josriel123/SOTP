@@ -18,7 +18,8 @@ public class F13 : ModuleRules
             "OnlineSubsystem",
             "OnlineSubsystemUtils",
             "OnlineSubsystemEOS",
-            "HostMigrationSystem"
+            "HostMigrationSystem",
+            "AIModule"
         });
     }
 }

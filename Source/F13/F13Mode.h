@@ -8,6 +8,8 @@
 class AF13PlayerController;
 class AF13PlayerState;
 class AF13GameState;
+class AAIController;
+class AF13BotController;
 
 UCLASS()
 class F13_API AF13Mode : public AHMS_GameMode
@@ -27,11 +29,32 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Variables")
 	TSubclassOf<APawn> PawnToSpawn;
 
-	// (Optionally) when the match officially “starts,” you could override 
-	// StartPlay() or BeginPlay() to check if everyone has chosen and then spawn.
+	UPROPERTY(EditDefaultsOnly, Category = "Bots")
+	TSubclassOf<AAIController> BotControllerClass;
+
+	static constexpr int32 kMaxPlayers = 10;   // killer + 9 survivors
+
+	/** Override so we can auto-spawn bots and pick the killer before play begins */
+	virtual void StartMatch() override;
+	virtual void InitGame(const FString& MapName, const FString& Options, FString& Error) override;
+
+
+
 
 protected:
 
 	virtual void BeginPlay() override;
+
+	/* ---------- helpers implemented in F13Mode.cpp ---------- */
+	void FillWithBots();
+	void PickRandomKiller();
+	void ReplaceBotIfPossible(APlayerController* JoiningPC);
+	int32 ExpectedHumans = 1;
+
+private:
+
+	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
+	
+	
 
 };

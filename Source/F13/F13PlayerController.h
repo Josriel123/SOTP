@@ -34,4 +34,6 @@ private:
 	/** Cached pointer to our PlayerState, cast to AF13PlayerState. */
 	UPROPERTY()
 	AF13PlayerState* F13PlayerStateCached;
+
+
 };

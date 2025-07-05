@@ -15,11 +15,11 @@ class APlayerController;
 #endif
 #define F13_F13Mode_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execHandleCharacterSelected);
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13Mode(); \
 	friend struct Z_Construct_UClass_AF13Mode_Statics; \
@@ -28,7 +28,7 @@ public: \
 	DECLARE_SERIALIZER(AF13Mode)
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AF13Mode(AF13Mode&&); \
@@ -40,13 +40,13 @@ public: \
 	NO_API virtual ~AF13Mode();
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_12_PROLOG
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_GENERATED_BODY \
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_14_PROLOG
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_INCLASS_NO_PURE_DECLS \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

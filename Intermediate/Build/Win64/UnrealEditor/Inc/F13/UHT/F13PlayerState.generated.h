@@ -49,6 +49,7 @@ public: \
 		SelectedPawnClass=NETFIELD_REP_START, \
 		ChosenRole, \
 		ChosenCharacterKey, \
+		bIsBot, \
 		bIsReady, \
 		NETFIELD_REP_END=bIsReady	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;

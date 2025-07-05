@@ -42,6 +42,7 @@ void AF13PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME(AF13PlayerState, ChosenRole);
 	DOREPLIFETIME(AF13PlayerState, ChosenCharacterKey);
 	DOREPLIFETIME(AF13PlayerState, SelectedPawnClass);
+	DOREPLIFETIME(AF13PlayerState, bIsBot);
 }
 
 void AF13PlayerState::ServerSetCharacterSelection_Implementation(
