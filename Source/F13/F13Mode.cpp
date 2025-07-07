@@ -107,7 +107,6 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
 
 }
 
-
 void AF13Mode::PostLogin(APlayerController* NewPlayer)
 {
     Super::PostLogin(NewPlayer);
@@ -304,4 +303,19 @@ AActor* AF13Mode::ChoosePlayerStart_Implementation(AController* Player)
 
     ++NextIndex;
     return Chosen;
+}
+
+void AF13Mode::HandleMatchIsWaitingToStart()
+{
+    Super::HandleMatchIsWaitingToStart();
+
+    const int32 HumansNow = GameState->PlayerArray.Num();
+    UE_LOG(LogF13Mode, Log, TEXT("HandleMatchIsWaitingToStart → Humans=%d / %d"),
+        HumansNow, ExpectedHumans);
+
+    if (HumansNow >= ExpectedHumans)
+    {
+        UE_LOG(LogF13Mode, Log, TEXT("All humans present – StartMatch()"));
+        StartMatch();               // FillWithBots() happens inside
+    }
 }

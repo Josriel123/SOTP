@@ -37,7 +37,7 @@ public:
 	/** Override so we can auto-spawn bots and pick the killer before play begins */
 	virtual void StartMatch() override;
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& Error) override;
-
+	virtual void HandleMatchIsWaitingToStart() override;
 
 
 
