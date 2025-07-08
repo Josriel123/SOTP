@@ -54,7 +54,5 @@ protected:
 private:
 
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
-	
-	
 
 };

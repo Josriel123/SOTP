@@ -112,7 +112,7 @@ void UF13GameInstance::HostSession()
     }
 
     TSharedPtr<FOnlineSessionSettings> Settings = MakeShareable(new FOnlineSessionSettings());
-    Settings->bIsLANMatch = false;
+    Settings->bIsLANMatch = true;
     Settings->NumPublicConnections = 10;
     Settings->bShouldAdvertise = true;
     Settings->bAllowJoinInProgress = true;

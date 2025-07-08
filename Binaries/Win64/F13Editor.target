@@ -4202,10 +4202,6 @@
 			"Type": "DynamicLibrary"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemEOS/Binaries/Win64/UnrealEditor-OnlineSubsystemEOSPlus.dll",
-			"Type": "DynamicLibrary"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemEOS/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
@@ -30380,10 +30376,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Online/EOSOverlayInputProvider/EOSOverlayInputProvider.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Online/EOSShared/EOSShared.uplugin",
 			"Type": "UFS"
 		},
@@ -30400,10 +30392,6 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemEOS/OnlineSubsystemEOS.uplugin",
-			"Type": "UFS"
-		},
-		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemNull/OnlineSubsystemNull.uplugin",
 			"Type": "UFS"
 		},
@@ -30413,14 +30401,6 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystem/OnlineSubsystem.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/SocketSubsystemEOS/SocketSubsystemEOS.uplugin",
-			"Type": "UFS"
-		},
-		{
-			"Path": "$(EngineDir)/Plugins/Online/VoiceChat/EOSVoiceChat/EOSVoiceChat.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -30689,9 +30669,7 @@
 		"DatasmithContent",
 		"DeformerGraph",
 		"DumpGPUServices",
-		"EOSOverlayInputProvider",
 		"EOSShared",
-		"EOSVoiceChat",
 		"EditorDataStorage",
 		"EditorDebugTools",
 		"EditorPerformance",
@@ -30763,7 +30741,6 @@
 		"OnlineBase",
 		"OnlineServices",
 		"OnlineSubsystem",
-		"OnlineSubsystemEOS",
 		"OnlineSubsystemGooglePlay",
 		"OnlineSubsystemIOS",
 		"OnlineSubsystemNull",
@@ -30795,7 +30772,6 @@
 		"SignificanceManager",
 		"SkeletalMeshModelingTools",
 		"SkeletalReduction",
-		"SocketSubsystemEOS",
 		"SoundFields",
 		"SpeedTreeImporter",
 		"StateTree",

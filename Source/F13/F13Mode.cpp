@@ -20,7 +20,7 @@ AF13Mode::AF13Mode()
     PlayerControllerClass = AF13PlayerController::StaticClass();
     PlayerStateClass = AF13PlayerState::StaticClass();
     GameStateClass = AF13GameState::StaticClass();
-    PawnToSpawn = nullptr;
+    //PawnToSpawn = nullptr;
     BotControllerClass = AF13BotController::StaticClass();
 
 }
@@ -117,13 +117,14 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
     if (GetMatchState() == MatchState::WaitingToStart &&
         HumansNow >= ExpectedHumans)
     {
-        UE_LOG(LogF13Mode, Log, TEXT("All humans present → StartMatch()"));
+        UE_LOG(LogF13Mode, Log, TEXT("All humans present → StartMatch() (PostLogin)"));
         StartMatch();   //  FillWithBots() happens inside
     }
 
+
     if (GetMatchState() == MatchState::InProgress)
     {
-        ReplaceBotIfPossible(NewPlayer);
+        //ReplaceBotIfPossible(NewPlayer);
     }
 
     if (AF13PlayerState* PS = Cast<AF13PlayerState>(NewPlayer->PlayerState))
@@ -138,13 +139,16 @@ void AF13Mode::StartMatch()
 {
     UE_LOG(LogF13Mode, Log, TEXT("=== StartMatch() called on server ==="));
 
+    
     if (HasAuthority())
     {
         FillWithBots();        // step 1
-        PickRandomKiller();    // step 2
+        //PickRandomKiller();    // step 2
     }
+    
     Super::StartMatch();       // *then* call parent so MatchState flips
 }
+
 
 /* ------------------------------------------------------------ */
 void AF13Mode::FillWithBots()
@@ -153,7 +157,7 @@ void AF13Mode::FillWithBots()
 
     UWorld* World = GetWorld();
     const int32 Humans = GameState->PlayerArray.Num();  // humans only (controllers already connected)
-    const int32 Needed = kMaxPlayers - Humans;
+    const int32 Needed = 1;
 
     UE_LOG(LogF13Mode, Log, TEXT("[FillWithBots] Humans=%d  BotsToSpawn=%d"), Humans, Needed);
 
@@ -305,6 +309,7 @@ AActor* AF13Mode::ChoosePlayerStart_Implementation(AController* Player)
     return Chosen;
 }
 
+
 void AF13Mode::HandleMatchIsWaitingToStart()
 {
     Super::HandleMatchIsWaitingToStart();
@@ -315,7 +320,7 @@ void AF13Mode::HandleMatchIsWaitingToStart()
 
     if (HumansNow >= ExpectedHumans)
     {
-        UE_LOG(LogF13Mode, Log, TEXT("All humans present – StartMatch()"));
+        UE_LOG(LogF13Mode, Log, TEXT("All humans present – StartMatch() (HandleMatchIsWaitingToStart)"));
         StartMatch();               // FillWithBots() happens inside
     }
 }

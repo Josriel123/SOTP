@@ -26,10 +26,6 @@
 			"Name": "HostMigrationSystemV2",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/23b51829593540eeb81c801014787306"
-		},
-		{
-			"Name": "OnlineSubsystemEOS",
-			"Enabled": true
 		}
 	]
 }
