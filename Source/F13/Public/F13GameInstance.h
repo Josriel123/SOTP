@@ -28,13 +28,13 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Session") void FindSessions();
     UFUNCTION(BlueprintCallable, Category = "Session") void JoinFoundSession(int32 SessionIndex);
     UFUNCTION(BlueprintCallable, Category = "Session") TArray<FString> GetFoundSessionNames() const;
-
     /* ----------  Delegates exposed to Blueprints ---------- */
     UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionCreated   OnSessionCreated;
     UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionJoined    OnSessionJoined;
     UPROPERTY(BlueprintAssignable, Category = "Session") FOnSessionListReady OnSessionListReady;
 
 private:
+
     /* ----------  Internal helpers ---------- */
     void HostSession();
 

@@ -742,38 +742,6 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13GameState.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13GameState.h">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Mode.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Mode.h">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerController.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerController.h">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerState.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerState.h">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
-    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13BotController.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
@@ -786,7 +754,27 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13GameSession.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13GameState.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13Mode.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13PlayerController.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13PlayerState.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
@@ -814,7 +802,27 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13GameSession.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13GameState.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13Mode.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13PlayerController.h">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13PlayerState.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>

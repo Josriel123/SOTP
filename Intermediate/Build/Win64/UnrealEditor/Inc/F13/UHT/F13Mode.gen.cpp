@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "F13/F13Mode.h"
+#include "F13/Public/F13Mode.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13Mode() {}
 
@@ -32,7 +32,7 @@ struct Z_Construct_UFunction_AF13Mode_HandleCharacterSelected_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// This is the function that actually spawns the pawn for a given PlayerController\n" },
 #endif
-		{ "ModuleRelativePath", "F13Mode.h" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "This is the function that actually spawns the pawn for a given PlayerController" },
 #endif
@@ -68,6 +68,52 @@ DEFINE_FUNCTION(AF13Mode::execHandleCharacterSelected)
 }
 // End Class AF13Mode Function HandleCharacterSelected
 
+// Begin Class AF13Mode Function K2_OnInitGame
+struct F13Mode_eventK2_OnInitGame_Parms
+{
+	FString Options;
+};
+static const FName NAME_AF13Mode_K2_OnInitGame = FName(TEXT("K2_OnInitGame"));
+void AF13Mode::K2_OnInitGame(const FString& Options)
+{
+	F13Mode_eventK2_OnInitGame_Parms Parms;
+	Parms.Options=Options;
+	UFunction* Func = FindFunctionChecked(NAME_AF13Mode_K2_OnInitGame);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "F13|Init" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Options_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_Options;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::NewProp_Options = { "Options", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13Mode_eventK2_OnInitGame_Parms, Options), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Options_MetaData), NewProp_Options_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::NewProp_Options,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13Mode, nullptr, "K2_OnInitGame", nullptr, nullptr, Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::PropPointers), sizeof(F13Mode_eventK2_OnInitGame_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::Function_MetaDataParams) };
+static_assert(sizeof(F13Mode_eventK2_OnInitGame_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AF13Mode_K2_OnInitGame()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13Mode_K2_OnInitGame_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+// End Class AF13Mode Function K2_OnInitGame
+
 // Begin Class AF13Mode
 void AF13Mode::StaticRegisterNativesAF13Mode()
 {
@@ -88,24 +134,31 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "F13Mode.h" },
-		{ "ModuleRelativePath", "F13Mode.h" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PawnToSpawn_MetaData[] = {
 		{ "Category", "Variables" },
-		{ "ModuleRelativePath", "F13Mode.h" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BotControllerClass_MetaData[] = {
 		{ "Category", "Bots" },
-		{ "ModuleRelativePath", "F13Mode.h" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsRehostGame_MetaData[] = {
+		{ "Category", "F13Mode" },
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_PawnToSpawn;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_BotControllerClass;
+	static void NewProp_bIsRehostGame_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRehostGame;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AF13Mode_HandleCharacterSelected, "HandleCharacterSelected" }, // 2022002596
+		{ &Z_Construct_UFunction_AF13Mode_HandleCharacterSelected, "HandleCharacterSelected" }, // 2733630682
+		{ &Z_Construct_UFunction_AF13Mode_K2_OnInitGame, "K2_OnInitGame" }, // 1935691886
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -115,9 +168,15 @@ struct Z_Construct_UClass_AF13Mode_Statics
 };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_PawnToSpawn = { "PawnToSpawn", nullptr, (EPropertyFlags)0x0014000000000004, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13Mode, PawnToSpawn), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PawnToSpawn_MetaData), NewProp_PawnToSpawn_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_BotControllerClass = { "BotControllerClass", nullptr, (EPropertyFlags)0x0014000000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13Mode, BotControllerClass), Z_Construct_UClass_UClass, Z_Construct_UClass_AAIController_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BotControllerClass_MetaData), NewProp_BotControllerClass_MetaData) };
+void Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame_SetBit(void* Obj)
+{
+	((AF13Mode*)Obj)->bIsRehostGame = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame = { "bIsRehostGame", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AF13Mode), &Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRehostGame_MetaData), NewProp_bIsRehostGame_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13Mode_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PawnToSpawn,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_BotControllerClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AF13Mode_Statics::DependentSingletons[])() = {
@@ -157,14 +216,14 @@ AF13Mode::~AF13Mode() {}
 // End Class AF13Mode
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 352656962U) },
+		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 1636960453U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_3713463724(TEXT("/Script/F13"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13Mode_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_2724623990(TEXT("/Script/F13"),
+	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

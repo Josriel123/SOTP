@@ -1,4 +1,4 @@
-// F13GameInstance.cpp
+ï»¿// F13GameInstance.cpp
 #include "F13GameInstance.h"
 #include "Engine/World.h"
 
@@ -35,10 +35,11 @@ void UF13GameInstance::Init()
         OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(
             this, &UF13GameInstance::OnJoinSessionComplete);
     }
+
 }
 
 /* ------------------------------------------------------------ */
-/*  PUBLIC  — widget entry-point                                */
+/*  PUBLIC  â€” widget entry-point                                */
 /* ------------------------------------------------------------ */
 void UF13GameInstance::HostAndStartSession()
 {
@@ -96,7 +97,7 @@ TArray<FString> UF13GameInstance::GetFoundSessionNames() const
 }
 
 /* ------------------------------------------------------------ */
-/*  INTERNAL — Host                                             */
+/*  INTERNAL â€” Host                                             */
 /* ------------------------------------------------------------ */
 void UF13GameInstance::HostSession()
 {
@@ -125,7 +126,7 @@ void UF13GameInstance::HostSession()
 }
 
 /* ------------------------------------------------------------ */
-/*  NEW — destroy-then-join helpers                             */
+/*  NEW â€” destroy-then-join helpers                             */
 /* ------------------------------------------------------------ */
 void UF13GameInstance::CleanAndJoin(int32 SearchIndex)
 {
@@ -180,6 +181,7 @@ void UF13GameInstance::OnCreateSessionComplete(FName /*SessionName*/, bool bWasS
             OnCreateSessionCompleteDelegateHandle);
     }
 
+
     OnSessionCreated.Broadcast(bWasSuccessful);
 }
 
@@ -232,3 +234,4 @@ void UF13GameInstance::OnJoinSessionComplete(FName SessionName,
 
     OnSessionJoined.Broadcast(bWasSuccessful);
 }
+

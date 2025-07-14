@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "F13/F13PlayerState.h"
+#include "F13/Public/F13PlayerState.h"
 #include "UObject/CoreNet.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13PlayerState() {}
@@ -32,7 +32,7 @@ struct Z_Construct_UDelegateFunction_F13_OnCharacterSelectedSignature__DelegateS
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SelectingPC;
@@ -77,7 +77,7 @@ struct Z_Construct_UDelegateFunction_F13_OnReadyChanged__DelegateSignature_Stati
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerState;
@@ -132,7 +132,7 @@ struct Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "CharacterSelection" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnValue;
@@ -177,7 +177,7 @@ struct Z_Construct_UFunction_AF13PlayerState_IsReady_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Current ready state (replicated). */" },
 #endif
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Current ready state (replicated)." },
 #endif
@@ -222,7 +222,7 @@ struct Z_Construct_UFunction_AF13PlayerState_OnRep_IsReady_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -266,7 +266,7 @@ struct Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "CharacterSelection" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NewRole_MetaData[] = {
 		{ "NativeConst", "" },
@@ -327,7 +327,7 @@ struct Z_Construct_UFunction_AF13PlayerState_SetReady_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Call from UI to toggle ready. */" },
 #endif
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Call from UI to toggle ready." },
 #endif
@@ -392,7 +392,7 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "F13PlayerState.h" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnReadyChanged_MetaData[] = {
@@ -400,35 +400,35 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Fired on both server & clients whenever ready changes. */" },
 #endif
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Fired on both server & clients whenever ready changes." },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SelectedPawnClass_MetaData[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ChosenRole_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ChosenCharacterKey_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnCharacterSelected_MetaData[] = {
 		{ "Category", "CharacterSelection" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsBot_MetaData[] = {
 		{ "Category", "F13PlayerState" },
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterOptionsTable_MetaData[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsReady_MetaData[] = {
-		{ "ModuleRelativePath", "F13PlayerState.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnReadyChanged;
@@ -444,11 +444,11 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass, "GetChosenPawnClass" }, // 2313521646
-		{ &Z_Construct_UFunction_AF13PlayerState_IsReady, "IsReady" }, // 2292886887
-		{ &Z_Construct_UFunction_AF13PlayerState_OnRep_IsReady, "OnRep_IsReady" }, // 3908571767
-		{ &Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection, "ServerSetCharacterSelection" }, // 1696547860
-		{ &Z_Construct_UFunction_AF13PlayerState_SetReady, "SetReady" }, // 107041671
+		{ &Z_Construct_UFunction_AF13PlayerState_GetChosenPawnClass, "GetChosenPawnClass" }, // 3606722075
+		{ &Z_Construct_UFunction_AF13PlayerState_IsReady, "IsReady" }, // 2682784377
+		{ &Z_Construct_UFunction_AF13PlayerState_OnRep_IsReady, "OnRep_IsReady" }, // 2652510147
+		{ &Z_Construct_UFunction_AF13PlayerState_ServerSetCharacterSelection, "ServerSetCharacterSelection" }, // 667676214
+		{ &Z_Construct_UFunction_AF13PlayerState_SetReady, "SetReady" }, // 2124479470
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -456,11 +456,11 @@ struct Z_Construct_UClass_AF13PlayerState_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnReadyChanged = { "OnReadyChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, OnReadyChanged), Z_Construct_UDelegateFunction_F13_OnReadyChanged__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnReadyChanged_MetaData), NewProp_OnReadyChanged_MetaData) }; // 3802124130
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnReadyChanged = { "OnReadyChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, OnReadyChanged), Z_Construct_UDelegateFunction_F13_OnReadyChanged__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnReadyChanged_MetaData), NewProp_OnReadyChanged_MetaData) }; // 2957426992
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_SelectedPawnClass = { "SelectedPawnClass", nullptr, (EPropertyFlags)0x0014000000000020, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, SelectedPawnClass), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelectedPawnClass_MetaData), NewProp_SelectedPawnClass_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenRole = { "ChosenRole", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, ChosenRole), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ChosenRole_MetaData), NewProp_ChosenRole_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_ChosenCharacterKey = { "ChosenCharacterKey", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, ChosenCharacterKey), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ChosenCharacterKey_MetaData), NewProp_ChosenCharacterKey_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnCharacterSelected = { "OnCharacterSelected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, OnCharacterSelected), Z_Construct_UDelegateFunction_F13_OnCharacterSelectedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnCharacterSelected_MetaData), NewProp_OnCharacterSelected_MetaData) }; // 1281545652
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_AF13PlayerState_Statics::NewProp_OnCharacterSelected = { "OnCharacterSelected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerState, OnCharacterSelected), Z_Construct_UDelegateFunction_F13_OnCharacterSelectedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnCharacterSelected_MetaData), NewProp_OnCharacterSelected_MetaData) }; // 1211771828
 void Z_Construct_UClass_AF13PlayerState_Statics::NewProp_bIsBot_SetBit(void* Obj)
 {
 	((AF13PlayerState*)Obj)->bIsBot = 1;
@@ -535,14 +535,14 @@ AF13PlayerState::~AF13PlayerState() {}
 // End Class AF13PlayerState
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerState, AF13PlayerState::StaticClass, TEXT("AF13PlayerState"), &Z_Registration_Info_UClass_AF13PlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerState), 1748983037U) },
+		{ Z_Construct_UClass_AF13PlayerState, AF13PlayerState::StaticClass, TEXT("AF13PlayerState"), &Z_Registration_Info_UClass_AF13PlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerState), 295073U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_2348981756(TEXT("/Script/F13"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerState_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_590339511(TEXT("/Script/F13"),
+	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

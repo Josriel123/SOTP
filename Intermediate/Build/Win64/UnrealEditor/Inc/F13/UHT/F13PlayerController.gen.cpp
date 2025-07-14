@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "F13/F13PlayerController.h"
+#include "F13/Public/F13PlayerController.h"
 #include "UObject/CoreNet.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13PlayerController() {}
@@ -37,7 +37,7 @@ struct Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13PlayerController.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_PawnClass;
@@ -92,7 +92,7 @@ struct Z_Construct_UFunction_AF13PlayerController_ServerSetReady_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13PlayerController.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
 	};
 #endif // WITH_METADATA
 	static void NewProp_bNewReady_SetBit(void* Obj);
@@ -159,7 +159,7 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 #endif
 		{ "HideCategories", "Collision Rendering Transformation" },
 		{ "IncludePath", "F13PlayerController.h" },
-		{ "ModuleRelativePath", "F13PlayerController.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "PlayerController responsible for receiving character\xe2\x80\x90selection clicks from UI\nand forwarding them to the server\xe2\x80\x90side PlayerState RPC." },
 #endif
@@ -168,7 +168,7 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/** Cached pointer to our PlayerState, cast to AF13PlayerState. */" },
 #endif
-		{ "ModuleRelativePath", "F13PlayerController.h" },
+		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Cached pointer to our PlayerState, cast to AF13PlayerState." },
 #endif
@@ -178,8 +178,8 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass, "ServerSelectPawnClass" }, // 1729292092
-		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetReady, "ServerSetReady" }, // 4241345266
+		{ &Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass, "ServerSelectPawnClass" }, // 2494364073
+		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetReady, "ServerSetReady" }, // 4241041020
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -229,14 +229,14 @@ AF13PlayerController::~AF13PlayerController() {}
 // End Class AF13PlayerController
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2222610882U) },
+		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 1948049451U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_3180702567(TEXT("/Script/F13"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13PlayerController_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_2332931649(TEXT("/Script/F13"),
+	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

@@ -227,30 +227,6 @@
     <ClCompile Include="..\..\Source\F13\F13.h">
       <Filter>Source\F13</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13GameState.cpp">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13GameState.h">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Mode.cpp">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13Mode.h">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerController.cpp">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerController.h">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerState.cpp">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\F13\F13PlayerState.h">
-      <Filter>Source\F13</Filter>
-    </ClCompile>
     <Filter Include="Source\F13\Private">
       <UniqueIdentifier>{D7C66078-A2B3-302A-924A-7EEACEF3DF20}</UniqueIdentifier>
     </Filter>
@@ -263,7 +239,22 @@
     <ClCompile Include="..\..\Source\F13\Private\F13GameInstance.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13GameSession.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13GameState.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13Mode.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13PlayerController.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13PlayerState.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13SurvivorCharacter.cpp">
@@ -287,7 +278,22 @@
     <ClCompile Include="..\..\Source\F13\Public\F13GameInstance.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13GameSession.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13GameState.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13Mode.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13PlayerController.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13PlayerState.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">

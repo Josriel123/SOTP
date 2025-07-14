@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "F13/F13GameState.h"
+#include "F13/Public/F13GameState.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13GameState() {}
 
@@ -22,7 +22,7 @@ struct Z_Construct_UDelegateFunction_F13_OnPlayersChanged__DelegateSignature_Sta
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "F13GameState.h" },
+		{ "ModuleRelativePath", "Public/F13GameState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
@@ -58,7 +58,7 @@ struct Z_Construct_UClass_AF13GameState_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "F13GameState.h" },
-		{ "ModuleRelativePath", "F13GameState.h" },
+		{ "ModuleRelativePath", "Public/F13GameState.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 #endif // WITH_METADATA
@@ -106,14 +106,14 @@ AF13GameState::~AF13GameState() {}
 // End Class AF13GameState
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameState_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13GameState, AF13GameState::StaticClass, TEXT("AF13GameState"), &Z_Registration_Info_UClass_AF13GameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13GameState), 2111261506U) },
+		{ Z_Construct_UClass_AF13GameState, AF13GameState::StaticClass, TEXT("AF13GameState"), &Z_Registration_Info_UClass_AF13GameState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13GameState), 1833483272U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_668448521(TEXT("/Script/F13"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_F13GameState_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameState_h_3189251429(TEXT("/Script/F13"),
+	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameState_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
