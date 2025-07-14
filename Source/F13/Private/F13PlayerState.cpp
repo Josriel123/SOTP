@@ -139,7 +139,7 @@ void AF13PlayerState::OnRep_IsReady()
 {
 	OnReadyChanged.Broadcast(this, bIsReady);
 
-	UE_LOG(LogTemp, Log, TEXT("PlayerState[%s] Ready = %s"),
+	UE_LOG(LogTemp, Log, TEXT("PlayerState[%s] Ready = %s (OnRep)"),
 		*GetPlayerName(), bIsReady ? TEXT("TRUE") : TEXT("FALSE"));
 }
 

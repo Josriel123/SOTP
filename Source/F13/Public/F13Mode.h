@@ -39,9 +39,14 @@ public:
 
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& Error) override;
 	virtual AHMS_PlayerController* HMS_PickNewHost_Implementation() override;
+	/** Prevent a second pawn being spawned after we swap a human into a bot */
+	virtual void RestartPlayer(AController* NewPlayer) override;
 
 
 	virtual void HandleMatchIsWaitingToStart() override;
+
+	TArray<APlayerStart*> CachedStarts;
+	int32                 NextStartIndex = 0;
 
 	UPROPERTY(VisibleAnywhere)
 	bool bIsRehostGame = false;

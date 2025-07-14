@@ -117,15 +117,16 @@ void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
 
 void AF13Mode::PostLogin(APlayerController* NewPlayer)
 {
+    if (GetMatchState() == MatchState::InProgress)
+    {
+        ReplaceBotIfPossible(NewPlayer);
+    }
+
     Super::PostLogin(NewPlayer);
 
     const int32 HumansNow = GameState->PlayerArray.Num();
     UE_LOG(LogF13Mode, Log, TEXT("PostLogin → Humans=%d / %d"), HumansNow, ExpectedHumans);
 
-    if (GetMatchState() == MatchState::InProgress)
-    {
-        ReplaceBotIfPossible(NewPlayer);
-    }
 
     if (AF13PlayerState* PS = Cast<AF13PlayerState>(NewPlayer->PlayerState))
     {
@@ -185,9 +186,9 @@ void AF13Mode::FillWithBots()
         // 2) Choose spawn and create pawn
         //------------------------------------------------------------------
         AActor* Start = FindPlayerStart(Bot);
-        if (!Start)
+        if (!IsValid(Start))
         {
-            UE_LOG(LogF13Mode, Warning, TEXT("  !! No PlayerStart found for Bot_%02d"), i + 1);
+            UE_LOG(LogF13Mode, Warning, TEXT("No valid PlayerStart – skipping bot"));
             continue;
         }
 
@@ -281,6 +282,11 @@ void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
             Bot->UnPossess();
             JoiningPC->Possess(Pawn);
 
+            UE_LOG(LogF13Mode, Log,
+                TEXT("Bot %s replaced by %s, controller now owns %s"),
+                *GetNameSafe(Bot), *GetNameSafe(JoiningPC),
+                *GetNameSafe(JoiningPC->GetPawn()));
+
             // Clean up
             Bot->Destroy();
 
@@ -292,38 +298,28 @@ void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
 
 AActor* AF13Mode::ChoosePlayerStart_Implementation(AController* Player)
 {
-    // Cache once
-    static TArray<APlayerStart*> Starts;
-    static int32 NextIndex = 0;
-
-    if (Starts.IsEmpty())
+    // Instance-local cache; will be rebuilt each time a map is loaded
+    if (CachedStarts.IsEmpty())
     {
         TArray<AActor*> Raw;
         UGameplayStatics::GetAllActorsOfClass(this, APlayerStart::StaticClass(), Raw);
 
         for (AActor* A : Raw)
-        {
-            Starts.Add(CastChecked<APlayerStart>(A));
-        }
+            CachedStarts.Add(CastChecked<APlayerStart>(A));
 
-        // Sort alphabetically so Start0…Start9 gives a predictable circle
-        Starts.Sort([](const APlayerStart& A, const APlayerStart& B)
+        CachedStarts.Sort([](const APlayerStart& A, const APlayerStart& B)
             {
                 return A.PlayerStartTag.ToString() < B.PlayerStartTag.ToString();
             });
+
+        NextStartIndex = 0;          // reset for this match
     }
 
-    if (Starts.Num() == 0)
-    {
-        UE_LOG(LogF13Mode, Warning, TEXT("No PlayerStarts found – falling back"));
+    if (CachedStarts.Num() == 0)
         return Super::ChoosePlayerStart_Implementation(Player);
-    }
 
-    // Round-robin pick
-    APlayerStart* Chosen = Starts[NextIndex % Starts.Num()];
-    UE_LOG(LogF13Mode, Log, TEXT("ChoosePlayerStart → %s"), *Chosen->PlayerStartTag.ToString());
-
-    ++NextIndex;
+    APlayerStart* Chosen = CachedStarts[NextStartIndex % CachedStarts.Num()];
+    ++NextStartIndex;
     return Chosen;
 }
 
@@ -389,4 +385,26 @@ AHMS_PlayerController* AF13Mode::HMS_PickNewHost_Implementation()
     }
 
     return Cast<AHMS_PlayerController>(Best->GetPlayerController());
+}
+
+void AF13Mode::RestartPlayer(AController* NewPlayer)
+{
+    // If ReplaceBotIfPossible already gave this controller a pawn,
+    // skip the default spawn so we don’t leave an extra bot in the world.
+
+    UE_LOG(LogF13Mode, Log,
+        TEXT("RestartPlayer called – PawnIsNull=%s"),
+        NewPlayer && NewPlayer->GetPawn() ? TEXT("false") : TEXT("true"));
+
+    if (NewPlayer && NewPlayer->GetPawn())
+    {
+        return;   // ← early‑out, no Super::RestartPlayer call
+    }
+
+    // Keep the host‑migration guard you already had
+    if (!HMS_MigrationFlags.IsGameRehosted
+        || HMS_MigrationFlags.IsLastSaveLoaded)
+    {
+        Super::RestartPlayer(NewPlayer);    // normal path
+    }
 }
