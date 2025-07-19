@@ -1,4 +1,5 @@
 ﻿#include "F13Mode.h"
+#include "F13CharacterBase.h"
 #include "GameFramework/HUD.h" 
 #include "F13PlayerController.h" 
 #include "F13BotController.h"
@@ -9,7 +10,8 @@
 #include "F13GameState.h"        
 #include "GameFramework/PlayerStart.h"
 #include "Kismet/GameplayStatics.h"
-#include "Engine/World.h"        
+#include "Engine/World.h"
+#include "EngineUtils.h"
 #include "UObject/ConstructorHelpers.h" 
 
 
@@ -17,20 +19,11 @@ DEFINE_LOG_CATEGORY_STATIC(LogF13Mode, Log, All);
 
 AF13Mode::AF13Mode()
 {
-    //DefaultPawnClass = nullptr;
     PlayerControllerClass = AF13PlayerController::StaticClass();
     PlayerStateClass = AF13PlayerState::StaticClass();
     GameStateClass = AF13GameState::StaticClass();
-    //PawnToSpawn = nullptr;
     BotControllerClass = AF13BotController::StaticClass();
     GameSessionClass = AF13GameSession::StaticClass();
-
-}
-
-
-void AF13Mode::BeginPlay()
-{
-    Super::BeginPlay();
 }
 
 void AF13Mode::InitGame(const FString& MapName, const FString& Options, FString& Error)
@@ -41,79 +34,13 @@ void AF13Mode::InitGame(const FString& MapName, const FString& Options, FString&
         *MapName, *Options);
 
     bIsRehostGame = UGameplayStatics::HasOption(Options, TEXT("hms_rehost"));
-    K2_OnInitGame(Options);
 
     
     FParse::Value(*Options, TEXT("humans="), ExpectedHumans);
     UE_LOG(LogF13Mode, Log, TEXT("InitGame → Expecting %d human players"), ExpectedHumans);
 }
 
-void AF13Mode::HandleCharacterSelected(APlayerController* SelectingPC)
-{
-    if (!SelectingPC)
-    {
-        return;
-    }
 
-    // Sanity check: only run this on the server
-    if (!HasAuthority())
-    {
-        return;
-    }
-
-
-
-    // Spawn logic (same as SpawnChosenPawnForController):
-    AF13PlayerState* PS = Cast<AF13PlayerState>(SelectingPC->PlayerState);
-    if (!PS)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("HandleCharacterSelected: no PlayerState"));
-        return;
-    }
-
-    UE_LOG(LogTemp, Log, TEXT(
-        "HandleCharacterSelected: Spawning pawn for %s (Role=%s, Key=%s)"
-    ),
-        *PS->GetPlayerName(),
-        *PS->ChosenRole,
-        *PS->ChosenCharacterKey.ToString()
-    );
-
-    // Get the pawn class they chose:
-    PawnToSpawn = PS->GetChosenPawnClass();
-    if (!PawnToSpawn)
-    {
-        UE_LOG(LogTemp, Warning, TEXT("HandleCharacterSelected: no PawnClass found for %s"),
-            *PS->GetPlayerName());
-        return;
-    }
-
-    // Find a spawn point (PlayerStart). If none, use zero‐origin:
-    AActor* StartSpot = FindPlayerStart(SelectingPC);
-    FTransform SpawnXF = StartSpot
-        ? StartSpot->GetActorTransform()
-        : FTransform(FRotator::ZeroRotator, FVector::ZeroVector);
-
-    // Spawn the new Pawn
-    FActorSpawnParameters Params;
-    Params.Owner = SelectingPC;
-    APawn* NewPawn = GetWorld()->SpawnActor<APawn>(
-        PawnToSpawn,
-        SpawnXF.GetLocation(),
-        SpawnXF.GetRotation().Rotator(),
-        Params
-    );
-    if (NewPawn)
-    {
-        SelectingPC->Possess(NewPawn);
-    }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("HandleCharacterSelected: failed to spawn %s for %s"),
-            *PawnToSpawn->GetName(), *PS->GetPlayerName());
-    }
-
-}
 
 void AF13Mode::PostLogin(APlayerController* NewPlayer)
 {
@@ -127,12 +54,6 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
     const int32 HumansNow = GameState->PlayerArray.Num();
     UE_LOG(LogF13Mode, Log, TEXT("PostLogin → Humans=%d / %d"), HumansNow, ExpectedHumans);
 
-
-    if (AF13PlayerState* PS = Cast<AF13PlayerState>(NewPlayer->PlayerState))
-    {
-        PS->OnCharacterSelected.AddDynamic(
-            this, &AF13Mode::HandleCharacterSelected);
-    }
 }
 
 
@@ -145,8 +66,8 @@ void AF13Mode::StartMatch()
     //*
     if (HasAuthority() && !bIsRehostGame)
     {
+        AssignRoles();
         FillWithBots();        // step 1
-        //PickRandomKiller();    // step 2
     }
     //*/
     Super::StartMatch();       // *then* call parent so MatchState flips
@@ -255,12 +176,45 @@ void AF13Mode::PickRandomKiller()
     }
 }
 
+void AF13Mode::AssignRoles()
+{
+    PickRandomKiller();                      // void – assigns ChosenRole
+
+    UE_LOG(LogF13Mode, Log, TEXT("----- Role Assignment -----"));
+
+    for (APlayerState* State : GameState->PlayerArray)
+    {
+        AF13PlayerState* PS = Cast<AF13PlayerState>(State);
+        if (!PS) continue;
+
+        /* Only compute the pawn class; role already set */
+        PS->SelectedPawnClass = PS->GetChosenPawnClassForRole(PS->ChosenRole);
+
+        const FName   RowKey = (PS->ChosenRole == TEXT("Killer"))
+            ? PS->KillerRowKey
+            : PS->SurvivorRowKey;
+
+        const TCHAR* PawnName = PS->SelectedPawnClass
+            ? *PS->SelectedPawnClass->GetName()
+            : TEXT("NONE");
+
+        UE_LOG(LogF13Mode, Log,
+            TEXT("Player %-18s  Role=%-9s  Row=%-14s  Pawn=%s"),
+            *PS->GetPlayerName(),
+            *PS->ChosenRole,
+            *RowKey.ToString(),
+            PawnName);
+    }
+    UE_LOG(LogF13Mode, Log, TEXT("---------------------------"));
+
+}
+
 void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
 {
     // Only after the match has begun, otherwise let lobby handle it.
     if (GetMatchState() != MatchState::InProgress) return;
 
-    UE_LOG(LogF13Mode, Warning, TEXT("Trying to replace bot (Outside)"));
+    UE_LOG(LogF13Mode, Warning, TEXT("Trying to replace bot"));
 
     for (FConstControllerIterator It = GetWorld()->GetControllerIterator(); It; ++It)
     {
@@ -275,23 +229,29 @@ void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
         {
             // Copy role & character choice
             HumanPS->ChosenRole = BotPS->ChosenRole;
-            HumanPS->ChosenCharacterKey = BotPS->ChosenCharacterKey;
+            HumanPS->SurvivorRowKey = BotPS->SurvivorRowKey;
+            HumanPS->KillerRowKey = BotPS->KillerRowKey;
             HumanPS->SelectedPawnClass = BotPS->SelectedPawnClass;
 
             // Possess the pawn
             Bot->UnPossess();
             JoiningPC->Possess(Pawn);
 
+            if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(Pawn))
+            {
+                // Set both for compatibility
+                Char->LastHumanOwnerPS = JoiningPC->PlayerState;
+                Char->LastHumanUniqueId = JoiningPC->PlayerState->GetUniqueId();
+            }
+
             UE_LOG(LogF13Mode, Log,
                 TEXT("Bot %s replaced by %s, controller now owns %s"),
                 *GetNameSafe(Bot), *GetNameSafe(JoiningPC),
                 *GetNameSafe(JoiningPC->GetPawn()));
 
-            // Clean up
+            // Clean up the bot
             Bot->Destroy();
-
-            UE_LOG(LogF13Mode, Warning, TEXT("Trying to replace bot (Inside)"));
-            return;    // one is enough
+            return;    // one replacement is enough
         }
     }
 }
@@ -369,10 +329,12 @@ AHMS_PlayerController* AF13Mode::HMS_PickNewHost_Implementation()
         }
     }
 
+
     UE_LOG(LogTemp, Log, TEXT("[HMS] Picked host → %s  (Ping %.0f ms)"),
         *GetNameSafe(Best->GetPlayerController()),
         Best->GetPingInMilliseconds());
 
+    /*
     // Optional: dump the whole array for deeper inspection
     for (APlayerState* PS : GameState->PlayerArray)
     {
@@ -383,28 +345,177 @@ AHMS_PlayerController* AF13Mode::HMS_PickNewHost_Implementation()
             bIsBot ? TEXT("YES") : TEXT("NO"),
             PS->GetPingInMilliseconds());
     }
+    */
 
     return Cast<AHMS_PlayerController>(Best->GetPlayerController());
 }
 
 void AF13Mode::RestartPlayer(AController* NewPlayer)
 {
-    // If ReplaceBotIfPossible already gave this controller a pawn,
-    // skip the default spawn so we don’t leave an extra bot in the world.
-
+    const bool bAlreadyHasPawn = NewPlayer && NewPlayer->GetPawn();
     UE_LOG(LogF13Mode, Log,
-        TEXT("RestartPlayer called – PawnIsNull=%s"),
-        NewPlayer && NewPlayer->GetPawn() ? TEXT("false") : TEXT("true"));
+        TEXT("RestartPlayer → PawnIsNull=%s"),
+        bAlreadyHasPawn ? TEXT("false") : TEXT("true"));
 
-    if (NewPlayer && NewPlayer->GetPawn())
+    /*  A. If this controller just replaced a bot it already owns a pawn.
+     *     Tag it and bail out so we don’t spawn a duplicate.                */
+    if (bAlreadyHasPawn)
     {
-        return;   // ← early‑out, no Super::RestartPlayer call
+        if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(NewPlayer->GetPawn()))
+        {
+            Char->LastHumanOwnerPS = NewPlayer->PlayerState;
+            Char->LastHumanUniqueId = NewPlayer->PlayerState->GetUniqueId();
+
+            UE_LOG(LogF13Mode, Log,
+                TEXT("[RestartPlayer] Existing pawn %s tagged with UniqueId=%s"),
+                *GetNameSafe(Char),                                                         // 1st %s
+                (Char->LastHumanUniqueId.IsValid()                                          // 2nd %s
+                    ? *Char->LastHumanUniqueId->ToString()   // FString → const TCHAR*
+                    : TEXT("None")));
+        }
+        return;
     }
 
-    // Keep the host‑migration guard you already had
-    if (!HMS_MigrationFlags.IsGameRehosted
-        || HMS_MigrationFlags.IsLastSaveLoaded)
+    /*  B. Normal spawn path  ------------------------------------------------*/
+    if (!HMS_MigrationFlags.IsGameRehosted || HMS_MigrationFlags.IsLastSaveLoaded)
     {
-        Super::RestartPlayer(NewPlayer);    // normal path
+        Super::RestartPlayer(NewPlayer);
+
+        AF13PlayerState* PS = Cast<AF13PlayerState>(NewPlayer->PlayerState);
+        if (!PS || !PS->SelectedPawnClass)             // still no choice? abort
+            return;
+
+        APawn* CurrentPawn = NewPlayer->GetPawn();     // could be nullptr
+
+        // If a wrong pawn spawned (or none), replace it with the chosen one
+        if (!CurrentPawn || !CurrentPawn->IsA(PS->SelectedPawnClass))
+        {
+            FVector  SpawnLoc;
+            FRotator SpawnRot;
+
+            if (IsValid(CurrentPawn))
+            {
+                SpawnLoc = CurrentPawn->GetActorLocation();
+                SpawnRot = CurrentPawn->GetActorRotation();
+                CurrentPawn->Destroy();
+            }
+            else
+            {
+                // No pawn at all – use PlayerStart location
+                AActor* Start = FindPlayerStart(NewPlayer);
+                SpawnLoc = Start ? Start->GetActorLocation() : FVector::ZeroVector;
+                SpawnRot = Start ? Start->GetActorRotation() : FRotator::ZeroRotator;
+            }
+
+            FActorSpawnParameters P;
+            P.Owner = NewPlayer;
+            P.SpawnCollisionHandlingOverride =
+                ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+            APawn* Final = GetWorld()->SpawnActor<APawn>(
+                PS->SelectedPawnClass, SpawnLoc, SpawnRot, P);
+
+            if (IsValid(Final))
+            {
+                const FName RowKey = (PS->ChosenRole == TEXT("Killer"))
+                    ? PS->KillerRowKey
+                    : PS->SurvivorRowKey;
+
+                NewPlayer->Possess(Final);
+                UE_LOG(LogF13Mode, Log,
+                    TEXT("[RestartPlayer] Spawned %s (row %s) for %s"),
+                    *Final->GetName(), *RowKey.ToString(),
+                    *NewPlayer->GetName());
+            }
+            else
+            {
+                UE_LOG(LogF13Mode, Error,
+                    TEXT("[RestartPlayer] FAILED to spawn pawn class %s"),
+                    *PS->SelectedPawnClass->GetName());
+            }
+        }
+
+        if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(NewPlayer->GetPawn()))
+        {
+            Char->LastHumanOwnerPS = NewPlayer->PlayerState;
+            Char->LastHumanUniqueId = NewPlayer->PlayerState->GetUniqueId();
+
+            UE_LOG(LogF13Mode, Log,
+                TEXT("[RestartPlayer] Existing pawn %s tagged with UniqueId=%s"),
+                *GetNameSafe(Char),                                                         // 1st %s
+                (Char->LastHumanUniqueId.IsValid()                                          // 2nd %s
+                    ? *Char->LastHumanUniqueId->ToString()   // FString → const TCHAR*
+                    : TEXT("None")));
+        }
+    }
+}
+
+void AF13Mode::Logout(AController* Exiting)
+{
+    UE_LOG(LogF13Mode, Log, TEXT("[Logout] %s leaving"), *GetNameSafe(Exiting));
+
+    /* 1. Grab the pawn *before* we call the parent.                         */
+    APawn* OrphanPawn = Exiting ? Exiting->GetPawn() : nullptr;
+
+    /* Un‑possess right away so the pawn isn’t auto‑destroyed in edge cases. */
+    if (Exiting && OrphanPawn)
+        Exiting->UnPossess();
+
+    const FUniqueNetIdRepl ExitingId =
+        (Exiting && Exiting->PlayerState) ? Exiting->PlayerState->GetUniqueId()
+        : FUniqueNetIdRepl();
+
+    /* 2. Call parent – this removes the controller & its PlayerState.       */
+    Super::Logout(Exiting);
+
+    /* 3. If we didn’t have a pawn pointer (or it became invalid),           */
+    /*    scan for the pawn using the UniqueNetId we saved.                  */
+    if (!IsValid(OrphanPawn) && ExitingId.IsValid())
+    {
+        for (TActorIterator<AF13CharacterBase> It(GetWorld()); It; ++It)
+        {
+            if (It->LastHumanUniqueId == ExitingId)
+            {
+                OrphanPawn = *It;
+                break;
+            }
+        }
+    }
+
+    /* 4. Spawn a bot and give it the pawn.                                  */
+    if (IsValid(OrphanPawn))
+    {
+        FActorSpawnParameters Params;
+        Params.SpawnCollisionHandlingOverride =
+            ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+        AF13BotController* NewBot =
+            GetWorld()->SpawnActor<AF13BotController>(BotControllerClass, Params);
+
+        if (NewBot)
+        {
+            NewBot->Possess(OrphanPawn);
+
+            if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(OrphanPawn))
+            {
+                Char->LastHumanOwnerPS = nullptr;
+                Char->LastHumanUniqueId = FUniqueNetIdRepl();   // clear tag
+            }
+
+            UE_LOG(LogF13Mode, Log,
+                TEXT("[Logout] Bot %s now controls pawn %s"),
+                *GetNameSafe(NewBot), *GetNameSafe(OrphanPawn));
+        }
+        else
+        {
+            UE_LOG(LogF13Mode, Error,
+                TEXT("[Logout] FAILED to spawn bot; pawn %s left idle"),
+                *GetNameSafe(OrphanPawn));
+        }
+    }
+    else
+    {
+        UE_LOG(LogF13Mode, Warning,
+            TEXT("[Logout] No pawn found to hand to a bot"));
     }
 }

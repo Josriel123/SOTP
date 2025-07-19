@@ -26,16 +26,12 @@ F13_API void FOnReadyChanged_DelegateWrapper(const FMulticastScriptDelegate& OnR
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
-	virtual bool ServerSetCharacterSelection_Validate(const FString& , FName const& ); \
-	virtual void ServerSetCharacterSelection_Implementation(const FString& NewRole, FName const& NewCharacterKey); \
 	DECLARE_FUNCTION(execOnRep_IsReady); \
-	DECLARE_FUNCTION(execGetChosenPawnClass); \
-	DECLARE_FUNCTION(execServerSetCharacterSelection); \
+	DECLARE_FUNCTION(execGetChosenPawnClassForRole); \
 	DECLARE_FUNCTION(execSetReady); \
 	DECLARE_FUNCTION(execIsReady);
 
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_CALLBACK_WRAPPERS
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13PlayerState(); \
@@ -48,8 +44,9 @@ public: \
 		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
 		SelectedPawnClass=NETFIELD_REP_START, \
 		ChosenRole, \
-		ChosenCharacterKey, \
 		bIsBot, \
+		SurvivorRowKey, \
+		KillerRowKey, \
 		bIsReady, \
 		NETFIELD_REP_END=bIsReady	}; \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
@@ -72,7 +69,6 @@ public: \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_CALLBACK_WRAPPERS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_INCLASS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerState_h_26_ENHANCED_CONSTRUCTORS \
 private: \

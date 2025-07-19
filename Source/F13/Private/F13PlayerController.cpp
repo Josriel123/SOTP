@@ -1,43 +1,16 @@
 ﻿#include "F13PlayerController.h"
 #include "F13PlayerState.h"
+#include "F13GameInstance.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/PlayerState.h"
 
 AF13PlayerController::AF13PlayerController()
-	: F13PlayerStateCached(nullptr)
 {
-	// We can set any default parameters for the PlayerController here if needed.
-	// For now, nothing special is required.
 }
 
 void AF13PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Cache our custom PlayerState once on BeginPlay.
-	// We know that when a client possesses a Pawn, its PlayerState will be AF13PlayerState.
-	if (APlayerState* PS = GetPlayerState<APlayerState>())
-	{
-		F13PlayerStateCached = Cast<AF13PlayerState>(PS);
-	}
-
-}
-// In F13PlayerController.cpp
-
-bool AF13PlayerController::ServerSelectPawnClass_Validate(TSubclassOf<APawn> PawnClass)
-{
-	// Here you can sanity-check the class (e.g., is it in your approved DataTable?)
-	return true;  // return false if you want to reject the request
-}
-
-void AF13PlayerController::ServerSelectPawnClass_Implementation(TSubclassOf<APawn> PawnClass)
-{
-	// This code runs on the server!
-	if (AF13PlayerState* PS = GetPlayerState<AF13PlayerState>())
-	{
-		// Store the choice in the replicated PlayerState
-		PS->SelectedPawnClass = PawnClass;
-	}
 }
 
 void AF13PlayerController::ServerSetReady_Implementation(bool bNewReady)
@@ -56,5 +29,31 @@ bool AF13PlayerController::ServerSetReady_Validate(bool /*bNewReady*/)
 	return true;    // add extra checks if needed
 }
 
+
+bool AF13PlayerController::ServerSetCharacterPreference_Validate(
+	FName, const FString&) {
+	return true;
+}
+
+void AF13PlayerController::ServerSetCharacterPreference_Implementation(
+	FName RowKey, const FString& InRole)
+{
+	AF13PlayerState* PS = GetPlayerState<AF13PlayerState>();
+	if (PS)
+	{
+		if (InRole == TEXT("Killer"))
+			PS->KillerRowKey = RowKey;
+		else
+			PS->SurvivorRowKey = RowKey;
+	}
+
+	if (UF13GameInstance* GI = GetGameInstance<UF13GameInstance>())
+	{
+		FPlayerProfileData P;
+		P.SurvivorRowKey = PS ? PS->SurvivorRowKey : RowKey;
+		P.KillerRowKey = PS ? PS->KillerRowKey : RowKey;
+		GI->SaveLocalProfile(P);
+	}
+}
 
 

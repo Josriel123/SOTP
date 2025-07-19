@@ -11,69 +11,75 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13PlayerController() {}
 
 // Begin Cross Module References
-COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
-ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13PlayerController();
 F13_API UClass* Z_Construct_UClass_AF13PlayerController_NoRegister();
-F13_API UClass* Z_Construct_UClass_AF13PlayerState_NoRegister();
 HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_PlayerController();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
 
-// Begin Class AF13PlayerController Function ServerSelectPawnClass
-struct F13PlayerController_eventServerSelectPawnClass_Parms
+// Begin Class AF13PlayerController Function ServerSetCharacterPreference
+struct F13PlayerController_eventServerSetCharacterPreference_Parms
 {
-	TSubclassOf<APawn> PawnClass;
+	FName RowKey;
+	FString InRole;
 };
-static const FName NAME_AF13PlayerController_ServerSelectPawnClass = FName(TEXT("ServerSelectPawnClass"));
-void AF13PlayerController::ServerSelectPawnClass(TSubclassOf<APawn> PawnClass)
+static const FName NAME_AF13PlayerController_ServerSetCharacterPreference = FName(TEXT("ServerSetCharacterPreference"));
+void AF13PlayerController::ServerSetCharacterPreference(FName RowKey, const FString& InRole)
 {
-	F13PlayerController_eventServerSelectPawnClass_Parms Parms;
-	Parms.PawnClass=PawnClass;
-	UFunction* Func = FindFunctionChecked(NAME_AF13PlayerController_ServerSelectPawnClass);
+	F13PlayerController_eventServerSetCharacterPreference_Parms Parms;
+	Parms.RowKey=RowKey;
+	Parms.InRole=InRole;
+	UFunction* Func = FindFunctionChecked(NAME_AF13PlayerController_ServerSetCharacterPreference);
 	ProcessEvent(Func,&Parms);
 }
-struct Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics
+struct Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InRole_MetaData[] = {
+		{ "NativeConst", "" },
+	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FClassPropertyParams NewProp_PawnClass;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_RowKey;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_InRole;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::NewProp_PawnClass = { "PawnClass", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13PlayerController_eventServerSelectPawnClass_Parms, PawnClass), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::NewProp_PawnClass,
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::NewProp_RowKey = { "RowKey", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13PlayerController_eventServerSetCharacterPreference_Parms, RowKey), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::NewProp_InRole = { "InRole", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13PlayerController_eventServerSetCharacterPreference_Parms, InRole), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InRole_MetaData), NewProp_InRole_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::NewProp_RowKey,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::NewProp_InRole,
 };
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13PlayerController, nullptr, "ServerSelectPawnClass", nullptr, nullptr, Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::PropPointers), sizeof(F13PlayerController_eventServerSelectPawnClass_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x80220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::Function_MetaDataParams) };
-static_assert(sizeof(F13PlayerController_eventServerSelectPawnClass_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass()
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13PlayerController, nullptr, "ServerSetCharacterPreference", nullptr, nullptr, Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::PropPointers), sizeof(F13PlayerController_eventServerSetCharacterPreference_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams) };
+static_assert(sizeof(F13PlayerController_eventServerSetCharacterPreference_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass_Statics::FuncParams);
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
-DEFINE_FUNCTION(AF13PlayerController::execServerSelectPawnClass)
+DEFINE_FUNCTION(AF13PlayerController::execServerSetCharacterPreference)
 {
-	P_GET_OBJECT(UClass,Z_Param_PawnClass);
+	P_GET_PROPERTY(FNameProperty,Z_Param_RowKey);
+	P_GET_PROPERTY(FStrProperty,Z_Param_InRole);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	if (!P_THIS->ServerSelectPawnClass_Validate(Z_Param_PawnClass))
+	if (!P_THIS->ServerSetCharacterPreference_Validate(Z_Param_RowKey,Z_Param_InRole))
 	{
-		RPC_ValidateFailed(TEXT("ServerSelectPawnClass_Validate"));
+		RPC_ValidateFailed(TEXT("ServerSetCharacterPreference_Validate"));
 		return;
 	}
-	P_THIS->ServerSelectPawnClass_Implementation(Z_Param_PawnClass);
+	P_THIS->ServerSetCharacterPreference_Implementation(Z_Param_RowKey,Z_Param_InRole);
 	P_NATIVE_END;
 }
-// End Class AF13PlayerController Function ServerSelectPawnClass
+// End Class AF13PlayerController Function ServerSetCharacterPreference
 
 // Begin Class AF13PlayerController Function ServerSetReady
 struct F13PlayerController_eventServerSetReady_Parms
@@ -140,7 +146,7 @@ void AF13PlayerController::StaticRegisterNativesAF13PlayerController()
 {
 	UClass* Class = AF13PlayerController::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
-		{ "ServerSelectPawnClass", &AF13PlayerController::execServerSelectPawnClass },
+		{ "ServerSetCharacterPreference", &AF13PlayerController::execServerSetCharacterPreference },
 		{ "ServerSetReady", &AF13PlayerController::execServerSetReady },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -164,21 +170,10 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 		{ "ToolTip", "PlayerController responsible for receiving character\xe2\x80\x90selection clicks from UI\nand forwarding them to the server\xe2\x80\x90side PlayerState RPC." },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_F13PlayerStateCached_MetaData[] = {
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Cached pointer to our PlayerState, cast to AF13PlayerState. */" },
-#endif
-		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Cached pointer to our PlayerState, cast to AF13PlayerState." },
-#endif
-	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_F13PlayerStateCached;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AF13PlayerController_ServerSelectPawnClass, "ServerSelectPawnClass" }, // 2494364073
+		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference, "ServerSetCharacterPreference" }, // 24020041
 		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetReady, "ServerSetReady" }, // 4241041020
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -187,11 +182,6 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AF13PlayerController_Statics::NewProp_F13PlayerStateCached = { "F13PlayerStateCached", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13PlayerController, F13PlayerStateCached), Z_Construct_UClass_AF13PlayerState_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_F13PlayerStateCached_MetaData), NewProp_F13PlayerStateCached_MetaData) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13PlayerController_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13PlayerController_Statics::NewProp_F13PlayerStateCached,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AF13PlayerController_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AF13PlayerController_Statics::DependentSingletons[])() = {
 	(UObject* (*)())Z_Construct_UClass_AHMS_PlayerController,
 	(UObject* (*)())Z_Construct_UPackage__Script_F13,
@@ -203,11 +193,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AF13PlayerController_St
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
 	FuncInfo,
-	Z_Construct_UClass_AF13PlayerController_Statics::PropPointers,
+	nullptr,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
 	UE_ARRAY_COUNT(FuncInfo),
-	UE_ARRAY_COUNT(Z_Construct_UClass_AF13PlayerController_Statics::PropPointers),
+	0,
 	0,
 	0x009002A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AF13PlayerController_Statics::Class_MetaDataParams), Z_Construct_UClass_AF13PlayerController_Statics::Class_MetaDataParams)
@@ -232,10 +222,10 @@ AF13PlayerController::~AF13PlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 1948049451U) },
+		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2124015489U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_2332931649(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_3973292726(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

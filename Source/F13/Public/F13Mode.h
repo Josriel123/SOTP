@@ -19,10 +19,6 @@ class F13_API AF13Mode : public AHMS_GameMode
 public:
 	AF13Mode();
 
-	// This is the function that actually spawns the pawn for a given PlayerController
-	UFUNCTION()
-	void HandleCharacterSelected(APlayerController* SelectingPC);
-
 	// When a new player has fully connected, this function is called.
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
@@ -41,7 +37,7 @@ public:
 	virtual AHMS_PlayerController* HMS_PickNewHost_Implementation() override;
 	/** Prevent a second pawn being spawned after we swap a human into a bot */
 	virtual void RestartPlayer(AController* NewPlayer) override;
-
+	virtual void Logout(AController* Exiting) override;
 
 	virtual void HandleMatchIsWaitingToStart() override;
 
@@ -51,16 +47,9 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool bIsRehostGame = false;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "F13|Init")
-	void K2_OnInitGame(const FString& Options);
-
-
-
 protected:
-
-	virtual void BeginPlay() override;
-
 	/* ---------- helpers implemented in F13Mode.cpp ---------- */
+	void AssignRoles();
 	void FillWithBots();
 	void PickRandomKiller();
 	void ReplaceBotIfPossible(APlayerController* JoiningPC);

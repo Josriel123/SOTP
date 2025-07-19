@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "Engine/DataTable.h"
+#include "Engine/NetSerialization.h"
 #include "F13CharacterBase.generated.h"
 
 class UInputMappingContext;
@@ -15,6 +16,7 @@ class UEnhancedInputLocalPlayerSubsystem;
 class UCharacterMovementComponent;
 class USpringArmComponent;
 class UCameraComponent;
+class APlayerState;
 
 UCLASS()
 class F13_API AF13CharacterBase : public ACharacter
@@ -23,6 +25,12 @@ class F13_API AF13CharacterBase : public ACharacter
 
 public:
     AF13CharacterBase();
+
+    UPROPERTY(Replicated)
+    FUniqueNetIdRepl LastHumanUniqueId;
+
+    UPROPERTY()
+    APlayerState* LastHumanOwnerPS;
 
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;

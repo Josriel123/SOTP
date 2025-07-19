@@ -1,10 +1,16 @@
 ﻿// F13GameInstance.cpp
 #include "F13GameInstance.h"
+#include "F13PlayerProfileSave.h"
+#include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 
 /* ------------------------------------------------------------ */
 /*  ctor / Init                                                 */
 /* ------------------------------------------------------------ */
+
+static const TCHAR* kProfileSlot = TEXT("PlayerProfile");
+static const int32  kProfileUserIdx = 0;
+
 UF13GameInstance::UF13GameInstance()
 {
     if (IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get())
@@ -16,6 +22,8 @@ UF13GameInstance::UF13GameInstance()
 void UF13GameInstance::Init()
 {
     Super::Init();
+
+    LoadLocalProfile(CachedStartupProfile);
 
     IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
     if (!Subsystem) { UE_LOG(LogTemp, Error, TEXT("No OSS loaded")); return; }
@@ -233,5 +241,23 @@ void UF13GameInstance::OnJoinSessionComplete(FName SessionName,
     }
 
     OnSessionJoined.Broadcast(bWasSuccessful);
+}
+
+bool UF13GameInstance::LoadLocalProfile(FPlayerProfileData& Out)
+{
+    if (USaveGame* Base = UGameplayStatics::LoadGameFromSlot(kProfileSlot, kProfileUserIdx))
+    {
+        Out = Cast<UF13PlayerProfileSave>(Base)->Profile;
+        return true;
+    }
+    return false;   // no file yet
+}
+
+void UF13GameInstance::SaveLocalProfile(const FPlayerProfileData& In)
+{
+    UF13PlayerProfileSave* Obj = Cast<UF13PlayerProfileSave>(
+        UGameplayStatics::CreateSaveGameObject(UF13PlayerProfileSave::StaticClass()));
+    Obj->Profile = In;
+    UGameplayStatics::SaveGameToSlot(Obj, kProfileSlot, kProfileUserIdx);
 }
 

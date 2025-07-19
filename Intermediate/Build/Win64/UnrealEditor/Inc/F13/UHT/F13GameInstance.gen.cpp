@@ -6,6 +6,7 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "F13/Public/F13GameInstance.h"
+#include "F13/Public/F13PlayerProfileSave.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13GameInstance() {}
 
@@ -15,6 +16,7 @@ F13_API UClass* Z_Construct_UClass_UF13GameInstance_NoRegister();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionCreated__DelegateSignature();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionJoined__DelegateSignature();
 F13_API UFunction* Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature();
+F13_API UScriptStruct* Z_Construct_UScriptStruct_FPlayerProfileData();
 HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_UHMS_GameInstance();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
@@ -351,6 +353,15 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 		{ "IncludePath", "F13GameInstance.h" },
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedStartupProfile_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Accessible at runtime \xe2\x80\x93 holds what we loaded on startup */" },
+#endif
+		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Accessible at runtime \xe2\x80\x93 holds what we loaded on startup" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnSessionCreated_MetaData[] = {
 		{ "Category", "Session" },
 #if !UE_BUILD_SHIPPING
@@ -370,6 +381,7 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 		{ "ModuleRelativePath", "Public/F13GameInstance.h" },
 	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_CachedStartupProfile;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionCreated;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionJoined;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnSessionListReady;
@@ -387,10 +399,12 @@ struct Z_Construct_UClass_UF13GameInstance_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_CachedStartupProfile = { "CachedStartupProfile", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, CachedStartupProfile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedStartupProfile_MetaData), NewProp_CachedStartupProfile_MetaData) }; // 3163263218
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionCreated = { "OnSessionCreated", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionCreated), Z_Construct_UDelegateFunction_F13_OnSessionCreated__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionCreated_MetaData), NewProp_OnSessionCreated_MetaData) }; // 175889299
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionJoined = { "OnSessionJoined", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionJoined), Z_Construct_UDelegateFunction_F13_OnSessionJoined__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionJoined_MetaData), NewProp_OnSessionJoined_MetaData) }; // 461676031
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionListReady = { "OnSessionListReady", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UF13GameInstance, OnSessionListReady), Z_Construct_UDelegateFunction_F13_OnSessionListReady__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnSessionListReady_MetaData), NewProp_OnSessionListReady_MetaData) }; // 4068235461
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UF13GameInstance_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_CachedStartupProfile,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionCreated,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionJoined,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UF13GameInstance_Statics::NewProp_OnSessionListReady,
@@ -436,10 +450,10 @@ UF13GameInstance::~UF13GameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 1925869549U) },
+		{ Z_Construct_UClass_UF13GameInstance, UF13GameInstance::StaticClass, TEXT("UF13GameInstance"), &Z_Registration_Info_UClass_UF13GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UF13GameInstance), 3763582457U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_3956746003(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_2618202163(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13GameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

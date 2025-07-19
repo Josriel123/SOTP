@@ -9,17 +9,11 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class APlayerController;
 #ifdef F13_F13Mode_generated_h
 #error "F13Mode.generated.h already included, missing '#pragma once' in F13Mode.h"
 #endif
 #define F13_F13Mode_generated_h
 
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execHandleCharacterSelected);
-
-
-#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_CALLBACK_WRAPPERS
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13Mode(); \
@@ -45,8 +39,6 @@ public: \
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_CALLBACK_WRAPPERS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_INCLASS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_17_ENHANCED_CONSTRUCTORS \
 private: \

@@ -297,6 +297,7 @@ void AF13CharacterBase::ServerSetSprinting_Implementation(bool bNewSprinting)
 void AF13CharacterBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    DOREPLIFETIME(AF13CharacterBase, LastHumanUniqueId);
     DOREPLIFETIME(AF13CharacterBase, bIsSprinting);
 }
 

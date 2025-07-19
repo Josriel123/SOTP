@@ -9,19 +9,18 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class APawn;
 #ifdef F13_F13PlayerController_generated_h
 #error "F13PlayerController.generated.h already included, missing '#pragma once' in F13PlayerController.h"
 #endif
 #define F13_F13PlayerController_generated_h
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual bool ServerSetCharacterPreference_Validate(FName , const FString& ); \
+	virtual void ServerSetCharacterPreference_Implementation(FName RowKey, const FString& InRole); \
 	virtual bool ServerSetReady_Validate(bool ); \
 	virtual void ServerSetReady_Implementation(bool bNewReady); \
-	virtual bool ServerSelectPawnClass_Validate(TSubclassOf<APawn> ); \
-	virtual void ServerSelectPawnClass_Implementation(TSubclassOf<APawn> PawnClass); \
-	DECLARE_FUNCTION(execServerSetReady); \
-	DECLARE_FUNCTION(execServerSelectPawnClass);
+	DECLARE_FUNCTION(execServerSetCharacterPreference); \
+	DECLARE_FUNCTION(execServerSetReady);
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_17_CALLBACK_WRAPPERS

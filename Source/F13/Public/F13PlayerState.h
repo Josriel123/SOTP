@@ -48,19 +48,19 @@ public:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
 	FString ChosenRole;
 
-	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
-	FName ChosenCharacterKey;
-
-	UFUNCTION(Server, Reliable, WithValidation, BlueprintCallable, Category = "CharacterSelection")
-	void ServerSetCharacterSelection(const FString& NewRole, const FName& NewCharacterKey);
-
 	UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
-	TSubclassOf<APawn> GetChosenPawnClass() const;
+	TSubclassOf<APawn> GetChosenPawnClassForRole(const FString& InRole) const;
 
 	UPROPERTY(BlueprintAssignable, Category = "CharacterSelection")
 	FOnCharacterSelectedSignature OnCharacterSelected;
 
 	UPROPERTY(Replicated, BlueprintReadOnly) bool bIsBot = false;
+
+	UPROPERTY(Replicated) FName SurvivorRowKey;
+
+	UPROPERTY(Replicated) FName KillerRowKey;
+
+	virtual void CopyProperties(APlayerState* NewPlayerState) override;
 
 protected:
 	// Make sure ChosenRole and ChosenCharacterKey replicate.

@@ -248,10 +248,16 @@
     <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13LobbyMenu.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13Mode.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13PlayerController.cpp">
+      <Filter>Source\F13\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Private\F13PlayerProfileSave.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Private\F13PlayerState.cpp">
@@ -287,10 +293,16 @@
     <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13LobbyMenu.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13Mode.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13PlayerController.h">
+      <Filter>Source\F13\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\F13\Public\F13PlayerProfileSave.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\F13\Public\F13PlayerState.h">

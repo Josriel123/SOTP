@@ -6,6 +6,7 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "F13/Public/F13CharacterBase.h"
+#include "Runtime/Engine/Classes/GameFramework/OnlineReplStructs.h"
 #include "UObject/CoreNet.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13CharacterBase() {}
@@ -13,9 +14,11 @@ void EmptyLinkFunctionForGeneratedCodeF13CharacterBase() {}
 // Begin Cross Module References
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
+ENGINE_API UClass* Z_Construct_UClass_APlayerState_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UDataTable_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
+ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FUniqueNetIdRepl();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 F13_API UClass* Z_Construct_UClass_AF13CharacterBase();
@@ -147,6 +150,12 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 		{ "IncludePath", "F13CharacterBase.h" },
 		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LastHumanUniqueId_MetaData[] = {
+		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LastHumanOwnerPS_MetaData[] = {
+		{ "ModuleRelativePath", "Public/F13CharacterBase.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterStatsTable_MetaData[] = {
 		{ "Category", "Stats" },
 #if !UE_BUILD_SHIPPING
@@ -257,6 +266,8 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 #endif
 	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_LastHumanUniqueId;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_LastHumanOwnerPS;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CharacterStatsTable;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_StatsRowName;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_WalkSpeed;
@@ -288,6 +299,8 @@ struct Z_Construct_UClass_AF13CharacterBase_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_LastHumanUniqueId = { "LastHumanUniqueId", nullptr, (EPropertyFlags)0x0010000000000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13CharacterBase, LastHumanUniqueId), Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastHumanUniqueId_MetaData), NewProp_LastHumanUniqueId_MetaData) }; // 3410776867
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_LastHumanOwnerPS = { "LastHumanOwnerPS", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13CharacterBase, LastHumanOwnerPS), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastHumanOwnerPS_MetaData), NewProp_LastHumanOwnerPS_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_CharacterStatsTable = { "CharacterStatsTable", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13CharacterBase, CharacterStatsTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterStatsTable_MetaData), NewProp_CharacterStatsTable_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_StatsRowName = { "StatsRowName", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13CharacterBase, StatsRowName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StatsRowName_MetaData), NewProp_StatsRowName_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_WalkSpeed = { "WalkSpeed", nullptr, (EPropertyFlags)0x0020080000020015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13CharacterBase, WalkSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WalkSpeed_MetaData), NewProp_WalkSpeed_MetaData) };
@@ -311,6 +324,8 @@ void Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_bIsSprinting_SetBit(v
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_bIsSprinting = { "bIsSprinting", "OnRep_IsSprinting", (EPropertyFlags)0x0040000100000020, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AF13CharacterBase), &Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_bIsSprinting_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsSprinting_MetaData), NewProp_bIsSprinting_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13CharacterBase_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_LastHumanUniqueId,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_LastHumanOwnerPS,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_CharacterStatsTable,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_StatsRowName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13CharacterBase_Statics::NewProp_WalkSpeed,
@@ -365,8 +380,10 @@ template<> F13_API UClass* StaticClass<AF13CharacterBase>()
 }
 void AF13CharacterBase::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
+	static const FName Name_LastHumanUniqueId(TEXT("LastHumanUniqueId"));
 	static const FName Name_bIsSprinting(TEXT("bIsSprinting"));
 	const bool bIsValid = true
+		&& Name_LastHumanUniqueId == ClassReps[(int32)ENetFields_Private::LastHumanUniqueId].Property->GetFName()
 		&& Name_bIsSprinting == ClassReps[(int32)ENetFields_Private::bIsSprinting].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in AF13CharacterBase"));
 }
@@ -378,10 +395,10 @@ AF13CharacterBase::~AF13CharacterBase() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13CharacterBase, AF13CharacterBase::StaticClass, TEXT("AF13CharacterBase"), &Z_Registration_Info_UClass_AF13CharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13CharacterBase), 4233159265U) },
+		{ Z_Construct_UClass_AF13CharacterBase, AF13CharacterBase::StaticClass, TEXT("AF13CharacterBase"), &Z_Registration_Info_UClass_AF13CharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13CharacterBase), 838679527U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_2245308605(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_2970722650(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13CharacterBase_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

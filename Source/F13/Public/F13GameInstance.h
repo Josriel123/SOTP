@@ -5,6 +5,7 @@
 #include "HMS_GameInstance.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSessionSettings.h"
+#include "F13PlayerProfileSave.h"
 #include "Interfaces/OnlineSessionInterface.h"
 #include "Interfaces/OnlineIdentityInterface.h"
 #include "F13GameInstance.generated.h"
@@ -21,6 +22,13 @@ class F13_API UF13GameInstance : public UHMS_GameInstance
 
 public:
     UF13GameInstance();
+
+    bool  LoadLocalProfile(FPlayerProfileData& Out);
+    void  SaveLocalProfile(const FPlayerProfileData& In);
+
+    /** Accessible at runtime – holds what we loaded on startup */
+    UPROPERTY() FPlayerProfileData CachedStartupProfile;
+
     virtual void Init() override;
 
     /* ----------  UI entry-points ---------- */

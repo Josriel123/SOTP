@@ -32,7 +32,6 @@ AF13PlayerState::AF13PlayerState()
 
 	// Initialize replicated fields to defaults.
 	ChosenRole = TEXT("");
-	ChosenCharacterKey = NAME_None;
 	bIsReady = false;
 }
 
@@ -42,84 +41,37 @@ void AF13PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 
 	DOREPLIFETIME(AF13PlayerState, bIsReady);
 	DOREPLIFETIME(AF13PlayerState, ChosenRole);
-	DOREPLIFETIME(AF13PlayerState, ChosenCharacterKey);
 	DOREPLIFETIME(AF13PlayerState, SelectedPawnClass);
 	DOREPLIFETIME(AF13PlayerState, bIsBot);
+	DOREPLIFETIME(AF13PlayerState, SurvivorRowKey);
+	DOREPLIFETIME(AF13PlayerState, KillerRowKey);
 }
 
-void AF13PlayerState::ServerSetCharacterSelection_Implementation(
-	const FString& NewRole,
-	const FName& NewCharacterKey
-)
+
+TSubclassOf<APawn> AF13PlayerState::GetChosenPawnClassForRole(const FString& InRole) const
 {
-	// Cache the new values on the server
-	ChosenRole = NewRole;
-	ChosenCharacterKey = NewCharacterKey;
-
-	SelectedPawnClass = GetChosenPawnClass();
-
-	UE_LOG(LogTemp, Log,
-		TEXT("PlayerState[%s] got SelectedPawnClass = %s"),
-		*GetPlayerName(),
-		SelectedPawnClass
-		? *SelectedPawnClass->GetName()
-		: TEXT("nullptr")
-	);
-
-	UE_LOG(LogTemp, Log, TEXT(
-		"AF13PlayerState::ServerSetCharacterSelection: PlayerState[%s] → Role=%s, Key=%s"
-	),
-		*GetPlayerName(),
-		*ChosenRole,
-		*ChosenCharacterKey.ToString()
-	);
-
-	if (APlayerController* OwningPC = Cast<APlayerController>(GetOwner()))
-	{
-		OnCharacterSelected.Broadcast(OwningPC);
-	}
-	
-}
-
-bool AF13PlayerState::ServerSetCharacterSelection_Validate(
-	const FString& NewRole,
-	const FName& NewCharacterKey
-)
-{
-	// In non–shipping builds you could verify NewRole is “Killer” or “Survivor”
-	// and NewCharacterKey actually exists in the DataTable. For now, allow all.
-	return true;
-}
-
-TSubclassOf<APawn> AF13PlayerState::GetChosenPawnClass() const
-{
-	// Only the server cares about returning a valid UClass.
-	// If we’re a client, just return null.
+	// Only the server should do the DataTable lookup
 	if (GetLocalRole() != ROLE_Authority)
-	{
 		return nullptr;
-	}
 
-	// If the DataTable failed to load in the ctor, warn & bail.
-	if (CharacterOptionsTable == nullptr)
+	if (!CharacterOptionsTable)
 	{
 		UE_LOG(LogTemp, Error,
-			TEXT("GetChosenPawnClass: CharacterOptionsTable is nullptr!"));
+			TEXT("GetPawnClassForRole: CharacterOptionsTable is nullptr!"));
 		return nullptr;
 	}
 
-	// Look up the row by the replicated key.
-	static const FString Context(TEXT("GetChosenPawnClass"));
-	const FCharacterOption* Row = CharacterOptionsTable->FindRow<FCharacterOption>(
-		ChosenCharacterKey, Context
-	);
+	/* Pick the correct row key based on the requested role */
+	const FName Key = (InRole == TEXT("Killer")) ? KillerRowKey : SurvivorRowKey;
 
-	if (Row == nullptr)
+	static const FString Ctx(TEXT("GetPawnClassForRole"));
+	const FCharacterOption* Row = CharacterOptionsTable->FindRow<FCharacterOption>(Key, Ctx);
+
+	if (!Row)
 	{
 		UE_LOG(LogTemp, Warning,
-			TEXT("GetChosenPawnClass: No row found for key '%s' in DT_CharacterOptions"),
-			*ChosenCharacterKey.ToString()
-		);
+			TEXT("GetPawnClassForRole: No row found for key '%s' (role %s)"),
+			*Key.ToString(), *InRole);
 		return nullptr;
 	}
 
@@ -156,4 +108,17 @@ void AF13PlayerState::EnsureUniqueIdForBot()
 		FUniqueNetIdString::Create(FakeId, TEXT("BOT"));
 
 	SetUniqueId(FUniqueNetIdRepl(FUniqueNetIdRef(NewId)));
+}
+
+void AF13PlayerState::CopyProperties(APlayerState* NewPlayerState)
+{
+	Super::CopyProperties(NewPlayerState);
+
+	if (AF13PlayerState* NewPS = Cast<AF13PlayerState>(NewPlayerState))
+	{
+		NewPS->SurvivorRowKey = SurvivorRowKey;
+		NewPS->KillerRowKey = KillerRowKey;
+		NewPS->ChosenRole = ChosenRole;
+		NewPS->SelectedPawnClass = SelectedPawnClass;
+	}
 }
