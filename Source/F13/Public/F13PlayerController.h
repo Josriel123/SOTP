@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "HMS_PlayerController.h"
+#include "F13PlayerProfileSave.h"
 #include "GameFramework/PlayerController.h"
 #include "F13PlayerController.generated.h"
 
@@ -25,9 +26,15 @@ public:
 	UFUNCTION(BlueprintCallable, Server, Reliable, WithValidation)
 	void ServerSetCharacterPreference(FName RowKey, const FString& InRole);   // Role = "Killer" or "Survivor"
 
+	UFUNCTION(Client, Reliable)
+	void Client_SaveLocalProfile(const FPlayerProfileData& InProfile);
+
+private:
+	FTimerHandle ReconnectAddrTimer;
+
 protected:
 	/** Override to cache our typed PlayerState. */
 	virtual void BeginPlay() override;
 
-
+	virtual FString HMS_GetReconnectNetAddress_Implementation() override;
 };

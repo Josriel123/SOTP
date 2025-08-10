@@ -1,6 +1,10 @@
 ﻿#include "F13PlayerController.h"
 #include "F13PlayerState.h"
 #include "F13GameInstance.h"
+#include "Sockets.h"
+#include "SocketSubsystem.h"
+#include "Engine/World.h"
+#include "Engine/NetDriver.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/PlayerState.h"
 
@@ -11,6 +15,32 @@ AF13PlayerController::AF13PlayerController()
 void AF13PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (IsLocalController())
+	{
+		if (UF13GameInstance* GI = GetGameInstance<UF13GameInstance>())
+		{
+			FPlayerProfileData Profile;
+			if (GI->LoadLocalProfile(Profile))
+			{
+				// Adjust to your RPC signature
+				ServerSetCharacterPreference(Profile.SurvivorRowKey, TEXT("Survivor"));
+				ServerSetCharacterPreference(Profile.KillerRowKey, TEXT("Killer"));
+			}
+		}
+	}
+
+	if (IsLocalController() && GetNetMode() == NM_Client)
+	{
+		GetWorldTimerManager().SetTimer(ReconnectAddrTimer, [this]()
+			{
+				if (NetConnection && NetConnection->IsNetReady(false))
+				{
+					HMS_SetMyReconnectAddressForTheServer(HMS_GetReconnectNetAddress());
+					GetWorldTimerManager().ClearTimer(ReconnectAddrTimer);
+				}
+			}, 0.2f, true);
+	}
 }
 
 void AF13PlayerController::ServerSetReady_Implementation(bool bNewReady)
@@ -52,8 +82,25 @@ void AF13PlayerController::ServerSetCharacterPreference_Implementation(
 		FPlayerProfileData P;
 		P.SurvivorRowKey = PS ? PS->SurvivorRowKey : RowKey;
 		P.KillerRowKey = PS ? PS->KillerRowKey : RowKey;
-		GI->SaveLocalProfile(P);
+		Client_SaveLocalProfile(P);
 	}
 }
 
+void AF13PlayerController::Client_SaveLocalProfile_Implementation(const FPlayerProfileData& InProfile)
+{
+	if (UF13GameInstance* GI = GetGameInstance<UF13GameInstance>())
+	{
+		GI->SaveLocalProfile(InProfile); // now saves on the player machine
+	}
+}
+
+FString AF13PlayerController::HMS_GetReconnectNetAddress_Implementation()
+{
+	bool bCanBind = false;
+	TSharedRef<FInternetAddr> LocalAddr =
+		ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->GetLocalHostAddr(*GLog, bCanBind);
+
+	// Return IP only; we’ll add the port in the GameInstance BP
+	return LocalAddr->ToString(/*bUseIPv6=*/false);
+}
 

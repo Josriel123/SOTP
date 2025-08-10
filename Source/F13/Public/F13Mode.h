@@ -47,6 +47,13 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool bIsRehostGame = false;
 
+	UPROPERTY()
+	TSet<TWeakObjectPtr<AController>> PendingSilentRemovals;
+
+	// --- Keep pawn in place after a bot->player swap ---
+	TSet<TWeakObjectPtr<AController>> SkipNextRestart;
+
+
 protected:
 	/* ---------- helpers implemented in F13Mode.cpp ---------- */
 	void AssignRoles();
@@ -54,6 +61,8 @@ protected:
 	void PickRandomKiller();
 	void ReplaceBotIfPossible(APlayerController* JoiningPC);
 	int32 ExpectedHumans = 1;
+	void SpawnReplacementBot(APawn* ReusePawn, const AF13PlayerState* LeavingPS);
+	void SpawnReplacementBotAt(const FTransform& Xf, TSubclassOf<APawn> PawnClass, const FVector& InVelocity);
 
 private:
 

@@ -1,14 +1,16 @@
 ﻿#include "F13Mode.h"
-#include "F13CharacterBase.h"
-#include "GameFramework/HUD.h" 
+#include "F13CharacterBase.h" 
 #include "F13PlayerController.h" 
 #include "F13BotController.h"
-#include "F13GameSession.h"
-#include "AIController.h"    
-#include "GameFramework/PlayerController.h"
+#include "F13GameSession.h"   
 #include "F13PlayerState.h"    
-#include "F13GameState.h"        
+#include "F13GameState.h"
+#include "AIController.h" 
+#include "GameFramework/PlayerController.h"
+#include "GameFramework/HUD.h"
 #include "GameFramework/PlayerStart.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
@@ -44,6 +46,8 @@ void AF13Mode::InitGame(const FString& MapName, const FString& Options, FString&
 
 void AF13Mode::PostLogin(APlayerController* NewPlayer)
 {
+    //Super::PostLogin(NewPlayer); // do this first
+
     if (GetMatchState() == MatchState::InProgress)
     {
         ReplaceBotIfPossible(NewPlayer);
@@ -53,8 +57,8 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
 
     const int32 HumansNow = GameState->PlayerArray.Num();
     UE_LOG(LogF13Mode, Log, TEXT("PostLogin → Humans=%d / %d"), HumansNow, ExpectedHumans);
-
 }
+
 
 
 void AF13Mode::StartMatch()
@@ -211,50 +215,214 @@ void AF13Mode::AssignRoles()
 
 void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
 {
-    // Only after the match has begun, otherwise let lobby handle it.
-    if (GetMatchState() != MatchState::InProgress) return;
+    if (!HasAuthority() || !IsValid(JoiningPC) || GetMatchState() != MatchState::InProgress)
+        return;
 
-    UE_LOG(LogF13Mode, Warning, TEXT("Trying to replace bot"));
+    AF13PlayerState* HumanPS = Cast<AF13PlayerState>(JoiningPC->PlayerState);
+    if (!HumanPS) return;
 
+    // Find any *survivor* bot to replace
+    AF13BotController* Bot = nullptr;
     for (FConstControllerIterator It = GetWorld()->GetControllerIterator(); It; ++It)
     {
-        AF13BotController* Bot = Cast<AF13BotController>(It->Get());
-        if (!Bot) continue;
+        AF13BotController* Candidate = Cast<AF13BotController>(It->Get());
+        if (!Candidate) continue;
 
-        APawn* Pawn = Bot->GetPawn();
-        AF13PlayerState* BotPS = Cast<AF13PlayerState>(Bot->PlayerState);
-        AF13PlayerState* HumanPS = Cast<AF13PlayerState>(JoiningPC->PlayerState);
-
-        if (Pawn && BotPS && HumanPS)
+        AF13PlayerState* BotPS = Cast<AF13PlayerState>(Candidate->PlayerState);
+        if (BotPS && BotPS->ChosenRole != TEXT("Killer"))
         {
-            // Copy role & character choice
-            HumanPS->ChosenRole = BotPS->ChosenRole;
-            HumanPS->SurvivorRowKey = BotPS->SurvivorRowKey;
-            HumanPS->KillerRowKey = BotPS->KillerRowKey;
-            HumanPS->SelectedPawnClass = BotPS->SelectedPawnClass;
-
-            // Possess the pawn
-            Bot->UnPossess();
-            JoiningPC->Possess(Pawn);
-
-            if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(Pawn))
-            {
-                // Set both for compatibility
-                Char->LastHumanOwnerPS = JoiningPC->PlayerState;
-                Char->LastHumanUniqueId = JoiningPC->PlayerState->GetUniqueId();
-            }
-
-            UE_LOG(LogF13Mode, Log,
-                TEXT("Bot %s replaced by %s, controller now owns %s"),
-                *GetNameSafe(Bot), *GetNameSafe(JoiningPC),
-                *GetNameSafe(JoiningPC->GetPawn()));
-
-            // Clean up the bot
-            Bot->Destroy();
-            return;    // one replacement is enough
+            Bot = Candidate;
+            break;
         }
     }
+    if (!Bot) return;
+
+    APawn* BotPawn = Bot->GetPawn();
+    if (!BotPawn) return;
+
+    // Cache the *exact* transform & motion of the bot pawn
+    const FTransform BotXf = BotPawn->GetActorTransform();
+    const FVector    BotVel = BotPawn->GetVelocity();
+
+    // Decide desired role/class; fall back to the bot's actual class if prefs are unset
+    FString DesiredRole = HumanPS->ChosenRole;
+    if (DesiredRole.IsEmpty())
+    {
+        if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(Bot->PlayerState))
+            DesiredRole = BotPS->ChosenRole.IsEmpty() ? TEXT("Survivor") : BotPS->ChosenRole;
+        else
+            DesiredRole = TEXT("Survivor");
+    }
+    TSubclassOf<APawn> DesiredClass = HumanPS->GetChosenPawnClassForRole(DesiredRole);
+    if (!DesiredClass)
+    {
+        DesiredClass = BotPawn->GetClass();               // hard fallback
+    }
+    HumanPS->SelectedPawnClass = DesiredClass;            // keep PS consistent
+
+    // Clean up any stray pawn created during login
+    if (APawn* Existing = JoiningPC->GetPawn())
+    {
+        JoiningPC->UnPossess();
+        if (Existing != BotPawn) { Existing->Destroy(); }
+    }
+
+    Bot->UnPossess();
+
+    if (DesiredClass == BotPawn->GetClass())
+    {
+        // Take over the bot pawn as-is
+        BotPawn->SetActorTransform(BotXf, false, nullptr, ETeleportType::TeleportPhysics);
+        JoiningPC->Possess(BotPawn);
+
+        if (ACharacter* Char = Cast<ACharacter>(BotPawn))
+        {
+            if (UCharacterMovementComponent* Move = Char->GetCharacterMovement())
+                Move->Velocity = BotVel;
+        }
+        JoiningPC->SetControlRotation(BotXf.GetRotation().Rotator());
+        BotPawn->ForceNetUpdate();
+    }
+    else
+    {
+        // Spawn the player’s preferred class at the bot's exact spot
+        FActorSpawnParameters P;
+        P.Owner = JoiningPC;
+        P.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+        APawn* NewPawn = GetWorld()->SpawnActor<APawn>(DesiredClass, BotXf, P);
+        if (NewPawn)
+        {
+            if (ACharacter* NewChar = Cast<ACharacter>(NewPawn))
+            {
+                if (UCharacterMovementComponent* Move = NewChar->GetCharacterMovement())
+                    Move->Velocity = BotVel;
+            }
+            JoiningPC->Possess(NewPawn);
+            JoiningPC->SetControlRotation(BotXf.GetRotation().Rotator());
+            NewPawn->ForceNetUpdate();
+            BotPawn->Destroy(); // we replaced the body
+        }
+        else
+        {
+            // Fallback: just possess the bot pawn
+            JoiningPC->Possess(BotPawn);
+        }
+    }
+
+    // Engine may still call RestartPlayer for this controller; skip it once
+    SkipNextRestart.Add(JoiningPC);
+
+    // Remove the bot controller now that the human took over
+    Bot->Destroy();
 }
+
+
+
+void AF13Mode::SpawnReplacementBot(APawn* ReusePawn, const AF13PlayerState* LeavingPS)
+{
+    if (!HasAuthority()) return;
+    UWorld* World = GetWorld();
+    if (!World) return;
+
+    // If killer left, you end the match elsewhere; don't spawn a bot.
+    if (LeavingPS && LeavingPS->ChosenRole == TEXT("Killer")) return;
+
+    // Spawn bot controller
+    FActorSpawnParameters CParams;
+    CParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    AF13BotController* Bot = World->SpawnActor<AF13BotController>(BotControllerClass, FTransform::Identity, CParams);
+    if (!Bot) return;
+
+    if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(Bot->PlayerState))
+    {
+        BotPS->bIsBot = true;
+        BotPS->ChosenRole = TEXT("Survivor");
+        BotPS->EnsureUniqueIdForBot();
+    }
+
+    if (IsValid(ReusePawn))
+    {
+
+        UE_LOG(LogF13Mode, Log, TEXT("[SpawnReplacementBot] Reusing pawn %s at %s"),
+            *GetNameSafe(ReusePawn),
+            *ReusePawn->GetActorLocation().ToString());
+
+        // Reuse the leaving player’s pawn at its exact spot
+        Bot->Possess(ReusePawn);
+        Bot->SetControlRotation(ReusePawn->GetActorRotation());
+        ReusePawn->ForceNetUpdate();
+        return;
+    }
+
+    // Fresh spawn for the bot
+    UClass* PawnClass = DefaultPawnClass ? *DefaultPawnClass : GetDefaultPawnClassForController(Bot);
+    if (!PawnClass) { Bot->Destroy(); return; }
+
+    AActor* Start = FindPlayerStart(Bot);
+    if (!Start) { Bot->Destroy(); return; }
+
+    FActorSpawnParameters P;
+    P.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+    APawn* NewPawn = World->SpawnActor<APawn>(PawnClass, Start->GetActorLocation(), Start->GetActorRotation(), P);
+    if (!NewPawn) { Bot->Destroy(); return; }
+
+    UE_LOG(LogF13Mode, Log, TEXT("[SpawnReplacementBot] Spawned NEW pawn %s at PlayerStart %s"),
+        *GetNameSafe(NewPawn), *GetNameSafe(Start));
+
+    Bot->Possess(NewPawn);
+}
+
+void AF13Mode::SpawnReplacementBotAt(const FTransform& Xf, TSubclassOf<APawn> PawnClass, const FVector& InVelocity)
+{
+    if (!HasAuthority()) return;
+    UWorld* World = GetWorld(); if (!World) return;
+
+    // Spawn bot controller
+    FActorSpawnParameters CParams;
+    CParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    AF13BotController* Bot = World->SpawnActor<AF13BotController>(BotControllerClass, FTransform::Identity, CParams);
+    if (!Bot) return;
+
+    if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(Bot->PlayerState))
+    {
+        BotPS->bIsBot = true;
+        BotPS->ChosenRole = TEXT("Survivor");
+        BotPS->EnsureUniqueIdForBot();
+    }
+
+    // Pick a class if none provided
+    if (!PawnClass)
+    {
+        PawnClass = DefaultPawnClass ? *DefaultPawnClass : GetDefaultPawnClassForController(Bot);
+        if (!PawnClass) { Bot->Destroy(); return; }
+    }
+
+    // Spawn the pawn at the EXACT same spot/rotation
+    FActorSpawnParameters P;
+    P.Owner = Bot;
+    P.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+    APawn* NewPawn = World->SpawnActor<APawn>(PawnClass, Xf, P);
+    if (!NewPawn) { Bot->Destroy(); return; }
+
+    Bot->Possess(NewPawn);
+
+    // Preserve motion if it was moving
+    if (ACharacter* Char = Cast<ACharacter>(NewPawn))
+    {
+        if (UCharacterMovementComponent* Move = Char->GetCharacterMovement())
+        {
+            Move->Velocity = InVelocity;
+        }
+    }
+
+    Bot->SetControlRotation(Xf.GetRotation().Rotator());
+    NewPawn->ForceNetUpdate();
+}
+
+
 
 AActor* AF13Mode::ChoosePlayerStart_Implementation(AController* Player)
 {
@@ -352,6 +520,14 @@ AHMS_PlayerController* AF13Mode::HMS_PickNewHost_Implementation()
 
 void AF13Mode::RestartPlayer(AController* NewPlayer)
 {
+
+    if (SkipNextRestart.Contains(NewPlayer))
+    {
+        SkipNextRestart.Remove(NewPlayer);
+        UE_LOG(LogF13Mode, Log, TEXT("[RestartPlayer] Skipping due to bot replacement for %s"), *GetNameSafe(NewPlayer));
+        return;
+    }
+
     const bool bAlreadyHasPawn = NewPlayer && NewPlayer->GetPawn();
     UE_LOG(LogF13Mode, Log,
         TEXT("RestartPlayer → PawnIsNull=%s"),
@@ -452,70 +628,94 @@ void AF13Mode::RestartPlayer(AController* NewPlayer)
 
 void AF13Mode::Logout(AController* Exiting)
 {
+    const bool bWasInProgress = (GetMatchState() == MatchState::InProgress);
     UE_LOG(LogF13Mode, Log, TEXT("[Logout] %s leaving"), *GetNameSafe(Exiting));
 
-    /* 1. Grab the pawn *before* we call the parent.                         */
-    APawn* OrphanPawn = Exiting ? Exiting->GetPawn() : nullptr;
+    AF13PlayerState* LeavingPS = Exiting ? Cast<AF13PlayerState>(Exiting->PlayerState) : nullptr;
+    const bool bLeavingIsBot = (Exiting && Exiting->IsA(AF13BotController::StaticClass())) ||
+        (LeavingPS && LeavingPS->bIsBot);
+    const bool bKillerLeaving = (LeavingPS && LeavingPS->ChosenRole == TEXT("Killer"));
 
-    /* Un‑possess right away so the pawn isn’t auto‑destroyed in edge cases. */
-    if (Exiting && OrphanPawn)
-        Exiting->UnPossess();
+    // Cache pawn info EARLY (in case the engine destroys it during Logout)
+    APawn* LeavingPawn = Exiting ? Exiting->GetPawn() : nullptr;
+    const bool bHadPawn = IsValid(LeavingPawn);
+    FTransform SavedXf;
+    FVector    SavedVel = FVector::ZeroVector;
+    TSubclassOf<APawn> SavedClass = nullptr;
 
-    const FUniqueNetIdRepl ExitingId =
-        (Exiting && Exiting->PlayerState) ? Exiting->PlayerState->GetUniqueId()
-        : FUniqueNetIdRepl();
-
-    /* 2. Call parent – this removes the controller & its PlayerState.       */
-    Super::Logout(Exiting);
-
-    /* 3. If we didn’t have a pawn pointer (or it became invalid),           */
-    /*    scan for the pawn using the UniqueNetId we saved.                  */
-    if (!IsValid(OrphanPawn) && ExitingId.IsValid())
+    if (bHadPawn)
     {
-        for (TActorIterator<AF13CharacterBase> It(GetWorld()); It; ++It)
-        {
-            if (It->LastHumanUniqueId == ExitingId)
-            {
-                OrphanPawn = *It;
-                break;
-            }
-        }
+        SavedXf = LeavingPawn->GetActorTransform();
+        SavedVel = LeavingPawn->GetVelocity();
+        SavedClass = LeavingPawn->GetClass();
     }
 
-    /* 4. Spawn a bot and give it the pawn.                                  */
-    if (IsValid(OrphanPawn))
+    AF13BotController* PreClaimedBot = nullptr;
+
+    // Try to PRE-CLAIM the pawn so it survives Logout
+    if (bWasInProgress && bHadPawn && !bLeavingIsBot && !bKillerLeaving)
     {
-        FActorSpawnParameters Params;
-        Params.SpawnCollisionHandlingOverride =
-            ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+        FActorSpawnParameters CParams;
+        CParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-        AF13BotController* NewBot =
-            GetWorld()->SpawnActor<AF13BotController>(BotControllerClass, Params);
-
-        if (NewBot)
+        PreClaimedBot = GetWorld()->SpawnActor<AF13BotController>(BotControllerClass, FTransform::Identity, CParams);
+        if (PreClaimedBot)
         {
-            NewBot->Possess(OrphanPawn);
-
-            if (AF13CharacterBase* Char = Cast<AF13CharacterBase>(OrphanPawn))
+            if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(PreClaimedBot->PlayerState))
             {
-                Char->LastHumanOwnerPS = nullptr;
-                Char->LastHumanUniqueId = FUniqueNetIdRepl();   // clear tag
+                BotPS->bIsBot = true;
+                BotPS->ChosenRole = TEXT("Survivor");
+                BotPS->EnsureUniqueIdForBot();
             }
 
-            UE_LOG(LogF13Mode, Log,
-                TEXT("[Logout] Bot %s now controls pawn %s"),
-                *GetNameSafe(NewBot), *GetNameSafe(OrphanPawn));
+            // prevent autopossess AI races
+            LeavingPawn->AutoPossessAI = EAutoPossessAI::Disabled;
+
+            Exiting->UnPossess();
+            PreClaimedBot->Possess(LeavingPawn);
+            PreClaimedBot->SetControlRotation(LeavingPawn->GetActorRotation());
+            LeavingPawn->ForceNetUpdate();
+
+            UE_LOG(LogF13Mode, Log, TEXT("[Logout] Pre-claimed pawn %s at %s"),
+                *GetNameSafe(LeavingPawn), *SavedXf.GetLocation().ToString());
         }
         else
         {
-            UE_LOG(LogF13Mode, Error,
-                TEXT("[Logout] FAILED to spawn bot; pawn %s left idle"),
-                *GetNameSafe(OrphanPawn));
+            UE_LOG(LogF13Mode, Warning, TEXT("[Logout] Failed to spawn pre-claim bot controller; will fallback after Super::Logout."));
         }
     }
-    else
+
+    // Let the engine do the standard cleanup
+    Super::Logout(Exiting);
+
+    if (!bWasInProgress)
+        return;
+
+    if (bLeavingIsBot)
     {
-        UE_LOG(LogF13Mode, Warning,
-            TEXT("[Logout] No pawn found to hand to a bot"));
+        UE_LOG(LogF13Mode, Log, TEXT("[Logout] Bot left — not spawning a replacement bot."));
+        return;
+    }
+
+    if (bKillerLeaving)
+    {
+        UE_LOG(LogF13Mode, Log, TEXT("[Logout] Killer left — ending match"));
+        EndMatch();
+        return;
+    }
+
+    // If pre-claim failed, spawn a bot AT THE SAME SPOT as the cached pawn.
+    if (!PreClaimedBot)
+    {
+        if (bHadPawn)
+        {
+            UE_LOG(LogF13Mode, Log, TEXT("[Logout] Fallback: Spawning bot at cached transform (no pre-claim)."));
+            SpawnReplacementBotAt(SavedXf, SavedClass, SavedVel);
+        }
+        else
+        {
+            // truly no pawn; use the PlayerStart path
+            SpawnReplacementBot(nullptr, LeavingPS);
+        }
     }
 }

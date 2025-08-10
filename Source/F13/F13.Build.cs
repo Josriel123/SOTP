@@ -20,7 +20,9 @@ public class F13 : ModuleRules
             "OnlineSubsystemEOS",
             "OnlineSubsystemNull",
             "HostMigrationSystem",
-            "AIModule"
+            "AIModule",
+            "Sockets",
+            "Networking"
         });
     }
 }

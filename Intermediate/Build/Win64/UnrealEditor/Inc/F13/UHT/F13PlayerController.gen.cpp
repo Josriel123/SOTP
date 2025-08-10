@@ -6,6 +6,7 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "F13/Public/F13PlayerController.h"
+#include "F13/Public/F13PlayerProfileSave.h"
 #include "UObject/CoreNet.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeF13PlayerController() {}
@@ -13,9 +14,69 @@ void EmptyLinkFunctionForGeneratedCodeF13PlayerController() {}
 // Begin Cross Module References
 F13_API UClass* Z_Construct_UClass_AF13PlayerController();
 F13_API UClass* Z_Construct_UClass_AF13PlayerController_NoRegister();
+F13_API UScriptStruct* Z_Construct_UScriptStruct_FPlayerProfileData();
 HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_PlayerController();
 UPackage* Z_Construct_UPackage__Script_F13();
 // End Cross Module References
+
+// Begin Class AF13PlayerController Function Client_SaveLocalProfile
+struct F13PlayerController_eventClient_SaveLocalProfile_Parms
+{
+	FPlayerProfileData InProfile;
+};
+static const FName NAME_AF13PlayerController_Client_SaveLocalProfile = FName(TEXT("Client_SaveLocalProfile"));
+void AF13PlayerController::Client_SaveLocalProfile(FPlayerProfileData const& InProfile)
+{
+	F13PlayerController_eventClient_SaveLocalProfile_Parms Parms;
+	Parms.InProfile=InProfile;
+	UFunction* Func = FindFunctionChecked(NAME_AF13PlayerController_Client_SaveLocalProfile);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Role = \"Killer\" or \"Survivor\"\n" },
+#endif
+		{ "ModuleRelativePath", "Public/F13PlayerController.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Role = \"Killer\" or \"Survivor\"" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InProfile_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_InProfile;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::NewProp_InProfile = { "InProfile", nullptr, (EPropertyFlags)0x0010000008000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(F13PlayerController_eventClient_SaveLocalProfile_Parms, InProfile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InProfile_MetaData), NewProp_InProfile_MetaData) }; // 3163263218
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::NewProp_InProfile,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13PlayerController, nullptr, "Client_SaveLocalProfile", nullptr, nullptr, Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::PropPointers), sizeof(F13PlayerController_eventClient_SaveLocalProfile_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams) };
+static_assert(sizeof(F13PlayerController_eventClient_SaveLocalProfile_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AF13PlayerController::execClient_SaveLocalProfile)
+{
+	P_GET_STRUCT(FPlayerProfileData,Z_Param_InProfile);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->Client_SaveLocalProfile_Implementation(Z_Param_InProfile);
+	P_NATIVE_END;
+}
+// End Class AF13PlayerController Function Client_SaveLocalProfile
 
 // Begin Class AF13PlayerController Function ServerSetCharacterPreference
 struct F13PlayerController_eventServerSetCharacterPreference_Parms
@@ -146,6 +207,7 @@ void AF13PlayerController::StaticRegisterNativesAF13PlayerController()
 {
 	UClass* Class = AF13PlayerController::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "Client_SaveLocalProfile", &AF13PlayerController::execClient_SaveLocalProfile },
 		{ "ServerSetCharacterPreference", &AF13PlayerController::execServerSetCharacterPreference },
 		{ "ServerSetReady", &AF13PlayerController::execServerSetReady },
 	};
@@ -173,6 +235,7 @@ struct Z_Construct_UClass_AF13PlayerController_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AF13PlayerController_Client_SaveLocalProfile, "Client_SaveLocalProfile" }, // 59576263
 		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetCharacterPreference, "ServerSetCharacterPreference" }, // 24020041
 		{ &Z_Construct_UFunction_AF13PlayerController_ServerSetReady, "ServerSetReady" }, // 4241041020
 	};
@@ -222,10 +285,10 @@ AF13PlayerController::~AF13PlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 2124015489U) },
+		{ Z_Construct_UClass_AF13PlayerController, AF13PlayerController::StaticClass, TEXT("AF13PlayerController"), &Z_Registration_Info_UClass_AF13PlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13PlayerController), 1933653746U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_3973292726(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_1967526496(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13PlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
