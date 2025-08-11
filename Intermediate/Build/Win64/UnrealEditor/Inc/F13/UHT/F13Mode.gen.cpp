@@ -71,9 +71,50 @@ UScriptStruct* Z_Construct_UScriptStruct_FPendingReplace()
 }
 // End ScriptStruct FPendingReplace
 
+// Begin Class AF13Mode Function HMS_OnGameRehosted_Cpp
+struct Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "HMS" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//void RememberLeavingPawn(AController* PC, APawn* Pawn, const FTransform& Xform);\n" },
+#endif
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "void RememberLeavingPawn(AController* PC, APawn* Pawn, const FTransform& Xform);" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AF13Mode, nullptr, "HMS_OnGameRehosted_Cpp", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams), Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams) };
+UFunction* Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AF13Mode::execHMS_OnGameRehosted_Cpp)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->HMS_OnGameRehosted_Cpp();
+	P_NATIVE_END;
+}
+// End Class AF13Mode Function HMS_OnGameRehosted_Cpp
+
 // Begin Class AF13Mode
 void AF13Mode::StaticRegisterNativesAF13Mode()
 {
+	UClass* Class = AF13Mode::StaticClass();
+	static const FNameNativePtrPair Funcs[] = {
+		{ "HMS_OnGameRehosted_Cpp", &AF13Mode::execHMS_OnGameRehosted_Cpp },
+	};
+	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
 IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(AF13Mode);
 UClass* Z_Construct_UClass_AF13Mode_NoRegister()
@@ -101,6 +142,16 @@ struct Z_Construct_UClass_AF13Mode_Statics
 		{ "Category", "F13Mode" },
 		{ "ModuleRelativePath", "Public/F13Mode.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bSpawnBots_MetaData[] = {
+		{ "Category", "Bots" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Should we fill the match with bots when starting?\n" },
+#endif
+		{ "ModuleRelativePath", "Public/F13Mode.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Should we fill the match with bots when starting?" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PendingSilentRemovals_MetaData[] = {
 		{ "ModuleRelativePath", "Public/F13Mode.h" },
 	};
@@ -112,6 +163,8 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	static const UECodeGen_Private::FClassPropertyParams NewProp_BotControllerClass;
 	static void NewProp_bIsRehostGame_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRehostGame;
+	static void NewProp_bSpawnBots_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bSpawnBots;
 	static const UECodeGen_Private::FWeakObjectPropertyParams NewProp_PendingSilentRemovals_ElementProp;
 	static const UECodeGen_Private::FSetPropertyParams NewProp_PendingSilentRemovals;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_PendingReplacements_ValueProp;
@@ -119,6 +172,10 @@ struct Z_Construct_UClass_AF13Mode_Statics
 	static const UECodeGen_Private::FMapPropertyParams NewProp_PendingReplacements;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
+	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AF13Mode_HMS_OnGameRehosted_Cpp, "HMS_OnGameRehosted_Cpp" }, // 3952839317
+	};
+	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AF13Mode>::IsAbstract,
 	};
@@ -131,6 +188,11 @@ void Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame_SetBit(void* Obj
 	((AF13Mode*)Obj)->bIsRehostGame = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame = { "bIsRehostGame", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AF13Mode), &Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsRehostGame_MetaData), NewProp_bIsRehostGame_MetaData) };
+void Z_Construct_UClass_AF13Mode_Statics::NewProp_bSpawnBots_SetBit(void* Obj)
+{
+	((AF13Mode*)Obj)->bSpawnBots = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_bSpawnBots = { "bSpawnBots", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AF13Mode), &Z_Construct_UClass_AF13Mode_Statics::NewProp_bSpawnBots_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bSpawnBots_MetaData), NewProp_bSpawnBots_MetaData) };
 const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingSilentRemovals_ElementProp = { "PendingSilentRemovals", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AController_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FSetPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingSilentRemovals = { "PendingSilentRemovals", nullptr, (EPropertyFlags)0x0014000000000000, UECodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AF13Mode, PendingSilentRemovals), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PendingSilentRemovals_MetaData), NewProp_PendingSilentRemovals_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingReplacements_ValueProp = { "PendingReplacements", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FPendingReplace, METADATA_PARAMS(0, nullptr) }; // 3006988495
@@ -140,6 +202,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AF13Mode_
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PawnToSpawn,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_BotControllerClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_bIsRehostGame,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_bSpawnBots,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingSilentRemovals_ElementProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingSilentRemovals,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AF13Mode_Statics::NewProp_PendingReplacements_ValueProp,
@@ -157,11 +220,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_AF13Mode_Statics::Class
 	"Game",
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
-	nullptr,
+	FuncInfo,
 	Z_Construct_UClass_AF13Mode_Statics::PropPointers,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
-	0,
+	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_AF13Mode_Statics::PropPointers),
 	0,
 	0x009002ACu,
@@ -190,10 +253,10 @@ struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_
 		{ FPendingReplace::StaticStruct, Z_Construct_UScriptStruct_FPendingReplace_Statics::NewStructOps, TEXT("PendingReplace"), &Z_Registration_Info_UScriptStruct_PendingReplace, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPendingReplace), 3006988495U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 3352801837U) },
+		{ Z_Construct_UClass_AF13Mode, AF13Mode::StaticClass, TEXT("AF13Mode"), &Z_Registration_Info_UClass_AF13Mode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AF13Mode), 2408343089U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_35630719(TEXT("/Script/F13"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_1202657142(TEXT("/Script/F13"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_Statics::ScriptStructInfo),
 	nullptr, 0);

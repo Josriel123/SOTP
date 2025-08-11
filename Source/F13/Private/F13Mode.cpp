@@ -26,6 +26,8 @@ AF13Mode::AF13Mode()
     GameStateClass = AF13GameState::StaticClass();
     BotControllerClass = AF13BotController::StaticClass();
     GameSessionClass = AF13GameSession::StaticClass();
+
+    HMS_MigrationSettings.CreateGameSaveUpdateParams.IgnoreHostPawn = false; // keep the host pawn
 }
 
 void AF13Mode::InitGame(const FString& MapName, const FString& Options, FString& Error)
@@ -40,6 +42,14 @@ void AF13Mode::InitGame(const FString& MapName, const FString& Options, FString&
     
     FParse::Value(*Options, TEXT("humans="), ExpectedHumans);
     UE_LOG(LogF13Mode, Log, TEXT("InitGame → Expecting %d human players"), ExpectedHumans);
+
+    int32 BotsFlag = 1;                           // default: bots ON
+    FParse::Value(*Options, TEXT("bots="), BotsFlag);
+    bSpawnBots = (BotsFlag != 0);
+
+    UE_LOG(LogF13Mode, Log, TEXT("InitGame → bSpawnBots: %s"),
+        bSpawnBots ? TEXT("true") : TEXT("false"));
+
 }
 
 
@@ -64,17 +74,111 @@ void AF13Mode::PostLogin(APlayerController* NewPlayer)
 void AF13Mode::StartMatch()
 {
     UE_LOG(LogF13Mode, Log, TEXT("=== StartMatch() called on server ==="));
-
     UE_LOG(LogTemp, Warning, TEXT("StartMatch → bIsRehostGame: %s"),
         bIsRehostGame ? TEXT("true") : TEXT("false"));
-    //*
+
     if (HasAuthority() && !bIsRehostGame)
     {
         AssignRoles();
-        FillWithBots();        // step 1
+        if (bSpawnBots)            // <<< gate here
+        {
+            FillWithBots();
+        }
     }
-    //*/
-    Super::StartMatch();       // *then* call parent so MatchState flips
+    Super::StartMatch();
+}
+
+
+void AF13Mode::HMS_OnGameRehosted_Cpp()
+{
+    if (!HasAuthority())
+    {
+        return;
+    }
+
+    UE_LOG(LogF13Mode, Log, TEXT("[HMS_OnGameRehosted_Cpp] Server repairing state after host migration"));
+
+    TArray<APawn*> Pawns;
+    for (TActorIterator<APawn> It(GetWorld()); It; ++It)
+    {
+        APawn* P = *It;
+        if (!IsValid(P) || P->IsActorBeingDestroyed())
+        {
+            continue;
+        }
+
+        if (P->GetController() == nullptr)
+        {
+            // Prefer your bot controller; fall back to base AIController if needed
+            TSubclassOf<AAIController> BotControllerClassToUse = AF13BotController::StaticClass();
+            if (!BotControllerClassToUse)
+            {
+                BotControllerClassToUse = AAIController::StaticClass();
+            }
+
+            AAIController* NewBot = GetWorld()->SpawnActor<AAIController>(
+                BotControllerClassToUse,
+                P->GetActorLocation(),
+                P->GetActorRotation()
+            );
+
+            if (NewBot)
+            {
+                NewBot->Possess(P);
+                UE_LOG(LogF13Mode, Log, TEXT("[HMS_OnGameRehosted_Cpp] Repossessed orphan pawn %s with %s"),
+                    *GetNameSafe(P), *GetNameSafe(NewBot));
+            }
+        }
+
+        Pawns.Add(P);
+    }
+
+    // Make sure AI pawns have a visible bot-style name so UI/logic works.
+    static int32 BotCounter = 0;
+    for (APawn* P : Pawns)
+    {
+        if (!IsValid(P) || P->IsActorBeingDestroyed()) continue;
+
+        const AController* C = P->GetController();
+        const bool bIsBot = (C && C->IsA(AAIController::StaticClass()));
+
+        if (bIsBot)
+        {
+            if (APlayerState* PS = P->GetPlayerState())
+            {
+                if (PS->GetPlayerName().IsEmpty())
+                {
+                    PS->SetPlayerName(FString::Printf(TEXT("Bot_%02d"), ++BotCounter));
+                }
+            }
+        }
+    }
+
+    // Tell PostLogin/replace logic we’re in a rehosted match
+    bIsRehostGame = true;
+}
+
+
+void AF13Mode::EnsureBotPlayerState(AAIController* AI)
+{
+    if (!AI) return;
+
+    // Make sure the AI actually has a PlayerState instance
+    if (AI->PlayerState == nullptr)
+    {
+        AI->InitPlayerState(); // gives us an AF13PlayerState (based on GameMode's PlayerStateClass)
+    }
+
+    if (AF13PlayerState* PS = Cast<AF13PlayerState>(AI->PlayerState))
+    {
+        // If your PS has a bIsBot flag, set it here
+        if (!PS->bIsBot)
+        {
+            PS->bIsBot = true;
+        }
+
+        PS->ForceNetUpdate();
+    }
 }
 
 

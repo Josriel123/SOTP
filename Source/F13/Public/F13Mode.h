@@ -60,6 +60,10 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool bIsRehostGame = false;
 
+	// Should we fill the match with bots when starting?
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Bots")
+	bool bSpawnBots = true;
+
 	UPROPERTY()
 	TSet<TWeakObjectPtr<AController>> PendingSilentRemovals;
 
@@ -77,12 +81,16 @@ protected:
 	void SpawnReplacementBotAt(const FTransform& Xf, TSubclassOf<APawn> PawnClass, const FVector& InVelocity);
 	void TagPawnWithPlayer(APawn* Pawn, AF13PlayerState* PS);
 
+	void EnsureBotPlayerState(AAIController* AI);
+
+
 	UPROPERTY()
 	TMap<TWeakObjectPtr<AController>, FPendingReplace> PendingReplacements;
 
 	//void RememberLeavingPawn(AController* PC, APawn* Pawn, const FTransform& Xform);
 	
-
+	UFUNCTION(BlueprintCallable, Category = "HMS")
+	void HMS_OnGameRehosted_Cpp();
 
 
 private:

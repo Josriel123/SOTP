@@ -21,6 +21,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 template<> F13_API UScriptStruct* StaticStruct<struct FPendingReplace>();
 
+#define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execHMS_OnGameRehosted_Cpp);
+
+
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAF13Mode(); \
@@ -46,6 +50,7 @@ public: \
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_INCLASS_NO_PURE_DECLS \
 	FID_Users_joelb_OneDrive_Documents_Unreal_Projects_F13_Source_F13_Public_F13Mode_h_29_ENHANCED_CONSTRUCTORS \
 private: \
