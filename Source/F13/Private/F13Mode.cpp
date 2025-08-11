@@ -221,72 +221,87 @@ void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
     AF13PlayerState* HumanPS = Cast<AF13PlayerState>(JoiningPC->PlayerState);
     if (!HumanPS) return;
 
-    // Find any *survivor* bot to replace
-    AF13BotController* Bot = nullptr;
+    AF13BotController* ChosenBot = nullptr;
+
+    // Prefer a bot that is controlling a pawn that used to be human (has a "UniqueId=" tag)
+    static const FString UniquePrefix = TEXT("UniqueId=");
     for (FConstControllerIterator It = GetWorld()->GetControllerIterator(); It; ++It)
     {
-        AF13BotController* Candidate = Cast<AF13BotController>(It->Get());
-        if (!Candidate) continue;
+        AF13BotController* BC = Cast<AF13BotController>(It->Get());
+        if (!BC) continue;
 
-        AF13PlayerState* BotPS = Cast<AF13PlayerState>(Candidate->PlayerState);
-        if (BotPS && BotPS->ChosenRole != TEXT("Killer"))
+        AF13PlayerState* BotPS = Cast<AF13PlayerState>(BC->PlayerState);
+        if (!BotPS || BotPS->ChosenRole == TEXT("Killer")) continue;
+
+        if (APawn* P = BC->GetPawn())
         {
-            Bot = Candidate;
-            break;
+            bool bLooksLikeAbandonedHumanPawn = false;
+            for (const FName& Tag : P->Tags)
+            {
+                if (Tag.ToString().StartsWith(UniquePrefix))
+                {
+                    bLooksLikeAbandonedHumanPawn = true;
+                    break;
+                }
+            }
+
+            if (bLooksLikeAbandonedHumanPawn)
+            {
+                ChosenBot = BC;
+                break; // best possible candidate
+            }
+
+            // Keep the first valid survivor bot as a fallback
+            if (!ChosenBot) ChosenBot = BC;
         }
     }
-    if (!Bot) return;
 
-    APawn* BotPawn = Bot->GetPawn();
+    if (!ChosenBot) return;
+
+    APawn* BotPawn = ChosenBot->GetPawn();
     if (!BotPawn) return;
 
-    // Cache the *exact* transform & motion of the bot pawn
     const FTransform BotXf = BotPawn->GetActorTransform();
     const FVector    BotVel = BotPawn->GetVelocity();
 
-    // Decide desired role/class; fall back to the bot's actual class if prefs are unset
+    // Decide the player’s desired class; fall back to the bot’s current class
     FString DesiredRole = HumanPS->ChosenRole;
     if (DesiredRole.IsEmpty())
     {
-        if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(Bot->PlayerState))
+        if (AF13PlayerState* BotPS = Cast<AF13PlayerState>(ChosenBot->PlayerState))
             DesiredRole = BotPS->ChosenRole.IsEmpty() ? TEXT("Survivor") : BotPS->ChosenRole;
         else
             DesiredRole = TEXT("Survivor");
     }
-    TSubclassOf<APawn> DesiredClass = HumanPS->GetChosenPawnClassForRole(DesiredRole);
-    if (!DesiredClass)
-    {
-        DesiredClass = BotPawn->GetClass();               // hard fallback
-    }
-    HumanPS->SelectedPawnClass = DesiredClass;            // keep PS consistent
 
-    // Clean up any stray pawn created during login
+    TSubclassOf<APawn> DesiredClass = HumanPS->GetChosenPawnClassForRole(DesiredRole);
+    if (!DesiredClass) DesiredClass = BotPawn->GetClass();
+    HumanPS->SelectedPawnClass = DesiredClass;
+
+    // Clean up any pawn the joining PC might already have
     if (APawn* Existing = JoiningPC->GetPawn())
     {
         JoiningPC->UnPossess();
         if (Existing != BotPawn) { Existing->Destroy(); }
     }
 
-    Bot->UnPossess();
+    // Free the bot controller
+    ChosenBot->UnPossess();
 
     if (DesiredClass == BotPawn->GetClass())
     {
-        // Take over the bot pawn as-is
-        BotPawn->SetActorTransform(BotXf, false, nullptr, ETeleportType::TeleportPhysics);
         JoiningPC->Possess(BotPawn);
         TagPawnWithPlayer(BotPawn, HumanPS);
 
         if (ACharacter* Char = Cast<ACharacter>(BotPawn))
-        {
             if (UCharacterMovementComponent* Move = Char->GetCharacterMovement())
                 Move->Velocity = BotVel;
-        }
+
         JoiningPC->SetControlRotation(BotXf.GetRotation().Rotator());
         BotPawn->ForceNetUpdate();
     }
     else
     {
-        // Spawn the player’s preferred class at the bot's exact spot
         FActorSpawnParameters P;
         P.Owner = JoiningPC;
         P.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
@@ -295,31 +310,28 @@ void AF13Mode::ReplaceBotIfPossible(APlayerController* JoiningPC)
         if (NewPawn)
         {
             if (ACharacter* NewChar = Cast<ACharacter>(NewPawn))
-            {
                 if (UCharacterMovementComponent* Move = NewChar->GetCharacterMovement())
                     Move->Velocity = BotVel;
-            }
+
             JoiningPC->Possess(NewPawn);
             TagPawnWithPlayer(NewPawn, HumanPS);
             JoiningPC->SetControlRotation(BotXf.GetRotation().Rotator());
             NewPawn->ForceNetUpdate();
-            BotPawn->Destroy(); // we replaced the body
+            BotPawn->Destroy();
         }
         else
         {
-            // Fallback: just possess the bot pawn
             JoiningPC->Possess(BotPawn);
         }
     }
 
-    // Engine may still call RestartPlayer for this controller; skip it once
+    // Engine may call RestartPlayer after PostLogin; skip once
     SkipNextRestart.Add(JoiningPC);
 
-    // Remove the bot controller now that the human took over
-    PendingSilentRemovals.Add(Bot);
-    Bot->bSkipLogoutRespawn = true;
-    Bot->Tags.AddUnique(FName(TEXT("SkipRespawn"))); // mark for silent removal
-    Bot->Destroy();
+    // Remove the bot controller cleanly
+    PendingSilentRemovals.Add(ChosenBot);
+    ChosenBot->bSkipLogoutRespawn = true;
+    ChosenBot->Destroy();
 }
 
 
@@ -685,14 +697,12 @@ void AF13Mode::Logout(AController* Exiting)
 
     UE_LOG(LogF13Mode, Log, TEXT("[Logout] %s leaving"), *GetNameSafe(Exiting));
 
-    // Was this a human? If not, just do normal cleanup.
     const bool bWasHuman = Cast<APlayerController>(Exiting) != nullptr;
     AF13PlayerState* PS = Exiting ? Exiting->GetPlayerState<AF13PlayerState>() : nullptr;
 
-    // Try to get the pawn they were using
+    // Try to get (or find) the pawn this controller was using
     APawn* LeavingPawn = Exiting ? Exiting->GetPawn() : nullptr;
 
-    // If the controller already unpossessed, find the pawn we tagged for this player.
     if (!LeavingPawn && PS)
     {
         const FName TagToFind(*FString::Printf(TEXT("UniqueId=%s"), *PS->GetPlayerName()));
@@ -707,55 +717,34 @@ void AF13Mode::Logout(AController* Exiting)
         }
     }
 
-    // If a human left and we found an unpossessed pawn, drop a bot controller onto it.
-    if (bWasHuman && LeavingPawn && !LeavingPawn->IsPendingKillPending() && LeavingPawn->GetController() == nullptr)
+    if (bWasHuman && LeavingPawn && !LeavingPawn->IsPendingKillPending())
     {
-        // optional: stop any residual velocity so possession is clean
+        // Stop any residual motion for a clean hand-off
         if (ACharacter* C = Cast<ACharacter>(LeavingPawn))
-        {
             if (UCharacterMovementComponent* Move = C->GetCharacterMovement())
-            {
                 Move->StopMovementImmediately();
-            }
-        }
 
-        // Spawn a bot controller and possess the *existing* pawn.
-        FActorSpawnParameters SP;
-        SP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-
-        // If you have a specific bot controller class, use it here instead of AAIController::StaticClass()
-        AAIController* NewBot = GetWorld()->SpawnActor<AAIController>(AAIController::StaticClass(),
-            LeavingPawn->GetActorLocation(),
-            LeavingPawn->GetActorRotation(),
-            SP);
-        if (NewBot)
+        // IMPORTANT: put an AF13BotController (not base AAIController) back on THIS pawn.
+        const FTransform Xf = LeavingPawn->GetActorTransform();
+        if (AAIController* NewBot = SpawnBotControllerAndPossessExisting(LeavingPawn, Xf))
         {
-            NewBot->Possess(LeavingPawn);
-            UE_LOG(LogF13Mode, Log, TEXT("[Logout] Bot took over pawn %s at %s"),
-                *GetNameSafe(LeavingPawn), *LeavingPawn->GetActorLocation().ToCompactString());
+            UE_LOG(LogF13Mode, Log, TEXT("[Logout] Bot %s took over pawn %s at %s"),
+                *GetNameSafe(NewBot), *GetNameSafe(LeavingPawn), *LeavingPawn->GetActorLocation().ToCompactString());
         }
         else
         {
-            UE_LOG(LogF13Mode, Warning, TEXT("[Logout] Failed to spawn bot controller; leaving pawn unpossessed"));
+            UE_LOG(LogF13Mode, Warning, TEXT("[Logout] Failed to spawn bot controller for leaving pawn"));
         }
 
-        // Important: DO NOT spawn any new pawn here.
+        // Do normal controller cleanup; we've kept the pawn alive.
         Super::Logout(Exiting);
         return;
     }
 
-    // If we reach here:
-    //  - A bot left, OR
-    //  - We couldn't find an unpossessed pawn to reuse.
-    // Do **not** spawn a new pawn here; let your regular fill logic handle it later.
-    if (bWasHuman && !LeavingPawn)
-    {
-        UE_LOG(LogF13Mode, Warning, TEXT("[Logout] No unpossessed pawn found for %s; skipping spawn on Logout"),
-            *GetNameSafe(Exiting));
-    }
-
+    // Bot left or no pawn to reuse
     Super::Logout(Exiting);
 }
+
 
 void AF13Mode::TagPawnWithPlayer(APawn* Pawn, AF13PlayerState* PS)
 {
