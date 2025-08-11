@@ -35,6 +35,6 @@ private:
 protected:
 	/** Override to cache our typed PlayerState. */
 	virtual void BeginPlay() override;
-
+	virtual void PawnLeavingGame() override;
 	virtual FString HMS_GetReconnectNetAddress_Implementation() override;
 };

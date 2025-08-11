@@ -18,4 +18,7 @@ public:
 
 	AF13BotController() { bWantsPlayerState = true; }
 	virtual void OnPossess(APawn* InPawn) override;
+
+	UPROPERTY(Transient, BlueprintReadOnly)
+	bool bSkipLogoutRespawn = false;
 };

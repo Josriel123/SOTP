@@ -1,12 +1,16 @@
 ﻿#include "F13PlayerController.h"
 #include "F13PlayerState.h"
 #include "F13GameInstance.h"
+#include "F13Mode.h"
 #include "Sockets.h"
 #include "SocketSubsystem.h"
 #include "Engine/World.h"
 #include "Engine/NetDriver.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/PlayerState.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
+
 
 AF13PlayerController::AF13PlayerController()
 {
@@ -104,3 +108,42 @@ FString AF13PlayerController::HMS_GetReconnectNetAddress_Implementation()
 	return LocalAddr->ToString(/*bUseIPv6=*/false);
 }
 
+void AF13PlayerController::PawnLeavingGame()
+{
+	// Server only
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		APawn* P = GetPawn();
+		if (P)
+		{
+			const FTransform Tf = P->GetActorTransform();
+
+			// optional: capture current velocity for a smoother hand-off
+			FVector Vel = FVector::ZeroVector;
+			if (const ACharacter* C = Cast<ACharacter>(P))
+			{
+				if (const UCharacterMovementComponent* Move = C->GetCharacterMovement())
+				{
+					Vel = Move->Velocity;
+				}
+			}
+
+			if (AF13Mode* GM = GetWorld()->GetAuthGameMode<AF13Mode>())
+			{
+				// You already have this helper in your GameMode; if yours only takes (PC,Pawn,Transform),
+				// just drop "Vel" from the call and store only the transform.
+				GM->RememberLeavingPawn(this, P, Tf /*, Vel */);
+			}
+
+			// Keep the pawn alive: unpossess but DON'T call Super (it destroys the pawn)
+			UnPossess();
+
+			// Make sure the actor stays around & replicating
+			P->SetReplicates(true);
+			P->SetAutonomousProxy(false);
+		}
+	}
+
+	// Intentionally do NOT call Super::PawnLeavingGame();
+	// Super destroys the pawn by default, which is exactly what we want to avoid. :contentReference[oaicite:1]{index=1}
+}
