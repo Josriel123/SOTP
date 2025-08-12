@@ -85,7 +85,22 @@ void APantheonGameMode::StartMatch()
             FillWithBots();
         }
     }
+
+    HMS_StartAsyncCreateGameSaveTask(HMS_MigrationSettings.CreateGameSaveUpdateParams);
+
     Super::StartMatch();
+
+    // Safety: if anything skipped role assignment, fix it
+    if (HasAuthority() && GameState)
+    {
+        bool bMissing = false;
+        for (APlayerState* S : GameState->PlayerArray)
+        {
+            if (auto* PS = Cast<APantheonPlayerState>(S))
+                if (!PS->SelectedPawnClass) { bMissing = true; break; }
+        }
+        if (bMissing) { AssignRoles(); }
+    }
 }
 
 

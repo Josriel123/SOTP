@@ -15,9 +15,10 @@ class PANTHEON_API APantheonLobbyGameMode : public AHMS_GameMode
 	GENERATED_BODY()
 
 public:
-	//APantheonLobbyGameMode();
+	APantheonLobbyGameMode();
 
 	virtual void PostLogin(APlayerController* NewPlayer) override;
+	virtual void BeginPlay() override;
 	
 };
 

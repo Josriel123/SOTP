@@ -76,7 +76,6 @@ template<> PANTHEON_API UClass* StaticClass<APantheonLobbyGameMode>()
 {
 	return APantheonLobbyGameMode::StaticClass();
 }
-APantheonLobbyGameMode::APantheonLobbyGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonLobbyGameMode);
 APantheonLobbyGameMode::~APantheonLobbyGameMode() {}
 // End Class APantheonLobbyGameMode

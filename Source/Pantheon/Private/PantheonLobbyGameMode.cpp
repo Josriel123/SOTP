@@ -5,6 +5,12 @@
 #include "PantheonGameInstance.h"
 #include "PantheonPlayerState.h"
 
+APantheonLobbyGameMode::APantheonLobbyGameMode()
+{
+    // prevents HMS timer-based “last save” from running on Lobby
+    HMS_MigrationSettings.AutoStartGameSaveUpdate = false;
+}
+
 void APantheonLobbyGameMode::PostLogin(APlayerController* NewPlayer)
 {
     Super::PostLogin(NewPlayer);
@@ -17,6 +23,19 @@ void APantheonLobbyGameMode::PostLogin(APlayerController* NewPlayer)
         PS->KillerRowKey = GI->CachedStartupProfile.KillerRowKey;
     }
     */
+}
+
+void APantheonLobbyGameMode::BeginPlay()
+{
+    Super::BeginPlay();
+    if (HasAuthority())
+    {
+        // wipe any stale rehost info as soon as we land in the lobby
+        if (auto* GI = Cast<UHMS_GameInstance>(GetGameInstance()))
+        {
+            GI->HMS_ResetHostMigration();
+        }
+    }
 }
 
 

@@ -155,6 +155,8 @@ void UPantheonGameInstance::CleanAndJoin(int32 SearchIndex)
 
 void UPantheonGameInstance::OnDestroySessionComplete(FName /*SessionName*/, bool /*bSuccess*/)
 {
+
+    
     if (SessionInterface.IsValid())
     {
         SessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(

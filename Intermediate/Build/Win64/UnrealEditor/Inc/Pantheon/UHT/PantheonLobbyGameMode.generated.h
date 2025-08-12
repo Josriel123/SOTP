@@ -24,8 +24,6 @@ public: \
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonLobbyGameMode_h_15_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API APantheonLobbyGameMode(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	APantheonLobbyGameMode(APantheonLobbyGameMode&&); \
@@ -33,7 +31,7 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, APantheonLobbyGameMode); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(APantheonLobbyGameMode); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(APantheonLobbyGameMode) \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(APantheonLobbyGameMode) \
 	NO_API virtual ~APantheonLobbyGameMode();
 
 
