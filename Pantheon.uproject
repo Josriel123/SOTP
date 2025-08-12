@@ -1,0 +1,32 @@
+﻿{
+    "FileVersion":  3,
+    "EngineAssociation":  "5.5",
+    "Category":  "",
+    "Description":  "",
+    "Modules":  [
+                    {
+                        "Name":  "Pantheon",
+                        "Type":  "Runtime",
+                        "LoadingPhase":  "Default",
+                        "AdditionalDependencies":  [
+                                                       "Engine",
+                                                       "AIModule",
+                                                       "HostMigrationSystem"
+                                                   ]
+                    }
+                ],
+    "Plugins":  [
+                    {
+                        "Name":  "ModelingToolsEditorMode",
+                        "Enabled":  true,
+                        "TargetAllowList":  [
+                                                "Editor"
+                                            ]
+                    },
+                    {
+                        "Name":  "HostMigrationSystemV2",
+                        "Enabled":  true,
+                        "MarketplaceURL":  "com.epicgames.launcher://ue/marketplace/product/23b51829593540eeb81c801014787306"
+                    }
+                ]
+}

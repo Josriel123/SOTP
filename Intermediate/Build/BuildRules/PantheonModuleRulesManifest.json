@@ -1,0 +1,9 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\joelb\\OneDrive\\Documents\\Unreal Projects\\Slayers Of The Pantheon\\Source\\Pantheon\\Pantheon.Build.cs",
+		"C:\\Users\\joelb\\OneDrive\\Documents\\Unreal Projects\\Slayers Of The Pantheon\\Plugins\\AdvancedSessions\\Source\\AdvancedSessions\\AdvancedSessions.Build.cs",
+		"C:\\Users\\joelb\\OneDrive\\Documents\\Unreal Projects\\Slayers Of The Pantheon\\Source\\Pantheon.Target.cs",
+		"C:\\Users\\joelb\\OneDrive\\Documents\\Unreal Projects\\Slayers Of The Pantheon\\Source\\PantheonEditor.Target.cs"
+	],
+	"EngineVersion": "5.5.4"
+}

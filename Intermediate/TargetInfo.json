@@ -1,13 +1,13 @@
 {
 	"Targets": [
 		{
-			"Name": "F13",
-			"Path": "..\\Source\\F13.Target.cs",
+			"Name": "Pantheon",
+			"Path": "..\\Source\\Pantheon.Target.cs",
 			"Type": "Game"
 		},
 		{
-			"Name": "F13Editor",
-			"Path": "..\\Source\\F13Editor.Target.cs",
+			"Name": "PantheonEditor",
+			"Path": "..\\Source\\PantheonEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]
