@@ -227,43 +227,46 @@
     <ClCompile Include="..\..\Source\F13\F13.h">
       <Filter>Source\F13</Filter>
     </ClCompile>
+    <None Include="..\..\Source\F13\rename_to_pantheon.ps1">
+      <Filter>Source\F13</Filter>
+    </None>
     <Filter Include="Source\F13\Private">
       <UniqueIdentifier>{D7C66078-A2B3-302A-924A-7EEACEF3DF20}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\F13\Private\F13BotController.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonBotController.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13CharacterBase.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonCharacterBase.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameInstance.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameInstance.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameSession.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameMode.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameState.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameSession.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameState.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13LobbyMenu.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonKillerCharacter.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13Mode.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonLobbyGameMode.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerController.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerController.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerProfileSave.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerProfileSave.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerState.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerState.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13SurvivorCharacter.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonSurvivorCharacter.cpp">
       <Filter>Source\F13\Private</Filter>
     </ClCompile>
     <Filter Include="Source\F13\Public">
@@ -275,40 +278,40 @@
     <ClCompile Include="..\..\Source\F13\Public\CharacterStats.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13BotController.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonBotController.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13CharacterBase.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonCharacterBase.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameInstance.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameInstance.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameSession.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameMode.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameState.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameSession.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameState.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13LobbyMenu.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonKillerCharacter.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13Mode.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonLobbyGameMode.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerController.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerController.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerProfileSave.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerProfileSave.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerState.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerState.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonSurvivorCharacter.h">
       <Filter>Source\F13\Public</Filter>
     </ClCompile>
   </ItemGroup>

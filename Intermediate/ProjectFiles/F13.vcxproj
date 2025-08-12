@@ -742,51 +742,52 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13BotController.cpp">
+    <None Include="..\..\Source\F13\rename_to_pantheon.ps1"/>
+    <ClCompile Include="..\..\Source\F13\Private\PantheonBotController.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13CharacterBase.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonCharacterBase.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameInstance.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameInstance.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameSession.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameMode.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13GameState.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameSession.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13KillerCharacter.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonGameState.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13LobbyMenu.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonKillerCharacter.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13Mode.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonLobbyGameMode.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerController.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerController.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerProfileSave.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerProfileSave.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13PlayerState.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonPlayerState.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Private\F13SurvivorCharacter.cpp">
+    <ClCompile Include="..\..\Source\F13\Private\PantheonSurvivorCharacter.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
@@ -798,51 +799,51 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13BotController.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonBotController.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13CharacterBase.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonCharacterBase.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameInstance.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameInstance.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameSession.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameMode.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13GameState.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameSession.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13KillerCharacter.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonGameState.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13LobbyMenu.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonKillerCharacter.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13Mode.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonLobbyGameMode.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerController.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerController.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerProfileSave.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerProfileSave.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13PlayerState.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonPlayerState.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\Source\F13\Public\F13SurvivorCharacter.h">
+    <ClCompile Include="..\..\Source\F13\Public\PantheonSurvivorCharacter.h">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_1)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_1)</ForcedIncludeFiles>
     </ClCompile>
