@@ -250,42 +250,6 @@ DEFINE_FUNCTION(UPantheonGameInstance::execGetFoundSessionNames)
 }
 // End Class UPantheonGameInstance Function GetFoundSessionNames
 
-// Begin Class UPantheonGameInstance Function HostAndStartSession
-struct Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession_Statics
-{
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "Category", "Session" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/* ----------  UI entry-points ---------- */" },
-#endif
-		{ "ModuleRelativePath", "Public/PantheonGameInstance.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "----------  UI entry-points ----------" },
-#endif
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UPantheonGameInstance, nullptr, "HostAndStartSession", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession_Statics::Function_MetaDataParams) };
-UFunction* Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(UPantheonGameInstance::execHostAndStartSession)
-{
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	P_THIS->HostAndStartSession();
-	P_NATIVE_END;
-}
-// End Class UPantheonGameInstance Function HostAndStartSession
-
 // Begin Class UPantheonGameInstance Function JoinFoundSession
 struct Z_Construct_UFunction_UPantheonGameInstance_JoinFoundSession_Statics
 {
@@ -336,7 +300,6 @@ void UPantheonGameInstance::StaticRegisterNativesUPantheonGameInstance()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "FindSessions", &UPantheonGameInstance::execFindSessions },
 		{ "GetFoundSessionNames", &UPantheonGameInstance::execGetFoundSessionNames },
-		{ "HostAndStartSession", &UPantheonGameInstance::execHostAndStartSession },
 		{ "JoinFoundSession", &UPantheonGameInstance::execJoinFoundSession },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -390,7 +353,6 @@ struct Z_Construct_UClass_UPantheonGameInstance_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UPantheonGameInstance_FindSessions, "FindSessions" }, // 1953536788
 		{ &Z_Construct_UFunction_UPantheonGameInstance_GetFoundSessionNames, "GetFoundSessionNames" }, // 329364117
-		{ &Z_Construct_UFunction_UPantheonGameInstance_HostAndStartSession, "HostAndStartSession" }, // 54966301
 		{ &Z_Construct_UFunction_UPantheonGameInstance_JoinFoundSession, "JoinFoundSession" }, // 2094059798
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -450,10 +412,10 @@ UPantheonGameInstance::~UPantheonGameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPantheonGameInstance, UPantheonGameInstance::StaticClass, TEXT("UPantheonGameInstance"), &Z_Registration_Info_UClass_UPantheonGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPantheonGameInstance), 1098316812U) },
+		{ Z_Construct_UClass_UPantheonGameInstance, UPantheonGameInstance::StaticClass, TEXT("UPantheonGameInstance"), &Z_Registration_Info_UClass_UPantheonGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPantheonGameInstance), 193337798U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_2071125764(TEXT("/Script/Pantheon"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_237164391(TEXT("/Script/Pantheon"),
 	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

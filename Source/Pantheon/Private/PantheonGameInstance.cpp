@@ -1,6 +1,7 @@
 // PantheonGameInstance.cpp
 #include "PantheonGameInstance.h"
 #include "PantheonPlayerProfileSave.h"
+#include "Online/OnlineSessionNames.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 
@@ -25,45 +26,48 @@ void UPantheonGameInstance::Init()
 
     LoadLocalProfile(CachedStartupProfile);
 
-    IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
-    if (!Subsystem) { UE_LOG(LogTemp, Error, TEXT("No OSS loaded")); return; }
-
-    SessionInterface = Subsystem->GetSessionInterface();
-    IOnlineIdentityPtr Identity = Subsystem->GetIdentityInterface();
-
-    Identity->OnLoginCompleteDelegates->AddUObject(this, &UPantheonGameInstance::OnLoginComplete);
-    Identity->Login(0, FOnlineAccountCredentials(TEXT("accountportal"), TEXT(""), TEXT("")));
-
-    if (SessionInterface.IsValid())
+    if (IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get())
     {
-        OnCreateSessionCompleteDelegate = FOnCreateSessionCompleteDelegate::CreateUObject(
-            this, &UPantheonGameInstance::OnCreateSessionComplete);
-        OnFindSessionsCompleteDelegate = FOnFindSessionsCompleteDelegate::CreateUObject(
-            this, &UPantheonGameInstance::OnFindSessionsComplete);
-        OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(
-            this, &UPantheonGameInstance::OnJoinSessionComplete);
+        SessionInterface = Subsystem->GetSessionInterface();
+        if (IOnlineIdentityPtr Identity = Subsystem->GetIdentityInterface())
+        {
+            Identity->OnLoginCompleteDelegates->AddUObject(this, &UPantheonGameInstance::OnLoginComplete);
+
+            const auto Status = Identity->GetLoginStatus(0);
+            if (Status != ELoginStatus::LoggedIn)
+            {
+                Identity->Login(0, FOnlineAccountCredentials(TEXT("accountportal"), TEXT(""), TEXT("")));
+            }
+        }
+
+        // one-time bind of the session delegates
+        if (SessionInterface.IsValid())
+        {
+            OnCreateSessionCompleteDelegate = FOnCreateSessionCompleteDelegate::CreateUObject(this, &UPantheonGameInstance::OnCreateSessionComplete);
+            OnFindSessionsCompleteDelegate = FOnFindSessionsCompleteDelegate::CreateUObject(this, &UPantheonGameInstance::OnFindSessionsComplete);
+            OnJoinSessionCompleteDelegate = FOnJoinSessionCompleteDelegate::CreateUObject(this, &UPantheonGameInstance::OnJoinSessionComplete);
+        }
     }
-
-}
-
-/* ------------------------------------------------------------ */
-/*  PUBLIC  — widget entry-point                                */
-/* ------------------------------------------------------------ */
-void UPantheonGameInstance::HostAndStartSession()
-{
-    HostSession();
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("No Online Subsystem loaded"));
+    }
 }
 
 /* ------------------------------------------------------------ */
 /*  Search & Join                                               */
 /* ------------------------------------------------------------ */
+
 void UPantheonGameInstance::FindSessions()
 {
     if (!SessionInterface.IsValid()) return;
 
-    SessionSearch = MakeShareable(new FOnlineSessionSearch());
-    SessionSearch->MaxSearchResults = 20;
+    SessionSearch = MakeShared<FOnlineSessionSearch>();
+    SessionSearch->MaxSearchResults = 50;
     SessionSearch->PingBucketSize = 50;
+
+    // Only show sessions advertising presence (join-in-progress, etc.)
+    SessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 
     OnFindSessionsCompleteDelegateHandle =
         SessionInterface->AddOnFindSessionsCompleteDelegate_Handle(OnFindSessionsCompleteDelegate);
@@ -71,25 +75,30 @@ void UPantheonGameInstance::FindSessions()
     SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 }
 
+
+
 void UPantheonGameInstance::JoinFoundSession(int32 SessionIndex)
 {
     if (!SessionInterface.IsValid() || !SessionSearch.IsValid()) return;
     if (!SessionSearch->SearchResults.IsValidIndex(SessionIndex)) return;
 
-    /* ---- if we still have a local GameSession, destroy first ---- */
+    /* ---- if we still have a local GameSession, destroy first ----*/
     if (SessionInterface->GetNamedSession(NAME_GameSession))
     {
         CleanAndJoin(SessionIndex);
         return;
     }
 
-    /* ---- proceed to join ---- */
+    /* ---- proceed to join ----*/
     OnJoinSessionCompleteDelegateHandle =
         SessionInterface->AddOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegate);
 
     SessionInterface->JoinSession(
         0, NAME_GameSession, SessionSearch->SearchResults[SessionIndex]);
 }
+
+
+
 
 TArray<FString> UPantheonGameInstance::GetFoundSessionNames() const
 {
@@ -104,54 +113,27 @@ TArray<FString> UPantheonGameInstance::GetFoundSessionNames() const
     return Names;
 }
 
-/* ------------------------------------------------------------ */
-/*  INTERNAL — Host                                             */
-/* ------------------------------------------------------------ */
-void UPantheonGameInstance::HostSession()
-{
-    if (!SessionInterface.IsValid())
-    {
-        UE_LOG(LogTemp, Warning, TEXT("HostSession: SessionInterface == nullptr"));
-        return;
-    }
 
-    if (SessionInterface->GetNamedSession(NAME_GameSession))
-    {
-        SessionInterface->DestroySession(NAME_GameSession);
-    }
-
-    TSharedPtr<FOnlineSessionSettings> Settings = MakeShareable(new FOnlineSessionSettings());
-    Settings->bIsLANMatch = true;
-    Settings->NumPublicConnections = 10;
-    Settings->bShouldAdvertise = true;
-    Settings->bAllowJoinInProgress = true;
-    Settings->bUsesPresence = true;
-
-    OnCreateSessionCompleteDelegateHandle =
-        SessionInterface->AddOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegate);
-
-    SessionInterface->CreateSession(0, NAME_GameSession, *Settings);
-}
-
-/* ------------------------------------------------------------ */
+/*------------------------------------------------------------ * /
 /*  NEW — destroy-then-join helpers                             */
 /* ------------------------------------------------------------ */
 void UPantheonGameInstance::CleanAndJoin(int32 SearchIndex)
 {
     if (!SessionInterface.IsValid()) return;
+    if (PendingJoinIndex != INDEX_NONE) return; // already in progress
 
+    UE_LOG(LogTemp, Log, TEXT("Clean and Join runs"));
     PendingJoinIndex = SearchIndex;
 
-    OnDestroySessionCompleteDelegate =
-        FOnDestroySessionCompleteDelegate::CreateUObject(
-            this, &UPantheonGameInstance::OnDestroySessionComplete);
-
+    OnDestroySessionCompleteDelegate = FOnDestroySessionCompleteDelegate::CreateUObject(this, &UPantheonGameInstance::OnDestroySessionComplete);
     OnDestroySessionCompleteDelegateHandle =
-        SessionInterface->AddOnDestroySessionCompleteDelegate_Handle(
-            OnDestroySessionCompleteDelegate);
+        SessionInterface->AddOnDestroySessionCompleteDelegate_Handle(OnDestroySessionCompleteDelegate);
 
     SessionInterface->DestroySession(NAME_GameSession);
 }
+
+
+
 
 void UPantheonGameInstance::OnDestroySessionComplete(FName /*SessionName*/, bool /*bSuccess*/)
 {
@@ -171,6 +153,7 @@ void UPantheonGameInstance::OnDestroySessionComplete(FName /*SessionName*/, bool
     }
 }
 
+
 /* ------------------------------------------------------------ */
 /*  Online-subsystem callbacks                                   */
 /* ------------------------------------------------------------ */
@@ -182,6 +165,7 @@ void UPantheonGameInstance::OnLoginComplete(int32 LocalUserNum, bool bWasSuccess
         bWasSuccessful ? TEXT("OK") : TEXT("FAILED"),
         LocalUserNum, *UserId.ToString(), *Error);
 }
+
 
 void UPantheonGameInstance::OnCreateSessionComplete(FName /*SessionName*/, bool bWasSuccessful)
 {
@@ -195,23 +179,30 @@ void UPantheonGameInstance::OnCreateSessionComplete(FName /*SessionName*/, bool 
     OnSessionCreated.Broadcast(bWasSuccessful);
 }
 
+
+
 void UPantheonGameInstance::OnFindSessionsComplete(bool bWasSuccessful)
 {
     if (SessionInterface.IsValid())
     {
-        SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(
-            OnFindSessionsCompleteDelegateHandle);
+        SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(OnFindSessionsCompleteDelegateHandle);
     }
 
-    if (bWasSuccessful && SessionSearch.IsValid() && SessionSearch->SearchResults.Num() > 0)
+    TArray<FString> Names;
+    if (bWasSuccessful && SessionSearch.IsValid())
     {
-        const int32 RandomIndex =
-            FMath::RandRange(0, SessionSearch->SearchResults.Num() - 1);
+        Names.Reserve(SessionSearch->SearchResults.Num());
+        for (const auto& R : SessionSearch->SearchResults)
+        {
+            Names.Add(R.GetSessionIdStr());
+        }
+    }
+    OnSessionListReady.Broadcast(Names); // <- feed UI
 
-        UE_LOG(LogTemp, Log,
-            TEXT("Attempting to join random session [%d / %d]"),
-            RandomIndex, SessionSearch->SearchResults.Num());
-
+    if (Names.Num() > 0)
+    {
+        const int32 RandomIndex = FMath::RandRange(0, Names.Num() - 1);
+        UE_LOG(LogTemp, Log, TEXT("Attempting to join random session [%d / %d]"), RandomIndex, Names.Num());
         JoinFoundSession(RandomIndex);
     }
     else
@@ -220,16 +211,17 @@ void UPantheonGameInstance::OnFindSessionsComplete(bool bWasSuccessful)
     }
 }
 
-void UPantheonGameInstance::OnJoinSessionComplete(FName SessionName,
-    EOnJoinSessionCompleteResult::Type Result)
+
+void UPantheonGameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
     if (SessionInterface.IsValid())
     {
-        SessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(
-            OnJoinSessionCompleteDelegateHandle);
+        SessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegateHandle);
     }
 
     const bool bWasSuccessful = (Result == EOnJoinSessionCompleteResult::Success);
+    UE_LOG(LogTemp, Log, TEXT("JoinSessionComplete: %s (Result=%d)"), bWasSuccessful ? TEXT("Success") : TEXT("Fail"), (int32)Result);
+
     if (bWasSuccessful)
     {
         FString ConnectString;
@@ -245,22 +237,45 @@ void UPantheonGameInstance::OnJoinSessionComplete(FName SessionName,
     OnSessionJoined.Broadcast(bWasSuccessful);
 }
 
+
+
 bool UPantheonGameInstance::LoadLocalProfile(FPlayerProfileData& Out)
 {
     if (USaveGame* Base = UGameplayStatics::LoadGameFromSlot(kProfileSlot, kProfileUserIdx))
     {
-        Out = Cast<UPantheonPlayerProfileSave>(Base)->Profile;
-        return true;
+        if (auto* Typed = Cast<UPantheonPlayerProfileSave>(Base))
+        {
+            Out = Typed->Profile;
+            return true;
+        }
+        UE_LOG(LogTemp, Warning, TEXT("Profile slot exists but type mismatch"));
     }
-    return false;   // no file yet
+    return false;
 }
 
 void UPantheonGameInstance::SaveLocalProfile(const FPlayerProfileData& In)
 {
-    UPantheonPlayerProfileSave* Obj = Cast<UPantheonPlayerProfileSave>(
-        UGameplayStatics::CreateSaveGameObject(UPantheonPlayerProfileSave::StaticClass()));
-    Obj->Profile = In;
-    UGameplayStatics::SaveGameToSlot(Obj, kProfileSlot, kProfileUserIdx);
+    if (auto* Obj = Cast<UPantheonPlayerProfileSave>(UGameplayStatics::CreateSaveGameObject(UPantheonPlayerProfileSave::StaticClass())))
+    {
+        Obj->Profile = In;
+        if (!UGameplayStatics::SaveGameToSlot(Obj, kProfileSlot, kProfileUserIdx))
+        {
+            UE_LOG(LogTemp, Warning, TEXT("SaveLocalProfile: SaveGameToSlot failed"));
+        }
+    }
 }
+
+void UPantheonGameInstance::Shutdown()
+{
+    Super::Shutdown();
+    if (SessionInterface.IsValid())
+    {
+        SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegateHandle);
+        SessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(OnFindSessionsCompleteDelegateHandle);
+        SessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(OnJoinSessionCompleteDelegateHandle);
+        SessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(OnDestroySessionCompleteDelegateHandle);
+    }
+}
+
 
 

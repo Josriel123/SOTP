@@ -31,8 +31,6 @@ public:
 
     virtual void Init() override;
 
-    /* ----------  UI entry-points ---------- */
-    UFUNCTION(BlueprintCallable, Category = "Session") void HostAndStartSession();
     UFUNCTION(BlueprintCallable, Category = "Session") void FindSessions();
     UFUNCTION(BlueprintCallable, Category = "Session") void JoinFoundSession(int32 SessionIndex);
     UFUNCTION(BlueprintCallable, Category = "Session") TArray<FString> GetFoundSessionNames() const;
@@ -43,8 +41,6 @@ public:
 
 private:
 
-    /* ----------  Internal helpers ---------- */
-    void HostSession();
 
     /* —— destroy-then-join helpers (NEW) —— */
     void CleanAndJoin(int32 SearchIndex);
@@ -56,6 +52,8 @@ private:
     void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
     void OnFindSessionsComplete(bool bWasSuccessful);
     void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
+
+	virtual void Shutdown() override;
 
     /* ----------  OSS handles ---------- */
     IOnlineSessionPtr                SessionInterface;

@@ -29,8 +29,7 @@ PANTHEON_API void FOnSessionListReady_DelegateWrapper(const FMulticastScriptDele
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execGetFoundSessionNames); \
 	DECLARE_FUNCTION(execJoinFoundSession); \
-	DECLARE_FUNCTION(execFindSessions); \
-	DECLARE_FUNCTION(execHostAndStartSession);
+	DECLARE_FUNCTION(execFindSessions);
 
 
 #define FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameInstance_h_21_INCLASS_NO_PURE_DECLS \
