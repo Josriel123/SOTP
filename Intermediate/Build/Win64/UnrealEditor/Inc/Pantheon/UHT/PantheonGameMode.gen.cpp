@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonGameMode.h"
+#include "PantheonGameMode.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonGameMode() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 AIMODULE_API UClass* Z_Construct_UClass_AAIController_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AController_NoRegister();
@@ -19,21 +21,17 @@ PANTHEON_API UClass* Z_Construct_UClass_APantheonGameMode();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonGameMode_NoRegister();
 PANTHEON_API UScriptStruct* Z_Construct_UScriptStruct_FPendingReplace();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin ScriptStruct FPendingReplace
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_PendingReplace;
+// ********** Begin ScriptStruct FPendingReplace ***************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FPendingReplace;
 class UScriptStruct* FPendingReplace::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_PendingReplace.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FPendingReplace.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_PendingReplace.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FPendingReplace, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("PendingReplace"));
+		Z_Registration_Info_UScriptStruct_FPendingReplace.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FPendingReplace, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("PendingReplace"));
 	}
-	return Z_Registration_Info_UScriptStruct_PendingReplace.OuterSingleton;
-}
-template<> PANTHEON_API UScriptStruct* StaticStruct<FPendingReplace>()
-{
-	return FPendingReplace::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FPendingReplace.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FPendingReplace_Statics
 {
@@ -63,15 +61,15 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FPendingReplace
 };
 UScriptStruct* Z_Construct_UScriptStruct_FPendingReplace()
 {
-	if (!Z_Registration_Info_UScriptStruct_PendingReplace.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FPendingReplace.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_PendingReplace.InnerSingleton, Z_Construct_UScriptStruct_FPendingReplace_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FPendingReplace.InnerSingleton, Z_Construct_UScriptStruct_FPendingReplace_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_PendingReplace.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FPendingReplace.InnerSingleton;
 }
-// End ScriptStruct FPendingReplace
+// ********** End ScriptStruct FPendingReplace *****************************************************
 
-// Begin Class APantheonGameMode Function HMS_OnGameRehosted_Cpp
+// ********** Begin Class APantheonGameMode Function HMS_OnGameRehosted_Cpp ************************
 struct Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics
 {
 #if WITH_METADATA
@@ -88,7 +86,7 @@ struct Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonGameMode, nullptr, "HMS_OnGameRehosted_Cpp", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonGameMode, nullptr, "HMS_OnGameRehosted_Cpp", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp_Statics::Function_MetaDataParams)},  };
 UFunction* Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -105,9 +103,9 @@ DEFINE_FUNCTION(APantheonGameMode::execHMS_OnGameRehosted_Cpp)
 	P_THIS->HMS_OnGameRehosted_Cpp();
 	P_NATIVE_END;
 }
-// End Class APantheonGameMode Function HMS_OnGameRehosted_Cpp
+// ********** End Class APantheonGameMode Function HMS_OnGameRehosted_Cpp **************************
 
-// Begin Class APantheonGameMode
+// ********** Begin Class APantheonGameMode ********************************************************
 void APantheonGameMode::StaticRegisterNativesAPantheonGameMode()
 {
 	UClass* Class = APantheonGameMode::StaticClass();
@@ -116,10 +114,34 @@ void APantheonGameMode::StaticRegisterNativesAPantheonGameMode()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonGameMode);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonGameMode;
+UClass* APantheonGameMode::GetPrivateStaticClass()
+{
+	using TClass = APantheonGameMode;
+	if (!Z_Registration_Info_UClass_APantheonGameMode.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonGameMode"),
+			Z_Registration_Info_UClass_APantheonGameMode.InnerSingleton,
+			StaticRegisterNativesAPantheonGameMode,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonGameMode.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonGameMode_NoRegister()
 {
-	return APantheonGameMode::StaticClass();
+	return APantheonGameMode::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonGameMode_Statics
 {
@@ -173,7 +195,7 @@ struct Z_Construct_UClass_APantheonGameMode_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp, "HMS_OnGameRehosted_Cpp" }, // 2699827182
+		{ &Z_Construct_UFunction_APantheonGameMode_HMS_OnGameRehosted_Cpp, "HMS_OnGameRehosted_Cpp" }, // 3371403015
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -195,9 +217,9 @@ void Z_Construct_UClass_APantheonGameMode_Statics::NewProp_bSpawnBots_SetBit(voi
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_bSpawnBots = { "bSpawnBots", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(APantheonGameMode), &Z_Construct_UClass_APantheonGameMode_Statics::NewProp_bSpawnBots_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bSpawnBots_MetaData), NewProp_bSpawnBots_MetaData) };
 const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingSilentRemovals_ElementProp = { "PendingSilentRemovals", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AController_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FSetPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingSilentRemovals = { "PendingSilentRemovals", nullptr, (EPropertyFlags)0x0014000000000000, UECodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonGameMode, PendingSilentRemovals), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PendingSilentRemovals_MetaData), NewProp_PendingSilentRemovals_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingReplacements_ValueProp = { "PendingReplacements", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FPendingReplace, METADATA_PARAMS(0, nullptr) }; // 1572883182
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingReplacements_ValueProp = { "PendingReplacements", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, Z_Construct_UScriptStruct_FPendingReplace, METADATA_PARAMS(0, nullptr) }; // 2179688994
 const UECodeGen_Private::FWeakObjectPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingReplacements_Key_KeyProp = { "PendingReplacements_Key", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::WeakObject, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AController_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingReplacements = { "PendingReplacements", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonGameMode, PendingReplacements), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PendingReplacements_MetaData), NewProp_PendingReplacements_MetaData) }; // 1572883182
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PendingReplacements = { "PendingReplacements", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonGameMode, PendingReplacements), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PendingReplacements_MetaData), NewProp_PendingReplacements_MetaData) }; // 2179688994
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APantheonGameMode_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APantheonGameMode_Statics::NewProp_PawnToSpawn,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APantheonGameMode_Statics::NewProp_BotControllerClass,
@@ -227,7 +249,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonGameMode_Stati
 	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_APantheonGameMode_Statics::PropPointers),
 	0,
-	0x009002ACu,
+	0x009003ACu,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonGameMode_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonGameMode_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonGameMode()
@@ -238,27 +260,24 @@ UClass* Z_Construct_UClass_APantheonGameMode()
 	}
 	return Z_Registration_Info_UClass_APantheonGameMode.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonGameMode>()
-{
-	return APantheonGameMode::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonGameMode);
 APantheonGameMode::~APantheonGameMode() {}
-// End Class APantheonGameMode
+// ********** End Class APantheonGameMode **********************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FPendingReplace::StaticStruct, Z_Construct_UScriptStruct_FPendingReplace_Statics::NewStructOps, TEXT("PendingReplace"), &Z_Registration_Info_UScriptStruct_PendingReplace, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPendingReplace), 1572883182U) },
+		{ FPendingReplace::StaticStruct, Z_Construct_UScriptStruct_FPendingReplace_Statics::NewStructOps, TEXT("PendingReplace"), &Z_Registration_Info_UScriptStruct_FPendingReplace, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPendingReplace), 2179688994U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonGameMode, APantheonGameMode::StaticClass, TEXT("APantheonGameMode"), &Z_Registration_Info_UClass_APantheonGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonGameMode), 4196793027U) },
+		{ Z_Construct_UClass_APantheonGameMode, APantheonGameMode::StaticClass, TEXT("APantheonGameMode"), &Z_Registration_Info_UClass_APantheonGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonGameMode), 686394303U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_3185310666(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonGameMode_h_Statics::ScriptStructInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_3485494459(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonGameMode_h__Script_Pantheon_Statics::ScriptStructInfo),
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -5,25 +5,51 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonLobbyGameMode.h"
+#include "PantheonLobbyGameMode.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonLobbyGameMode() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_GameMode();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonLobbyGameMode();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonLobbyGameMode_NoRegister();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class APantheonLobbyGameMode
+// ********** Begin Class APantheonLobbyGameMode ***************************************************
 void APantheonLobbyGameMode::StaticRegisterNativesAPantheonLobbyGameMode()
 {
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonLobbyGameMode);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonLobbyGameMode;
+UClass* APantheonLobbyGameMode::GetPrivateStaticClass()
+{
+	using TClass = APantheonLobbyGameMode;
+	if (!Z_Registration_Info_UClass_APantheonLobbyGameMode.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonLobbyGameMode"),
+			Z_Registration_Info_UClass_APantheonLobbyGameMode.InnerSingleton,
+			StaticRegisterNativesAPantheonLobbyGameMode,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonLobbyGameMode.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonLobbyGameMode_NoRegister()
 {
-	return APantheonLobbyGameMode::StaticClass();
+	return APantheonLobbyGameMode::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonLobbyGameMode_Statics
 {
@@ -61,7 +87,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonLobbyGameMode_
 	0,
 	0,
 	0,
-	0x009002ACu,
+	0x009003ACu,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonLobbyGameMode_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonLobbyGameMode_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonLobbyGameMode()
@@ -72,24 +98,21 @@ UClass* Z_Construct_UClass_APantheonLobbyGameMode()
 	}
 	return Z_Registration_Info_UClass_APantheonLobbyGameMode.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonLobbyGameMode>()
-{
-	return APantheonLobbyGameMode::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonLobbyGameMode);
 APantheonLobbyGameMode::~APantheonLobbyGameMode() {}
-// End Class APantheonLobbyGameMode
+// ********** End Class APantheonLobbyGameMode *****************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonLobbyGameMode_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonLobbyGameMode_h__Script_Pantheon_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonLobbyGameMode, APantheonLobbyGameMode::StaticClass, TEXT("APantheonLobbyGameMode"), &Z_Registration_Info_UClass_APantheonLobbyGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonLobbyGameMode), 1783193592U) },
+		{ Z_Construct_UClass_APantheonLobbyGameMode, APantheonLobbyGameMode::StaticClass, TEXT("APantheonLobbyGameMode"), &Z_Registration_Info_UClass_APantheonLobbyGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonLobbyGameMode), 1230175853U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonLobbyGameMode_h_1219576617(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonLobbyGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonLobbyGameMode_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonLobbyGameMode_h__Script_Pantheon_3418640795(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonLobbyGameMode_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonLobbyGameMode_h__Script_Pantheon_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

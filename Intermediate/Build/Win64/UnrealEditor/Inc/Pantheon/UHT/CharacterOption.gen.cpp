@@ -5,33 +5,31 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/CharacterOption.h"
+#include "CharacterOption.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodeCharacterOption() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
 PANTHEON_API UScriptStruct* Z_Construct_UScriptStruct_FCharacterOption();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin ScriptStruct FCharacterOption
+// ********** Begin ScriptStruct FCharacterOption **************************************************
 static_assert(std::is_polymorphic<FCharacterOption>() == std::is_polymorphic<FTableRowBase>(), "USTRUCT FCharacterOption cannot be polymorphic unless super FTableRowBase is polymorphic");
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_CharacterOption;
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FCharacterOption;
 class UScriptStruct* FCharacterOption::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_CharacterOption.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FCharacterOption.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_CharacterOption.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FCharacterOption, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("CharacterOption"));
+		Z_Registration_Info_UScriptStruct_FCharacterOption.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FCharacterOption, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("CharacterOption"));
 	}
-	return Z_Registration_Info_UScriptStruct_CharacterOption.OuterSingleton;
-}
-template<> PANTHEON_API UScriptStruct* StaticStruct<FCharacterOption>()
-{
-	return FCharacterOption::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FCharacterOption.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FCharacterOption_Statics
 {
@@ -118,24 +116,25 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FCharacterOptio
 };
 UScriptStruct* Z_Construct_UScriptStruct_FCharacterOption()
 {
-	if (!Z_Registration_Info_UScriptStruct_CharacterOption.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FCharacterOption.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_CharacterOption.InnerSingleton, Z_Construct_UScriptStruct_FCharacterOption_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FCharacterOption.InnerSingleton, Z_Construct_UScriptStruct_FCharacterOption_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_CharacterOption.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FCharacterOption.InnerSingleton;
 }
-// End ScriptStruct FCharacterOption
+// ********** End ScriptStruct FCharacterOption ****************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_CharacterOption_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_CharacterOption_h__Script_Pantheon_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FCharacterOption::StaticStruct, Z_Construct_UScriptStruct_FCharacterOption_Statics::NewStructOps, TEXT("CharacterOption"), &Z_Registration_Info_UScriptStruct_CharacterOption, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCharacterOption), 1174163480U) },
+		{ FCharacterOption::StaticStruct, Z_Construct_UScriptStruct_FCharacterOption_Statics::NewStructOps, TEXT("CharacterOption"), &Z_Registration_Info_UScriptStruct_FCharacterOption, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCharacterOption), 2235573728U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_CharacterOption_h_2381288234(TEXT("/Script/Pantheon"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_CharacterOption_h__Script_Pantheon_130242336(TEXT("/Script/Pantheon"),
 	nullptr, 0,
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_CharacterOption_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_CharacterOption_h_Statics::ScriptStructInfo),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_CharacterOption_h__Script_Pantheon_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_CharacterOption_h__Script_Pantheon_Statics::ScriptStructInfo),
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

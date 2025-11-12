@@ -5,13 +5,15 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonCharacterBase.h"
-#include "Runtime/Engine/Classes/GameFramework/OnlineReplStructs.h"
+#include "PantheonCharacterBase.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "UObject/CoreNet.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonCharacterBase() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 ENGINE_API UClass* Z_Construct_UClass_APlayerState_NoRegister();
@@ -24,9 +26,9 @@ ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonCharacterBase();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonCharacterBase_NoRegister();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class APantheonCharacterBase Function OnRep_IsSprinting
+// ********** Begin Class APantheonCharacterBase Function OnRep_IsSprinting ************************
 struct Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics
 {
 #if WITH_METADATA
@@ -42,7 +44,7 @@ struct Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonCharacterBase, nullptr, "OnRep_IsSprinting", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00040401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonCharacterBase, nullptr, "OnRep_IsSprinting", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00040401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting_Statics::Function_MetaDataParams)},  };
 UFunction* Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -59,14 +61,14 @@ DEFINE_FUNCTION(APantheonCharacterBase::execOnRep_IsSprinting)
 	P_THIS->OnRep_IsSprinting();
 	P_NATIVE_END;
 }
-// End Class APantheonCharacterBase Function OnRep_IsSprinting
+// ********** End Class APantheonCharacterBase Function OnRep_IsSprinting **************************
 
-// Begin Class APantheonCharacterBase Function ServerSetSprinting
+// ********** Begin Class APantheonCharacterBase Function ServerSetSprinting ***********************
 struct PantheonCharacterBase_eventServerSetSprinting_Parms
 {
 	bool bNewSprinting;
 };
-static const FName NAME_APantheonCharacterBase_ServerSetSprinting = FName(TEXT("ServerSetSprinting"));
+static FName NAME_APantheonCharacterBase_ServerSetSprinting = FName(TEXT("ServerSetSprinting"));
 void APantheonCharacterBase::ServerSetSprinting(bool bNewSprinting)
 {
 	PantheonCharacterBase_eventServerSetSprinting_Parms Parms;
@@ -101,7 +103,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::NewProp_bNewSprinting,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonCharacterBase, nullptr, "ServerSetSprinting", nullptr, nullptr, Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::PropPointers), sizeof(PantheonCharacterBase_eventServerSetSprinting_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x80240CC1, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonCharacterBase, nullptr, "ServerSetSprinting", Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::PropPointers), sizeof(PantheonCharacterBase_eventServerSetSprinting_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x80240CC1, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(PantheonCharacterBase_eventServerSetSprinting_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting()
 {
@@ -125,9 +127,9 @@ DEFINE_FUNCTION(APantheonCharacterBase::execServerSetSprinting)
 	P_THIS->ServerSetSprinting_Implementation(Z_Param_bNewSprinting);
 	P_NATIVE_END;
 }
-// End Class APantheonCharacterBase Function ServerSetSprinting
+// ********** End Class APantheonCharacterBase Function ServerSetSprinting *************************
 
-// Begin Class APantheonCharacterBase
+// ********** Begin Class APantheonCharacterBase ***************************************************
 void APantheonCharacterBase::StaticRegisterNativesAPantheonCharacterBase()
 {
 	UClass* Class = APantheonCharacterBase::StaticClass();
@@ -137,10 +139,34 @@ void APantheonCharacterBase::StaticRegisterNativesAPantheonCharacterBase()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonCharacterBase);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonCharacterBase;
+UClass* APantheonCharacterBase::GetPrivateStaticClass()
+{
+	using TClass = APantheonCharacterBase;
+	if (!Z_Registration_Info_UClass_APantheonCharacterBase.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonCharacterBase"),
+			Z_Registration_Info_UClass_APantheonCharacterBase.InnerSingleton,
+			StaticRegisterNativesAPantheonCharacterBase,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonCharacterBase.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonCharacterBase_NoRegister()
 {
-	return APantheonCharacterBase::StaticClass();
+	return APantheonCharacterBase::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonCharacterBase_Statics
 {
@@ -290,8 +316,8 @@ struct Z_Construct_UClass_APantheonCharacterBase_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting, "OnRep_IsSprinting" }, // 3259507143
-		{ &Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting, "ServerSetSprinting" }, // 1147448527
+		{ &Z_Construct_UFunction_APantheonCharacterBase_OnRep_IsSprinting, "OnRep_IsSprinting" }, // 1849485559
+		{ &Z_Construct_UFunction_APantheonCharacterBase_ServerSetSprinting, "ServerSetSprinting" }, // 2005257051
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -299,7 +325,7 @@ struct Z_Construct_UClass_APantheonCharacterBase_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_APantheonCharacterBase_Statics::NewProp_LastHumanUniqueId = { "LastHumanUniqueId", nullptr, (EPropertyFlags)0x0010000000000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonCharacterBase, LastHumanUniqueId), Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastHumanUniqueId_MetaData), NewProp_LastHumanUniqueId_MetaData) }; // 3410776867
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_APantheonCharacterBase_Statics::NewProp_LastHumanUniqueId = { "LastHumanUniqueId", nullptr, (EPropertyFlags)0x0010000000000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonCharacterBase, LastHumanUniqueId), Z_Construct_UScriptStruct_FUniqueNetIdRepl, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastHumanUniqueId_MetaData), NewProp_LastHumanUniqueId_MetaData) }; // 774471623
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APantheonCharacterBase_Statics::NewProp_LastHumanOwnerPS = { "LastHumanOwnerPS", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonCharacterBase, LastHumanOwnerPS), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastHumanOwnerPS_MetaData), NewProp_LastHumanOwnerPS_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APantheonCharacterBase_Statics::NewProp_CharacterStatsTable = { "CharacterStatsTable", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonCharacterBase, CharacterStatsTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterStatsTable_MetaData), NewProp_CharacterStatsTable_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_APantheonCharacterBase_Statics::NewProp_StatsRowName = { "StatsRowName", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonCharacterBase, StatsRowName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StatsRowName_MetaData), NewProp_StatsRowName_MetaData) };
@@ -363,7 +389,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonCharacterBase_
 	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_APantheonCharacterBase_Statics::PropPointers),
 	0,
-	0x009000A4u,
+	0x009001A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonCharacterBase_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonCharacterBase_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonCharacterBase()
@@ -374,33 +400,32 @@ UClass* Z_Construct_UClass_APantheonCharacterBase()
 	}
 	return Z_Registration_Info_UClass_APantheonCharacterBase.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonCharacterBase>()
-{
-	return APantheonCharacterBase::StaticClass();
-}
+#if VALIDATE_CLASS_REPS
 void APantheonCharacterBase::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
-	static const FName Name_LastHumanUniqueId(TEXT("LastHumanUniqueId"));
-	static const FName Name_bIsSprinting(TEXT("bIsSprinting"));
+	static FName Name_LastHumanUniqueId(TEXT("LastHumanUniqueId"));
+	static FName Name_bIsSprinting(TEXT("bIsSprinting"));
 	const bool bIsValid = true
 		&& Name_LastHumanUniqueId == ClassReps[(int32)ENetFields_Private::LastHumanUniqueId].Property->GetFName()
 		&& Name_bIsSprinting == ClassReps[(int32)ENetFields_Private::bIsSprinting].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in APantheonCharacterBase"));
 }
+#endif
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonCharacterBase);
 APantheonCharacterBase::~APantheonCharacterBase() {}
-// End Class APantheonCharacterBase
+// ********** End Class APantheonCharacterBase *****************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonCharacterBase_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonCharacterBase_h__Script_Pantheon_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonCharacterBase, APantheonCharacterBase::StaticClass, TEXT("APantheonCharacterBase"), &Z_Registration_Info_UClass_APantheonCharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonCharacterBase), 2818803620U) },
+		{ Z_Construct_UClass_APantheonCharacterBase, APantheonCharacterBase::StaticClass, TEXT("APantheonCharacterBase"), &Z_Registration_Info_UClass_APantheonCharacterBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonCharacterBase), 866111329U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonCharacterBase_h_2668823083(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonCharacterBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonCharacterBase_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonCharacterBase_h__Script_Pantheon_2431362421(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonCharacterBase_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonCharacterBase_h__Script_Pantheon_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

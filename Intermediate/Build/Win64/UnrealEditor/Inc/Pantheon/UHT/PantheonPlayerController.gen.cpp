@@ -5,26 +5,28 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonPlayerController.h"
-#include "Pantheon/Public/PantheonPlayerProfileSave.h"
+#include "PantheonPlayerController.h"
+#include "PantheonPlayerProfileSave.h"
 #include "UObject/CoreNet.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonPlayerController() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 HOSTMIGRATIONSYSTEM_API UClass* Z_Construct_UClass_AHMS_PlayerController();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonPlayerController();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonPlayerController_NoRegister();
 PANTHEON_API UScriptStruct* Z_Construct_UScriptStruct_FPlayerProfileData();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class APantheonPlayerController Function Client_SaveLocalProfile
+// ********** Begin Class APantheonPlayerController Function Client_SaveLocalProfile ***************
 struct PantheonPlayerController_eventClient_SaveLocalProfile_Parms
 {
 	FPlayerProfileData InProfile;
 };
-static const FName NAME_APantheonPlayerController_Client_SaveLocalProfile = FName(TEXT("Client_SaveLocalProfile"));
+static FName NAME_APantheonPlayerController_Client_SaveLocalProfile = FName(TEXT("Client_SaveLocalProfile"));
 void APantheonPlayerController::Client_SaveLocalProfile(FPlayerProfileData const& InProfile)
 {
 	PantheonPlayerController_eventClient_SaveLocalProfile_Parms Parms;
@@ -52,12 +54,12 @@ struct Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_S
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::NewProp_InProfile = { "InProfile", nullptr, (EPropertyFlags)0x0010000008000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PantheonPlayerController_eventClient_SaveLocalProfile_Parms, InProfile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InProfile_MetaData), NewProp_InProfile_MetaData) }; // 3532099325
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::NewProp_InProfile = { "InProfile", nullptr, (EPropertyFlags)0x0010000008000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PantheonPlayerController_eventClient_SaveLocalProfile_Parms, InProfile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InProfile_MetaData), NewProp_InProfile_MetaData) }; // 3079805725
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::NewProp_InProfile,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "Client_SaveLocalProfile", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers), sizeof(PantheonPlayerController_eventClient_SaveLocalProfile_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "Client_SaveLocalProfile", Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::PropPointers), sizeof(PantheonPlayerController_eventClient_SaveLocalProfile_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(PantheonPlayerController_eventClient_SaveLocalProfile_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile()
 {
@@ -76,15 +78,15 @@ DEFINE_FUNCTION(APantheonPlayerController::execClient_SaveLocalProfile)
 	P_THIS->Client_SaveLocalProfile_Implementation(Z_Param_InProfile);
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerController Function Client_SaveLocalProfile
+// ********** End Class APantheonPlayerController Function Client_SaveLocalProfile *****************
 
-// Begin Class APantheonPlayerController Function ServerSetCharacterPreference
+// ********** Begin Class APantheonPlayerController Function ServerSetCharacterPreference **********
 struct PantheonPlayerController_eventServerSetCharacterPreference_Parms
 {
 	FName RowKey;
 	FString InRole;
 };
-static const FName NAME_APantheonPlayerController_ServerSetCharacterPreference = FName(TEXT("ServerSetCharacterPreference"));
+static FName NAME_APantheonPlayerController_ServerSetCharacterPreference = FName(TEXT("ServerSetCharacterPreference"));
 void APantheonPlayerController::ServerSetCharacterPreference(FName RowKey, const FString& InRole)
 {
 	PantheonPlayerController_eventServerSetCharacterPreference_Parms Parms;
@@ -115,7 +117,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::NewProp_InRole,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "ServerSetCharacterPreference", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::PropPointers), sizeof(PantheonPlayerController_eventServerSetCharacterPreference_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "ServerSetCharacterPreference", Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::PropPointers), sizeof(PantheonPlayerController_eventServerSetCharacterPreference_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(PantheonPlayerController_eventServerSetCharacterPreference_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference()
 {
@@ -140,14 +142,14 @@ DEFINE_FUNCTION(APantheonPlayerController::execServerSetCharacterPreference)
 	P_THIS->ServerSetCharacterPreference_Implementation(Z_Param_RowKey,Z_Param_InRole);
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerController Function ServerSetCharacterPreference
+// ********** End Class APantheonPlayerController Function ServerSetCharacterPreference ************
 
-// Begin Class APantheonPlayerController Function ServerSetReady
+// ********** Begin Class APantheonPlayerController Function ServerSetReady ************************
 struct PantheonPlayerController_eventServerSetReady_Parms
 {
 	bool bNewReady;
 };
-static const FName NAME_APantheonPlayerController_ServerSetReady = FName(TEXT("ServerSetReady"));
+static FName NAME_APantheonPlayerController_ServerSetReady = FName(TEXT("ServerSetReady"));
 void APantheonPlayerController::ServerSetReady(bool bNewReady)
 {
 	PantheonPlayerController_eventServerSetReady_Parms Parms;
@@ -176,7 +178,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::NewProp_bNewReady,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "ServerSetReady", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::PropPointers), sizeof(PantheonPlayerController_eventServerSetReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerController, nullptr, "ServerSetReady", Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::PropPointers), sizeof(PantheonPlayerController_eventServerSetReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x84220CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerController_ServerSetReady_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(PantheonPlayerController_eventServerSetReady_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerController_ServerSetReady()
 {
@@ -200,9 +202,9 @@ DEFINE_FUNCTION(APantheonPlayerController::execServerSetReady)
 	P_THIS->ServerSetReady_Implementation(Z_Param_bNewReady);
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerController Function ServerSetReady
+// ********** End Class APantheonPlayerController Function ServerSetReady **************************
 
-// Begin Class APantheonPlayerController
+// ********** Begin Class APantheonPlayerController ************************************************
 void APantheonPlayerController::StaticRegisterNativesAPantheonPlayerController()
 {
 	UClass* Class = APantheonPlayerController::StaticClass();
@@ -213,10 +215,34 @@ void APantheonPlayerController::StaticRegisterNativesAPantheonPlayerController()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonPlayerController);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonPlayerController;
+UClass* APantheonPlayerController::GetPrivateStaticClass()
+{
+	using TClass = APantheonPlayerController;
+	if (!Z_Registration_Info_UClass_APantheonPlayerController.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonPlayerController"),
+			Z_Registration_Info_UClass_APantheonPlayerController.InnerSingleton,
+			StaticRegisterNativesAPantheonPlayerController,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonPlayerController.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonPlayerController_NoRegister()
 {
-	return APantheonPlayerController::StaticClass();
+	return APantheonPlayerController::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonPlayerController_Statics
 {
@@ -235,9 +261,9 @@ struct Z_Construct_UClass_APantheonPlayerController_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile, "Client_SaveLocalProfile" }, // 2149020519
-		{ &Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference, "ServerSetCharacterPreference" }, // 2817890515
-		{ &Z_Construct_UFunction_APantheonPlayerController_ServerSetReady, "ServerSetReady" }, // 374623294
+		{ &Z_Construct_UFunction_APantheonPlayerController_Client_SaveLocalProfile, "Client_SaveLocalProfile" }, // 3935541990
+		{ &Z_Construct_UFunction_APantheonPlayerController_ServerSetCharacterPreference, "ServerSetCharacterPreference" }, // 65968656
+		{ &Z_Construct_UFunction_APantheonPlayerController_ServerSetReady, "ServerSetReady" }, // 3876776328
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -262,7 +288,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonPlayerControll
 	UE_ARRAY_COUNT(FuncInfo),
 	0,
 	0,
-	0x009002A4u,
+	0x009003A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonPlayerController_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonPlayerController_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonPlayerController()
@@ -273,24 +299,21 @@ UClass* Z_Construct_UClass_APantheonPlayerController()
 	}
 	return Z_Registration_Info_UClass_APantheonPlayerController.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonPlayerController>()
-{
-	return APantheonPlayerController::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonPlayerController);
 APantheonPlayerController::~APantheonPlayerController() {}
-// End Class APantheonPlayerController
+// ********** End Class APantheonPlayerController **************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerController_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerController_h__Script_Pantheon_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonPlayerController, APantheonPlayerController::StaticClass, TEXT("APantheonPlayerController"), &Z_Registration_Info_UClass_APantheonPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonPlayerController), 3197209732U) },
+		{ Z_Construct_UClass_APantheonPlayerController, APantheonPlayerController::StaticClass, TEXT("APantheonPlayerController"), &Z_Registration_Info_UClass_APantheonPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonPlayerController), 342545551U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerController_h_726907254(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerController_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerController_h__Script_Pantheon_1517823861(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerController_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerController_h__Script_Pantheon_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

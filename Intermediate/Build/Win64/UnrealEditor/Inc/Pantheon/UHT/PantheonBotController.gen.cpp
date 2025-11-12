@@ -5,25 +5,51 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonBotController.h"
+#include "PantheonBotController.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonBotController() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 AIMODULE_API UClass* Z_Construct_UClass_AAIController();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonBotController();
 PANTHEON_API UClass* Z_Construct_UClass_APantheonBotController_NoRegister();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Class APantheonBotController
+// ********** Begin Class APantheonBotController ***************************************************
 void APantheonBotController::StaticRegisterNativesAPantheonBotController()
 {
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonBotController);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonBotController;
+UClass* APantheonBotController::GetPrivateStaticClass()
+{
+	using TClass = APantheonBotController;
+	if (!Z_Registration_Info_UClass_APantheonBotController.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonBotController"),
+			Z_Registration_Info_UClass_APantheonBotController.InnerSingleton,
+			StaticRegisterNativesAPantheonBotController,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonBotController.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonBotController_NoRegister()
 {
-	return APantheonBotController::StaticClass();
+	return APantheonBotController::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonBotController_Statics
 {
@@ -76,7 +102,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonBotController_
 	0,
 	UE_ARRAY_COUNT(Z_Construct_UClass_APantheonBotController_Statics::PropPointers),
 	0,
-	0x009002A4u,
+	0x009003A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonBotController_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonBotController_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonBotController()
@@ -87,24 +113,21 @@ UClass* Z_Construct_UClass_APantheonBotController()
 	}
 	return Z_Registration_Info_UClass_APantheonBotController.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonBotController>()
-{
-	return APantheonBotController::StaticClass();
-}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonBotController);
 APantheonBotController::~APantheonBotController() {}
-// End Class APantheonBotController
+// ********** End Class APantheonBotController *****************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonBotController_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonBotController_h__Script_Pantheon_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonBotController, APantheonBotController::StaticClass, TEXT("APantheonBotController"), &Z_Registration_Info_UClass_APantheonBotController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonBotController), 2433090228U) },
+		{ Z_Construct_UClass_APantheonBotController, APantheonBotController::StaticClass, TEXT("APantheonBotController"), &Z_Registration_Info_UClass_APantheonBotController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonBotController), 2274859474U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonBotController_h_2797870997(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonBotController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonBotController_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonBotController_h__Script_Pantheon_2146622915(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonBotController_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonBotController_h__Script_Pantheon_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

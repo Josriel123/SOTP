@@ -5,11 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonPlayerState.h"
+#include "PantheonPlayerState.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonPlayerState() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
@@ -20,9 +22,9 @@ PANTHEON_API UClass* Z_Construct_UClass_APantheonPlayerState_NoRegister();
 PANTHEON_API UFunction* Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature();
 PANTHEON_API UFunction* Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin Delegate FOnCharacterSelectedSignature
+// ********** Begin Delegate FOnCharacterSelectedSignature *****************************************
 struct Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics
 {
 	struct _Script_Pantheon_eventOnCharacterSelectedSignature_Parms
@@ -36,21 +38,21 @@ struct Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__Dele
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SelectingPC;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
+	static const UECodeGen_Private::FDelegateFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::NewProp_SelectingPC = { "SelectingPC", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_Pantheon_eventOnCharacterSelectedSignature_Parms, SelectingPC), Z_Construct_UClass_APlayerController_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::NewProp_SelectingPC,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_Pantheon, nullptr, "OnCharacterSelectedSignature__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::_Script_Pantheon_eventOnCharacterSelectedSignature_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FDelegateFunctionParams Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UPackage__Script_Pantheon, nullptr, "OnCharacterSelectedSignature__DelegateSignature", Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::_Script_Pantheon_eventOnCharacterSelectedSignature_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::_Script_Pantheon_eventOnCharacterSelectedSignature_Parms) < MAX_uint16);
 UFunction* Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::FuncParams);
+		UECodeGen_Private::ConstructUDelegateFunction(&ReturnFunction, Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
@@ -64,9 +66,9 @@ void FOnCharacterSelectedSignature_DelegateWrapper(const FMulticastScriptDelegat
 	Parms.SelectingPC=SelectingPC;
 	OnCharacterSelectedSignature.ProcessMulticastDelegate<UObject>(&Parms);
 }
-// End Delegate FOnCharacterSelectedSignature
+// ********** End Delegate FOnCharacterSelectedSignature *******************************************
 
-// Begin Delegate FOnReadyChanged
+// ********** Begin Delegate FOnReadyChanged *******************************************************
 struct Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics
 {
 	struct _Script_Pantheon_eventOnReadyChanged_Parms
@@ -83,7 +85,7 @@ struct Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_
 	static void NewProp_bNowReady_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bNowReady;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
+	static const UECodeGen_Private::FDelegateFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::NewProp_PlayerState = { "PlayerState", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_Pantheon_eventOnReadyChanged_Parms, PlayerState), Z_Construct_UClass_APantheonPlayerState_NoRegister, METADATA_PARAMS(0, nullptr) };
 void Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::NewProp_bNowReady_SetBit(void* Obj)
@@ -96,14 +98,14 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunctio
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::NewProp_bNowReady,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_Pantheon, nullptr, "OnReadyChanged__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::_Script_Pantheon_eventOnReadyChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FDelegateFunctionParams Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UPackage__Script_Pantheon, nullptr, "OnReadyChanged__DelegateSignature", Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::_Script_Pantheon_eventOnReadyChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::_Script_Pantheon_eventOnReadyChanged_Parms) < MAX_uint16);
 UFunction* Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
 	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::FuncParams);
+		UECodeGen_Private::ConstructUDelegateFunction(&ReturnFunction, Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature_Statics::FuncParams);
 	}
 	return ReturnFunction;
 }
@@ -119,9 +121,9 @@ void FOnReadyChanged_DelegateWrapper(const FMulticastScriptDelegate& OnReadyChan
 	Parms.bNowReady=bNowReady ? true : false;
 	OnReadyChanged.ProcessMulticastDelegate<UObject>(&Parms);
 }
-// End Delegate FOnReadyChanged
+// ********** End Delegate FOnReadyChanged *********************************************************
 
-// Begin Class APantheonPlayerState Function GetChosenPawnClassForRole
+// ********** Begin Class APantheonPlayerState Function GetChosenPawnClassForRole ******************
 struct Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics
 {
 	struct PantheonPlayerState_eventGetChosenPawnClassForRole_Parms
@@ -150,7 +152,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "GetChosenPawnClassForRole", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PantheonPlayerState_eventGetChosenPawnClassForRole_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "GetChosenPawnClassForRole", Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PantheonPlayerState_eventGetChosenPawnClassForRole_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole_Statics::PantheonPlayerState_eventGetChosenPawnClassForRole_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole()
 {
@@ -169,9 +171,9 @@ DEFINE_FUNCTION(APantheonPlayerState::execGetChosenPawnClassForRole)
 	*(TSubclassOf<APawn>*)Z_Param__Result=P_THIS->GetChosenPawnClassForRole(Z_Param_InRole);
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerState Function GetChosenPawnClassForRole
+// ********** End Class APantheonPlayerState Function GetChosenPawnClassForRole ********************
 
-// Begin Class APantheonPlayerState Function IsReady
+// ********** Begin Class APantheonPlayerState Function IsReady ************************************
 struct Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics
 {
 	struct PantheonPlayerState_eventIsReady_Parms
@@ -204,7 +206,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::NewProp_ReturnValue,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "IsReady", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PantheonPlayerState_eventIsReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "IsReady", Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PantheonPlayerState_eventIsReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_APantheonPlayerState_IsReady_Statics::PantheonPlayerState_eventIsReady_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerState_IsReady()
 {
@@ -222,9 +224,9 @@ DEFINE_FUNCTION(APantheonPlayerState::execIsReady)
 	*(bool*)Z_Param__Result=P_THIS->IsReady();
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerState Function IsReady
+// ********** End Class APantheonPlayerState Function IsReady **************************************
 
-// Begin Class APantheonPlayerState Function OnRep_IsReady
+// ********** Begin Class APantheonPlayerState Function OnRep_IsReady ******************************
 struct Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics
 {
 #if WITH_METADATA
@@ -234,7 +236,7 @@ struct Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "OnRep_IsReady", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "OnRep_IsReady", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady_Statics::Function_MetaDataParams)},  };
 UFunction* Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -251,9 +253,9 @@ DEFINE_FUNCTION(APantheonPlayerState::execOnRep_IsReady)
 	P_THIS->OnRep_IsReady();
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerState Function OnRep_IsReady
+// ********** End Class APantheonPlayerState Function OnRep_IsReady ********************************
 
-// Begin Class APantheonPlayerState Function SetReady
+// ********** Begin Class APantheonPlayerState Function SetReady ***********************************
 struct Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics
 {
 	struct PantheonPlayerState_eventSetReady_Parms
@@ -286,7 +288,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APanth
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::NewProp_bNewReady,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "SetReady", nullptr, nullptr, Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PantheonPlayerState_eventSetReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_APantheonPlayerState, nullptr, "SetReady", Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PropPointers), sizeof(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PantheonPlayerState_eventSetReady_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::Function_MetaDataParams), Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::Function_MetaDataParams)},  };
 static_assert(sizeof(Z_Construct_UFunction_APantheonPlayerState_SetReady_Statics::PantheonPlayerState_eventSetReady_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_APantheonPlayerState_SetReady()
 {
@@ -305,9 +307,9 @@ DEFINE_FUNCTION(APantheonPlayerState::execSetReady)
 	P_THIS->SetReady(Z_Param_bNewReady);
 	P_NATIVE_END;
 }
-// End Class APantheonPlayerState Function SetReady
+// ********** End Class APantheonPlayerState Function SetReady *************************************
 
-// Begin Class APantheonPlayerState
+// ********** Begin Class APantheonPlayerState *****************************************************
 void APantheonPlayerState::StaticRegisterNativesAPantheonPlayerState()
 {
 	UClass* Class = APantheonPlayerState::StaticClass();
@@ -319,10 +321,34 @@ void APantheonPlayerState::StaticRegisterNativesAPantheonPlayerState()
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(APantheonPlayerState);
+FClassRegistrationInfo Z_Registration_Info_UClass_APantheonPlayerState;
+UClass* APantheonPlayerState::GetPrivateStaticClass()
+{
+	using TClass = APantheonPlayerState;
+	if (!Z_Registration_Info_UClass_APantheonPlayerState.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonPlayerState"),
+			Z_Registration_Info_UClass_APantheonPlayerState.InnerSingleton,
+			StaticRegisterNativesAPantheonPlayerState,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_APantheonPlayerState.InnerSingleton;
+}
 UClass* Z_Construct_UClass_APantheonPlayerState_NoRegister()
 {
-	return APantheonPlayerState::StaticClass();
+	return APantheonPlayerState::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_APantheonPlayerState_Statics
 {
@@ -385,10 +411,10 @@ struct Z_Construct_UClass_APantheonPlayerState_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole, "GetChosenPawnClassForRole" }, // 47963111
-		{ &Z_Construct_UFunction_APantheonPlayerState_IsReady, "IsReady" }, // 3392498803
-		{ &Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady, "OnRep_IsReady" }, // 2891582922
-		{ &Z_Construct_UFunction_APantheonPlayerState_SetReady, "SetReady" }, // 713270098
+		{ &Z_Construct_UFunction_APantheonPlayerState_GetChosenPawnClassForRole, "GetChosenPawnClassForRole" }, // 2426281094
+		{ &Z_Construct_UFunction_APantheonPlayerState_IsReady, "IsReady" }, // 2811775473
+		{ &Z_Construct_UFunction_APantheonPlayerState_OnRep_IsReady, "OnRep_IsReady" }, // 2744896085
+		{ &Z_Construct_UFunction_APantheonPlayerState_SetReady, "SetReady" }, // 1848919296
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -396,10 +422,10 @@ struct Z_Construct_UClass_APantheonPlayerState_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_OnReadyChanged = { "OnReadyChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, OnReadyChanged), Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnReadyChanged_MetaData), NewProp_OnReadyChanged_MetaData) }; // 3600866153
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_OnReadyChanged = { "OnReadyChanged", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, OnReadyChanged), Z_Construct_UDelegateFunction_Pantheon_OnReadyChanged__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnReadyChanged_MetaData), NewProp_OnReadyChanged_MetaData) }; // 3053674113
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_SelectedPawnClass = { "SelectedPawnClass", nullptr, (EPropertyFlags)0x0014000000000020, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, SelectedPawnClass), Z_Construct_UClass_UClass, Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelectedPawnClass_MetaData), NewProp_SelectedPawnClass_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_ChosenRole = { "ChosenRole", nullptr, (EPropertyFlags)0x0010000000000034, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, ChosenRole), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ChosenRole_MetaData), NewProp_ChosenRole_MetaData) };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_OnCharacterSelected = { "OnCharacterSelected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, OnCharacterSelected), Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnCharacterSelected_MetaData), NewProp_OnCharacterSelected_MetaData) }; // 853332004
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_OnCharacterSelected = { "OnCharacterSelected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APantheonPlayerState, OnCharacterSelected), Z_Construct_UDelegateFunction_Pantheon_OnCharacterSelectedSignature__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnCharacterSelected_MetaData), NewProp_OnCharacterSelected_MetaData) }; // 269183990
 void Z_Construct_UClass_APantheonPlayerState_Statics::NewProp_bIsBot_SetBit(void* Obj)
 {
 	((APantheonPlayerState*)Obj)->bIsBot = 1;
@@ -442,7 +468,7 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_APantheonPlayerState_St
 	UE_ARRAY_COUNT(FuncInfo),
 	UE_ARRAY_COUNT(Z_Construct_UClass_APantheonPlayerState_Statics::PropPointers),
 	0,
-	0x009002A4u,
+	0x009003A4u,
 	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_APantheonPlayerState_Statics::Class_MetaDataParams), Z_Construct_UClass_APantheonPlayerState_Statics::Class_MetaDataParams)
 };
 UClass* Z_Construct_UClass_APantheonPlayerState()
@@ -453,18 +479,15 @@ UClass* Z_Construct_UClass_APantheonPlayerState()
 	}
 	return Z_Registration_Info_UClass_APantheonPlayerState.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<APantheonPlayerState>()
-{
-	return APantheonPlayerState::StaticClass();
-}
+#if VALIDATE_CLASS_REPS
 void APantheonPlayerState::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
 {
-	static const FName Name_SelectedPawnClass(TEXT("SelectedPawnClass"));
-	static const FName Name_ChosenRole(TEXT("ChosenRole"));
-	static const FName Name_bIsBot(TEXT("bIsBot"));
-	static const FName Name_SurvivorRowKey(TEXT("SurvivorRowKey"));
-	static const FName Name_KillerRowKey(TEXT("KillerRowKey"));
-	static const FName Name_bIsReady(TEXT("bIsReady"));
+	static FName Name_SelectedPawnClass(TEXT("SelectedPawnClass"));
+	static FName Name_ChosenRole(TEXT("ChosenRole"));
+	static FName Name_bIsBot(TEXT("bIsBot"));
+	static FName Name_SurvivorRowKey(TEXT("SurvivorRowKey"));
+	static FName Name_KillerRowKey(TEXT("KillerRowKey"));
+	static FName Name_bIsReady(TEXT("bIsReady"));
 	const bool bIsValid = true
 		&& Name_SelectedPawnClass == ClassReps[(int32)ENetFields_Private::SelectedPawnClass].Property->GetFName()
 		&& Name_ChosenRole == ClassReps[(int32)ENetFields_Private::ChosenRole].Property->GetFName()
@@ -474,20 +497,22 @@ void APantheonPlayerState::ValidateGeneratedRepEnums(const TArray<struct FRepRec
 		&& Name_bIsReady == ClassReps[(int32)ENetFields_Private::bIsReady].Property->GetFName();
 	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in APantheonPlayerState"));
 }
+#endif
 DEFINE_VTABLE_PTR_HELPER_CTOR(APantheonPlayerState);
 APantheonPlayerState::~APantheonPlayerState() {}
-// End Class APantheonPlayerState
+// ********** End Class APantheonPlayerState *******************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerState_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerState_h__Script_Pantheon_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APantheonPlayerState, APantheonPlayerState::StaticClass, TEXT("APantheonPlayerState"), &Z_Registration_Info_UClass_APantheonPlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonPlayerState), 2379013722U) },
+		{ Z_Construct_UClass_APantheonPlayerState, APantheonPlayerState::StaticClass, TEXT("APantheonPlayerState"), &Z_Registration_Info_UClass_APantheonPlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APantheonPlayerState), 1487956785U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerState_h_419210968(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerState_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerState_h__Script_Pantheon_4088869013(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerState_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerState_h__Script_Pantheon_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

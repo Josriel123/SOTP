@@ -14,7 +14,6 @@
     <None Include="..\..\.gitattributes" />
     <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
-    <None Include="..\..\rename_module_F13_to_Pantheon.ps1" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -57,81 +56,81 @@
     <Filter Include="Plugins\AdvancedSessions\Source\AdvancedSessions\Classes">
       <UniqueIdentifier>{9E78B99A-76A3-3C41-BB3F-7B04A3F9AAFD}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedExternalUILibrary.h">
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedExternalUILibrary.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsGameInstance.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsGameInstance.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsInterface.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsInterface.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsLibrary.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsLibrary.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedGameSession.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedGameSession.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedIdentityLibrary.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedIdentityLibrary.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessions.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessions.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessionsLibrary.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessionsLibrary.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedVoiceLibrary.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedVoiceLibrary.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AutoLoginUserCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\AutoLoginUserCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\BlueprintDataDefinitions.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\BlueprintDataDefinitions.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CancelFindSessionsCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CancelFindSessionsCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CreateSessionCallbackProxyAdvanced.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\CreateSessionCallbackProxyAdvanced.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\EndSessionCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\EndSessionCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindFriendSessionCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindFriendSessionCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindSessionsCallbackProxyAdvanced.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\FindSessionsCallbackProxyAdvanced.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetFriendsCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetFriendsCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetRecentPlayersCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetRecentPlayersCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetUserPrivilegeCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\GetUserPrivilegeCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LoginUserCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LoginUserCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LogoutUserCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\LogoutUserCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\OnlineSubSystemHeader.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\OnlineSubSystemHeader.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\SendFriendInviteCallbackProxy.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\SendFriendInviteCallbackProxy.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\StartSessionCallbackProxyAdvanced.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\StartSessionCallbackProxyAdvanced.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\UpdateSessionCallbackProxyAdvanced.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\AdvancedSessions\Source\AdvancedSessions\Classes\UpdateSessionCallbackProxyAdvanced.h">
       <Filter>Plugins\AdvancedSessions\Source\AdvancedSessions\Classes</Filter>
-    </ClCompile>
+    </ClInclude>
     <Filter Include="Plugins\AdvancedSessions\Source\AdvancedSessions\Private">
       <UniqueIdentifier>{A352E0BB-374F-32C5-964E-D78AA9200CC7}</UniqueIdentifier>
     </Filter>
@@ -225,12 +224,9 @@
     <ClCompile Include="..\..\Source\Pantheon\Pantheon.cpp">
       <Filter>Source\Pantheon</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Pantheon.h">
+    <ClInclude Include="..\..\Source\Pantheon\Pantheon.h">
       <Filter>Source\Pantheon</Filter>
-    </ClCompile>
-    <None Include="..\..\Source\Pantheon\rename_to_pantheon.ps1">
-      <Filter>Source\Pantheon</Filter>
-    </None>
+    </ClInclude>
     <Filter Include="Source\Pantheon\Private">
       <UniqueIdentifier>{CB813514-444F-37FC-A682-BDA184FB5655}</UniqueIdentifier>
     </Filter>
@@ -273,47 +269,47 @@
     <Filter Include="Source\Pantheon\Public">
       <UniqueIdentifier>{32B3837B-8006-31A9-B16E-51A238D06A70}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\Pantheon\Public\CharacterOption.h">
+    <ClInclude Include="..\..\Source\Pantheon\Public\CharacterOption.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\CharacterStats.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\CharacterStats.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonBotController.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonBotController.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonCharacterBase.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonCharacterBase.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonGameInstance.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonGameInstance.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonGameMode.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonGameMode.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonGameSession.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonGameSession.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonGameState.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonGameState.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonKillerCharacter.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonKillerCharacter.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonLobbyGameMode.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonLobbyGameMode.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonPlayerController.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonPlayerController.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonPlayerProfileSave.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonPlayerProfileSave.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonPlayerState.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonPlayerState.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Pantheon\Public\PantheonSurvivorCharacter.h">
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Pantheon\Public\PantheonSurvivorCharacter.h">
       <Filter>Source\Pantheon\Public</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
 </Project>

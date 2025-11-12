@@ -5,31 +5,29 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Pantheon/Public/PantheonPlayerProfileSave.h"
+#include "PantheonPlayerProfileSave.h"
+
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+
 void EmptyLinkFunctionForGeneratedCodePantheonPlayerProfileSave() {}
 
-// Begin Cross Module References
+// ********** Begin Cross Module References ********************************************************
 ENGINE_API UClass* Z_Construct_UClass_USaveGame();
 PANTHEON_API UClass* Z_Construct_UClass_UPantheonPlayerProfileSave();
 PANTHEON_API UClass* Z_Construct_UClass_UPantheonPlayerProfileSave_NoRegister();
 PANTHEON_API UScriptStruct* Z_Construct_UScriptStruct_FPlayerProfileData();
 UPackage* Z_Construct_UPackage__Script_Pantheon();
-// End Cross Module References
+// ********** End Cross Module References **********************************************************
 
-// Begin ScriptStruct FPlayerProfileData
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_PlayerProfileData;
+// ********** Begin ScriptStruct FPlayerProfileData ************************************************
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FPlayerProfileData;
 class UScriptStruct* FPlayerProfileData::StaticStruct()
 {
-	if (!Z_Registration_Info_UScriptStruct_PlayerProfileData.OuterSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FPlayerProfileData.OuterSingleton)
 	{
-		Z_Registration_Info_UScriptStruct_PlayerProfileData.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FPlayerProfileData, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("PlayerProfileData"));
+		Z_Registration_Info_UScriptStruct_FPlayerProfileData.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FPlayerProfileData, (UObject*)Z_Construct_UPackage__Script_Pantheon(), TEXT("PlayerProfileData"));
 	}
-	return Z_Registration_Info_UScriptStruct_PlayerProfileData.OuterSingleton;
-}
-template<> PANTHEON_API UScriptStruct* StaticStruct<FPlayerProfileData>()
-{
-	return FPlayerProfileData::StaticStruct();
+	return Z_Registration_Info_UScriptStruct_FPlayerProfileData.OuterSingleton;
 }
 struct Z_Construct_UScriptStruct_FPlayerProfileData_Statics
 {
@@ -76,22 +74,46 @@ const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FPlayerProfileD
 };
 UScriptStruct* Z_Construct_UScriptStruct_FPlayerProfileData()
 {
-	if (!Z_Registration_Info_UScriptStruct_PlayerProfileData.InnerSingleton)
+	if (!Z_Registration_Info_UScriptStruct_FPlayerProfileData.InnerSingleton)
 	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_PlayerProfileData.InnerSingleton, Z_Construct_UScriptStruct_FPlayerProfileData_Statics::StructParams);
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_FPlayerProfileData.InnerSingleton, Z_Construct_UScriptStruct_FPlayerProfileData_Statics::StructParams);
 	}
-	return Z_Registration_Info_UScriptStruct_PlayerProfileData.InnerSingleton;
+	return Z_Registration_Info_UScriptStruct_FPlayerProfileData.InnerSingleton;
 }
-// End ScriptStruct FPlayerProfileData
+// ********** End ScriptStruct FPlayerProfileData **************************************************
 
-// Begin Class UPantheonPlayerProfileSave
+// ********** Begin Class UPantheonPlayerProfileSave ***********************************************
 void UPantheonPlayerProfileSave::StaticRegisterNativesUPantheonPlayerProfileSave()
 {
 }
-IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UPantheonPlayerProfileSave);
+FClassRegistrationInfo Z_Registration_Info_UClass_UPantheonPlayerProfileSave;
+UClass* UPantheonPlayerProfileSave::GetPrivateStaticClass()
+{
+	using TClass = UPantheonPlayerProfileSave;
+	if (!Z_Registration_Info_UClass_UPantheonPlayerProfileSave.InnerSingleton)
+	{
+		GetPrivateStaticClassBody(
+			StaticPackage(),
+			TEXT("PantheonPlayerProfileSave"),
+			Z_Registration_Info_UClass_UPantheonPlayerProfileSave.InnerSingleton,
+			StaticRegisterNativesUPantheonPlayerProfileSave,
+			sizeof(TClass),
+			alignof(TClass),
+			TClass::StaticClassFlags,
+			TClass::StaticClassCastFlags(),
+			TClass::StaticConfigName(),
+			(UClass::ClassConstructorType)InternalConstructor<TClass>,
+			(UClass::ClassVTableHelperCtorCallerType)InternalVTableHelperCtorCaller<TClass>,
+			UOBJECT_CPPCLASS_STATICFUNCTIONS_FORCLASS(TClass),
+			&TClass::Super::StaticClass,
+			&TClass::WithinClass::StaticClass
+		);
+	}
+	return Z_Registration_Info_UClass_UPantheonPlayerProfileSave.InnerSingleton;
+}
 UClass* Z_Construct_UClass_UPantheonPlayerProfileSave_NoRegister()
 {
-	return UPantheonPlayerProfileSave::StaticClass();
+	return UPantheonPlayerProfileSave::GetPrivateStaticClass();
 }
 struct Z_Construct_UClass_UPantheonPlayerProfileSave_Statics
 {
@@ -117,7 +139,7 @@ struct Z_Construct_UClass_UPantheonPlayerProfileSave_Statics
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::NewProp_SaveVersion = { "SaveVersion", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPantheonPlayerProfileSave, SaveVersion), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SaveVersion_MetaData), NewProp_SaveVersion_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::NewProp_Profile = { "Profile", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPantheonPlayerProfileSave, Profile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Profile_MetaData), NewProp_Profile_MetaData) }; // 3532099325
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::NewProp_Profile = { "Profile", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPantheonPlayerProfileSave, Profile), Z_Construct_UScriptStruct_FPlayerProfileData, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Profile_MetaData), NewProp_Profile_MetaData) }; // 3079805725
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::NewProp_SaveVersion,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPantheonPlayerProfileSave_Statics::NewProp_Profile,
@@ -151,28 +173,25 @@ UClass* Z_Construct_UClass_UPantheonPlayerProfileSave()
 	}
 	return Z_Registration_Info_UClass_UPantheonPlayerProfileSave.OuterSingleton;
 }
-template<> PANTHEON_API UClass* StaticClass<UPantheonPlayerProfileSave>()
-{
-	return UPantheonPlayerProfileSave::StaticClass();
-}
 UPantheonPlayerProfileSave::UPantheonPlayerProfileSave(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UPantheonPlayerProfileSave);
 UPantheonPlayerProfileSave::~UPantheonPlayerProfileSave() {}
-// End Class UPantheonPlayerProfileSave
+// ********** End Class UPantheonPlayerProfileSave *************************************************
 
-// Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_Statics
+// ********** Begin Registration *******************************************************************
+struct Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FPlayerProfileData::StaticStruct, Z_Construct_UScriptStruct_FPlayerProfileData_Statics::NewStructOps, TEXT("PlayerProfileData"), &Z_Registration_Info_UScriptStruct_PlayerProfileData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPlayerProfileData), 3532099325U) },
+		{ FPlayerProfileData::StaticStruct, Z_Construct_UScriptStruct_FPlayerProfileData_Statics::NewStructOps, TEXT("PlayerProfileData"), &Z_Registration_Info_UScriptStruct_FPlayerProfileData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPlayerProfileData), 3079805725U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPantheonPlayerProfileSave, UPantheonPlayerProfileSave::StaticClass, TEXT("UPantheonPlayerProfileSave"), &Z_Registration_Info_UClass_UPantheonPlayerProfileSave, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPantheonPlayerProfileSave), 541365500U) },
+		{ Z_Construct_UClass_UPantheonPlayerProfileSave, UPantheonPlayerProfileSave::StaticClass, TEXT("UPantheonPlayerProfileSave"), &Z_Registration_Info_UClass_UPantheonPlayerProfileSave, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPantheonPlayerProfileSave), 4066867271U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_2719207036(TEXT("/Script/Pantheon"),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_OneDrive_Documents_Unreal_Projects_Slayers_Of_The_Pantheon_Source_Pantheon_Public_PantheonPlayerProfileSave_h_Statics::ScriptStructInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_686190231(TEXT("/Script/Pantheon"),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_joelb_source_repos_SOTP_Source_Pantheon_Public_PantheonPlayerProfileSave_h__Script_Pantheon_Statics::ScriptStructInfo),
 	nullptr, 0);
-// End Registration
+// ********** End Registration *********************************************************************
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
