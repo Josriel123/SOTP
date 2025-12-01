@@ -9,73 +9,70 @@ class UDataTable;
 class APawn;
 class APlayerController;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-	FOnCharacterSelectedSignature,
-	APlayerController*, SelectingPC
-);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCharacterSelectedSignature,
+                                            APlayerController *, SelectingPC);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-	FOnReadyChanged, 
-	APantheonPlayerState*, PlayerState, bool, bNowReady
-);
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnReadyChanged,
+                                             APantheonPlayerState *,
+                                             PlayerState, bool, bNowReady);
 
 UCLASS()
-class PANTHEON_API APantheonPlayerState : public APlayerState
-{
-	GENERATED_BODY()
+class PANTHEON_API APantheonPlayerState : public APlayerState {
+  GENERATED_BODY()
 
 public:
-	APantheonPlayerState();
+  APantheonPlayerState();
 
-	void EnsureUniqueIdForBot();
+  void EnsureUniqueIdForBot();
 
-	/* --------------------  READY  -------------------- */
-	/** Current ready state (replicated). */
-	UFUNCTION(BlueprintPure, Category = "Lobby") bool IsReady() const { return bIsReady; }
+  /** Pick a random survivor from the DataTable and assign it to this bot. */
+  void AssignRandomSurvivor();
 
-	/** Call from UI to toggle ready. */
-	UFUNCTION(BlueprintCallable, Category = "Lobby")
-	void SetReady(bool bNewReady);
+  /* --------------------  READY  -------------------- */
+  /** Current ready state (replicated). */
+  UFUNCTION(BlueprintPure, Category = "Lobby") bool IsReady() const {
+    return bIsReady;
+  }
 
-	/** Fired on both server & clients whenever ready changes. */
-	UPROPERTY(BlueprintAssignable, Category = "Lobby")
-	FOnReadyChanged OnReadyChanged;
+  /** Call from UI to toggle ready. */
+  UFUNCTION(BlueprintCallable, Category = "Lobby")
+  void SetReady(bool bNewReady);
 
-	UPROPERTY(Replicated)
-	TSubclassOf<APawn> SelectedPawnClass;
+  /** Fired on both server & clients whenever ready changes. */
+  UPROPERTY(BlueprintAssignable, Category = "Lobby")
+  FOnReadyChanged OnReadyChanged;
 
-	UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
-	FString ChosenRole;
+  UPROPERTY(Replicated)
+  TSubclassOf<APawn> SelectedPawnClass;
 
-	UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
-	TSubclassOf<APawn> GetChosenPawnClassForRole(const FString& InRole) const;
+  UPROPERTY(Replicated, BlueprintReadOnly, Category = "CharacterSelection")
+  FString ChosenRole;
 
-	UPROPERTY(BlueprintAssignable, Category = "CharacterSelection")
-	FOnCharacterSelectedSignature OnCharacterSelected;
+  UFUNCTION(BlueprintCallable, Category = "CharacterSelection")
+  TSubclassOf<APawn> GetChosenPawnClassForRole(const FString &InRole) const;
 
-	UPROPERTY(Replicated, BlueprintReadOnly) bool bIsBot = false;
+  UPROPERTY(BlueprintAssignable, Category = "CharacterSelection")
+  FOnCharacterSelectedSignature OnCharacterSelected;
 
-	UPROPERTY(Replicated) FName SurvivorRowKey;
+  UPROPERTY(Replicated, BlueprintReadOnly) bool bIsBot = false;
 
-	UPROPERTY(Replicated) FName KillerRowKey;
+  UPROPERTY(Replicated) FName SurvivorRowKey;
 
-	virtual void CopyProperties(APlayerState* NewPlayerState) override;
+  UPROPERTY(Replicated) FName KillerRowKey;
+
+  virtual void CopyProperties(APlayerState *NewPlayerState) override;
 
 protected:
-	// Make sure ChosenRole and ChosenCharacterKey replicate.
-	
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+  // Make sure ChosenRole and ChosenCharacterKey replicate.
 
-	UFUNCTION() void OnRep_IsReady();
+  virtual void GetLifetimeReplicatedProps(
+      TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+
+  UFUNCTION() void OnRep_IsReady();
 
 private:
+  UPROPERTY()
+  UDataTable *CharacterOptionsTable;
 
-	UPROPERTY()
-	UDataTable* CharacterOptionsTable;
-
-	UPROPERTY(ReplicatedUsing = OnRep_IsReady) bool bIsReady = false;
-
-	
+  UPROPERTY(ReplicatedUsing = OnRep_IsReady) bool bIsReady = false;
 };
-

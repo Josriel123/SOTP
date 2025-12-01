@@ -208,6 +208,7 @@ void APantheonGameMode::FillWithBots() {
       PS->SetPlayerName(FString::Printf(TEXT("Bot_%02d"), i + 1));
       PS->bIsBot = true;
       PS->EnsureUniqueIdForBot(); // << give it a valid id
+      PS->AssignRandomSurvivor(); // << Assign random survivor skin
     }
 
     //------------------------------------------------------------------
@@ -220,9 +221,13 @@ void APantheonGameMode::FillWithBots() {
       continue;
     }
 
-    UClass *PawnClass = DefaultPawnClass
-                            ? *DefaultPawnClass
-                            : GetDefaultPawnClassForController(Bot);
+    UClass *PawnClass = nullptr;
+    if (PS && PS->SelectedPawnClass) {
+      PawnClass = *PS->SelectedPawnClass;
+    } else {
+      PawnClass = DefaultPawnClass ? *DefaultPawnClass
+                                   : GetDefaultPawnClassForController(Bot);
+    }
 
     if (!PawnClass) {
       UE_LOG(LogPantheonGameMode, Error,
