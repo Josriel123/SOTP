@@ -12,4 +12,8 @@ UCLASS()
 class PANTHEON_API APantheonGameState : public AGameState
 {
     GENERATED_BODY()
+
+public:
+    UPROPERTY(BlueprintAssignable, Category = "Events")
+    FOnPlayersChanged OnPlayersChanged;
 };

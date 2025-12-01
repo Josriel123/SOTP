@@ -16,13 +16,13 @@ Based on the analysis of the project structure, Blueprints, and `ARCHITECTURE.md
 
 ## Opportunities for Improvement (Actionable Items)
 
-### 1. Decouple UI from GameState (Priority: High)
-*   **Current Issue**: In `OnRep_AllPlayerStates`, the code uses `Get All Widgets Of Class` to find the Lobby Menu and call `RebuildPlayerList`. This is slow and brittle.
-*   **Proposed Solution**: Use **Delegates**.
-    1.  In `PantheonGameState`: Add `DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerListChanged);` and a BlueprintAssignable property.
-    2.  In `OnRep_AllPlayerStates`: Simply broadcast this delegate.
-    3.  In `WBP_HostLobbyMenu`: Bind to this delegate on `Event Construct`.
-*   **Benefit**: The GameState no longer needs to know about the UI class, preventing crashes if the UI changes.
+### 1. Decouple UI from GameState (Status: **COMPLETE**)
+*   **Issue**: Original implementation used brittle `Get All Widgets` calls and suffered from race conditions where UI updated before data arrived.
+*   **Solution Implemented**: **Polling Pattern**.
+    1.  Removed all UI references from `GameState` and `GameMode`.
+    2.  `WBP_HostLobbyMenu` now uses a self-contained Timer (0.5s) to check `GameState->PlayerArray`.
+    3.  This guarantees the UI only updates when valid data is present, resolving the "Empty List" bug.
+*   **Benefit**: robust against network lag, zero coupling between classes, and deleted redundant code.
 
 ### 2. Safer URL Construction (Priority: Medium)
 *   **Current Issue**: In `ServerStartMatch`, the connection string (`?listen?humans=N?bots=M`) is built manually with string appends. A single typo will break the game.
