@@ -160,6 +160,8 @@ SOTP/
 └── Pantheon.uproject
 ```
 
+> Engine-generated folders (`Binaries/`, `Intermediate/`, `Saved/`, `DerivedDataCache/`) and `Pantheon.sln` are created locally when you generate project files and build, so they aren't tracked (see `.gitignore`). Design decisions are recorded in [`docs/decision-log.md`](docs/decision-log.md).
+
 ---
 
 ## 🗺️ Roadmap

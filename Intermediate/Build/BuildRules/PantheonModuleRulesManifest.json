@@ -1,9 +1,0 @@
-{
-	"SourceFiles": [
-		"C:\\Users\\joelb\\source\\repos\\SOTP\\Source\\Pantheon\\Pantheon.Build.cs",
-		"C:\\Users\\joelb\\source\\repos\\SOTP\\Plugins\\AdvancedSessions\\Source\\AdvancedSessions\\AdvancedSessions.Build.cs",
-		"C:\\Users\\joelb\\source\\repos\\SOTP\\Source\\Pantheon.Target.cs",
-		"C:\\Users\\joelb\\source\\repos\\SOTP\\Source\\PantheonEditor.Target.cs"
-	],
-	"EngineVersion": "5.6.1"
-}
