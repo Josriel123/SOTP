@@ -100,13 +100,20 @@ GameMode          ← Authoritative server logic (role assignment, match state, 
 2. **Install Marketplace Plugins:**
    - Purchase and install **HMS V2** and **Advanced Sessions** from the Unreal Marketplace to your engine version.
 
-3. **Generate Project Files:**
+3. **Add your EOS credentials (for online play):**
+   Create `Config/UserEngine.ini` with your own client from the [Epic Developer Portal](https://dev.epicgames.com/portal). The file is gitignored, so credentials never get committed. Unreal loads it on top of `DefaultEngine.ini` and packaging includes it in builds.
+   ```ini
+   [/Script/OnlineSubsystemEOS.EOSSettings]
+   +Artifacts=(ArtifactName="UE_5.5",ClientId="<client-id>",ClientSecret="<client-secret>",ProductId="<product-id>",SandboxId="<sandbox-id>",DeploymentId="<deployment-id>",ClientEncryptionKey="<64-hex-char-key>")
+   ```
+
+4. **Generate Project Files:**
    Right-click `Pantheon.uproject` → *Generate Visual Studio project files*
 
-4. **Build the project:**
+5. **Build the project:**
    Open `Pantheon.sln` in Visual Studio and build in **Development Editor** configuration.
 
-5. **Open in Unreal Engine:**
+6. **Open in Unreal Engine:**
    Double-click `Pantheon.uproject` to launch the editor.
 
 ---

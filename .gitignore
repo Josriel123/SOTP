@@ -52,3 +52,7 @@ Build/*
 Build/*/**
 !Build/*/PakBlacklist*.txt
 !Build/**/*.ico
+
+# Local-only config layers (Unreal loads Config/User*.ini after Default*.ini).
+# EOS client credentials live in Config/UserEngine.ini (see README > Setup).
+/Config/User*.ini
